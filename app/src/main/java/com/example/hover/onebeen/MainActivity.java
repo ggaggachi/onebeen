@@ -1,37 +1,79 @@
 package com.example.hover.onebeen;
 
-import android.support.v7.app.ActionBarActivity;
+import android.content.Intent;
 import android.os.Bundle;
-import android.view.Menu;
-import android.view.MenuItem;
+import android.support.v4.app.FragmentActivity;
+import android.widget.Toast;
+import com.example.hover.onebeen.db.UserDataSource;
+import com.example.hover.onebeen.db.dto.User;
+import com.facebook.CallbackManager;
+import com.facebook.FacebookCallback;
+import com.facebook.FacebookException;
+import com.facebook.FacebookSdk;
+import com.facebook.Profile;
+import com.facebook.appevents.AppEventsLogger;
+import com.facebook.login.LoginManager;
+import com.facebook.login.LoginResult;
 
-public class MainActivity extends ActionBarActivity {
+public class MainActivity extends FragmentActivity {
+
+	CallbackManager callbackManager = null;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
-		super.onCreate(savedInstanceState);
+        super.onCreate(savedInstanceState);
+
+		FacebookSdk.sdkInitialize(this.getApplicationContext());
+
+		callbackManager = CallbackManager.Factory.create();
+
+		registerFacebookLoginButtonEvent();
+
 		setContentView(R.layout.activity_main);
 	}
 
-	@Override
-	public boolean onCreateOptionsMenu(Menu menu) {
-		// Inflate the menu; this adds items to the action bar if it is present.
-		getMenuInflater().inflate(R.menu.menu_main, menu);
-		return true;
+	private void registerFacebookLoginButtonEvent() {
+		LoginManager.getInstance().registerCallback(callbackManager,
+				new FacebookCallback<LoginResult>() {
+					@Override
+					public void onSuccess(LoginResult loginResult) {
+						insertUserInformation();
+
+						startActivity(new Intent(MainActivity.this, ProfileActivity.class));
+					}
+
+					@Override
+					public void onCancel() {
+						Toast.makeText(getApplicationContext(), "Cancel!", Toast.LENGTH_LONG).show();
+					}
+
+					@Override
+					public void onError(FacebookException exception) {
+						Toast.makeText(getApplicationContext(), "Error!", Toast.LENGTH_LONG).show();
+					}
+				});
+	}
+
+	private void insertUserInformation() {
+		UserDataSource userDataSource = new UserDataSource(getApplicationContext());
+
+		Profile profile = Profile.getCurrentProfile();
+
+		String fullName = profile.getLastName() + profile.getFirstName();
+
+		userDataSource.insertUser(new User(profile.getId(), fullName));
 	}
 
 	@Override
-	public boolean onOptionsItemSelected(MenuItem item) {
-		// Handle action bar item clicks here. The action bar will
-		// automatically handle clicks on the Home/Up button, so long
-		// as you specify a parent activity in AndroidManifest.xml.
-		int id = item.getItemId();
+	protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+		super.onActivityResult(requestCode, resultCode, data);
+		callbackManager.onActivityResult(requestCode, resultCode, data);
+	}
 
-		//noinspection SimplifiableIfStatement
-		if (id == R.id.action_settings) {
-			return true;
-		}
+	@Override
+	protected void onResume() {
+		super.onResume();
 
-		return super.onOptionsItemSelected(item);
+		AppEventsLogger.activateApp(this);
 	}
 }

@@ -10,8 +10,9 @@ package com.example.hover.onebeen;
     import android.os.Handler;
     import android.view.Window;
     import android.view.WindowManager;
+    import com.example.hover.onebeen.puzzle.PuzzleDummyActivity;
 
-    public class SplashActivity extends Activity {
+public class SplashActivity extends Activity {
 
         //Set waktu lama splashscreen
         private static int splashInterval = 2000;
@@ -31,7 +32,7 @@ package com.example.hover.onebeen;
                 @Override
                 public void run() {
                     // TODO Auto-generated method stub
-                    Intent i = new Intent(SplashActivity.this, MainActivity.class);
+                    Intent i = new Intent(SplashActivity.this, PuzzleDummyActivity.class);
                     startActivity(i);
 
 

@@ -30,6 +30,10 @@
             </intent-filter>
         </activity>
 
+        <activity
+            android:name=".fourbtnActivity"
+            android:label="@string/app_name" >
+        </activity>
 
         <!-- Main activity -->
         <activity

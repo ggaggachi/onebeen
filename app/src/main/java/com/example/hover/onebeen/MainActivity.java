@@ -3,9 +3,12 @@ package com.example.hover.onebeen;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
+import android.util.Log;
+import android.view.View;
 import android.widget.Toast;
 import com.example.hover.onebeen.db.UserDataSource;
 import com.example.hover.onebeen.db.dto.User;
+import com.example.hover.onebeen.puzzle.MakePuzzleActivity;
 import com.facebook.CallbackManager;
 import com.facebook.FacebookCallback;
 import com.facebook.FacebookException;
@@ -49,6 +52,7 @@ public class MainActivity extends FragmentActivity {
 
 					@Override
 					public void onError(FacebookException exception) {
+						Log.e("ekdxhrl", exception.getMessage());
 						Toast.makeText(getApplicationContext(), "Error!", Toast.LENGTH_LONG).show();
 					}
 				});

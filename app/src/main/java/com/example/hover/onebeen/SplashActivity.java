@@ -32,7 +32,7 @@ public class SplashActivity extends Activity {
                 @Override
                 public void run() {
                     // TODO Auto-generated method stub
-                    Intent i = new Intent(SplashActivity.this, PuzzleDummyActivity.class);
+                    Intent i = new Intent(SplashActivity.this, MainActivity.class);
                     startActivity(i);
 
 

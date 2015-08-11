@@ -4,9 +4,13 @@
 
     <!-- permission list start -->
     <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.MANAGE_DOCUMENTS"/>
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+
     <!-- permission list end -->
     <application
-        android:debuggable="true"
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
@@ -26,13 +30,17 @@
             </intent-filter>
         </activity>
 
+        <activity
+            android:name=".fourbtnActivity"
+            android:label="@string/app_name" >
+        </activity>
 
         <!-- Main activity -->
         <activity
             android:name=".MainActivity"
-
             android:label="@string/app_name" >
         </activity>
+
         <activity
             android:name="com.facebook.FacebookActivity"
             android:configChanges="keyboard|keyboardHidden|screenLayout|screenSize|orientation"
@@ -42,6 +50,16 @@
         <activity
             android:name=".ProfileActivity"
             android:label="@string/title_activity_profile" />
+
+        <activity android:name=".puzzle.MakePuzzleActivity"
+                  android:label="@string/app_name" />
+
+        <activity android:name=".puzzle.PuzzleDummyActivity"
+                  android:label="@string/app_name" >
+
+        </activity>
+
+
     </application>
 
 </manifest>

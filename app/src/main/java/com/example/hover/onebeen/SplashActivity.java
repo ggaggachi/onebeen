@@ -10,8 +10,9 @@ package com.example.hover.onebeen;
     import android.os.Handler;
     import android.view.Window;
     import android.view.WindowManager;
+    import com.example.hover.onebeen.puzzle.PuzzleDummyActivity;
 
-    public class SplashActivity extends Activity {
+public class SplashActivity extends Activity {
 
         //Set waktu lama splashscreen
         private static int splashInterval = 2000;

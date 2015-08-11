@@ -10,14 +10,14 @@
 	android:id="@+id/main_page"
 	tools:context=".MainActivity">
 
-	<!--<com.facebook.login.widget.LoginButton-->
-		<!--android:id="@+id/facebook_login_button"-->
-		<!--android:layout_width="wrap_content"-->
-		<!--android:layout_height="wrap_content"-->
-		<!--android:layout_gravity="center_horizontal"-->
-		<!--android:layout_marginTop="30dp"-->
-		<!--android:layout_marginBottom="30dp"-->
-		<!--facebook:confirm_logout="false"/>-->
+	<com.facebook.login.widget.LoginButton
+		android:id="@+id/facebook_login_button"
+		android:layout_width="wrap_content"
+		android:layout_height="wrap_content"
+		android:layout_gravity="center_horizontal"
+		android:layout_marginTop="30dp"
+		android:layout_marginBottom="30dp"
+		facebook:confirm_logout="false"/>
 
 	<TextView
 		android:id="@+id/user_name"

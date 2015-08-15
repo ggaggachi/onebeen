@@ -25,7 +25,8 @@
             android:textColor="#ffffff"
             android:textSize="17sp"
             android:paddingTop="12dp"
-            android:paddingBottom="8dp"/>
+            android:paddingBottom="8dp"
+            android:drawableTop="@drawable/btn1"/>
 
         <Button
             android:id="@+id/btn2"
@@ -37,7 +38,8 @@
             android:textColor="#ffffff"
             android:textSize="17sp"
             android:paddingTop="12dp"
-            android:paddingBottom="8dp"/>
+            android:paddingBottom="8dp"
+            android:drawableTop="@drawable/btn2"/>
 
         <Button
             android:id="@+id/btn3"
@@ -49,7 +51,8 @@
             android:textColor="#ffffff"
             android:textSize="17sp"
             android:paddingTop="12dp"
-            android:paddingBottom="8dp"/>
+            android:paddingBottom="8dp"
+            android:drawableTop="@drawable/btn3"/>
 
         <Button
             android:id="@+id/btn4"
@@ -62,6 +65,7 @@
             android:textSize="17sp"
             android:paddingTop="12dp"
             android:paddingBottom="8dp"
-            android:layout_marginBottom="16dp"/>
+            android:layout_marginBottom="16dp"
+            android:drawableTop="@drawable/btn4"/>
     </LinearLayout>
 </LinearLayout>

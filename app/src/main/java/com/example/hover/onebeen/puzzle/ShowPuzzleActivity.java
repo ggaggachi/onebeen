@@ -23,8 +23,6 @@ public class ShowPuzzleActivity extends FragmentActivity {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_show_puzzle);
 
-		Log.e("oncreated", "oncreated");
-
 //		Intent intent = getIntent();
 //		Puzzle puzzle = (Puzzle) intent.getSerializableExtra("puzzle");
 

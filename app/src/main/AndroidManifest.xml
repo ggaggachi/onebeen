@@ -46,14 +46,6 @@
         <activity
             android:name=".ProfileActivity"
             android:label="@string/title_activity_profile" />
-        <activity
-            android:name=".puzzle.MakePuzzleActivity"
-            android:label="@string/app_name" />
-        <activity
-            android:name=".onebeen_title"> </activity>
-        <activity
-            android:name=".puzzle.PuzzleDummyActivity"
-            android:label="@string/app_name" >
 
         <activity android:name=".puzzle.MakePuzzleActivity"
                   android:label="@string/app_name" />
@@ -73,11 +65,6 @@
         <activity
             android:name=".TravelActivity"
             android:label="@string/title_activity_map" >
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
         </activity>
     </application>
 

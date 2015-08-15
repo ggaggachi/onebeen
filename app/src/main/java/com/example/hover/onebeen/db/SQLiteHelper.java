@@ -20,7 +20,6 @@ public class SQLiteHelper extends SQLiteOpenHelper {
     @Override
     public void onCreate(SQLiteDatabase database) {
         database.execSQL(UserTableSchema.CREATE_USER_TABLE);
-        database.execSQL(PuzzleTableSchema.CREATE_PUZZLE_TABLE);
         database.execSQL(TravelTableSchema.CREATE_TRAVEL_TABLE);
 
         // puzzle table 새로 생성

@@ -1,5 +1,6 @@
 package com.example.hover.onebeen;
 
+import android.content.pm.ActivityInfo;
 import android.graphics.Color;
 import android.support.v4.app.FragmentActivity;
 import android.os.Bundle;
@@ -13,6 +14,8 @@ import com.example.hover.onebeen.db.dto.Travel;
 import com.example.hover.onebeen.db.dto.TravelRequestParam;
 import com.ssomai.android.scalablelayout.ScalableLayout;
 
+
+// 위가 140
 public class TravelActivity extends FragmentActivity {
 
     TravelDataSource travelDataSource;
@@ -21,17 +24,22 @@ public class TravelActivity extends FragmentActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        ScalableLayout scalableLayout = new ScalableLayout(this, 400, 200);
+//        this.setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
+
+        ScalableLayout scalableLayout = new ScalableLayout(this, 400f, 600f);
+//        scalableLayout.setBackgroundColor(Color.BLACK);
 
 //        oneTestRow(scalableLayout);
-        oneFirstRow(scalableLayout, 0);
-        oneSecondRow(scalableLayout, 30);
-        oneSecondRow(scalableLayout, 60);
-        oneSecondRow(scalableLayout, 90);
-        oneSecondRow(scalableLayout, 120);
-        oneSecondRow(scalableLayout, 150);
-        oneSecondRow(scalableLayout, 180);
-        oneSecondRow(scalableLayout, 30);
+        addRow1(scalableLayout, 0);
+        addRow2(scalableLayout, 30);
+        addRow3(scalableLayout, 60);
+        addRow4(scalableLayout, 90);
+        addRow5(scalableLayout, 120);
+        addRow6(scalableLayout, 150);
+        addRow7(scalableLayout, 180);
+        addRow8(scalableLayout, 210);
+//        addRow9(scalableLayout, 240);
+//        addRow10(scalableLayout, 270);
 
         setContentView(scalableLayout);
 
@@ -47,19 +55,104 @@ public class TravelActivity extends FragmentActivity {
 //        registerCancelCheckInEvent();
     }
 
-    private void oneFirstRow(ScalableLayout scalableLayout, int top) {
+    private void addRow1(ScalableLayout scalableLayout, int top) {
         addImageView(scalableLayout, TravelArray.X0, 50, 30, top, R.drawable.travel_empty_grid);
-        addImageView(scalableLayout, TravelArray.X1, 60, 30, top, R.drawable.test);
-        addImageView(scalableLayout, TravelArray.X2, 60, 30, top, R.drawable.test);
-        addImageView(scalableLayout, TravelArray.X3, 60, 30, top, R.drawable.test);
-        addImageView(scalableLayout, TravelArray.X4, 60, 30, top, R.drawable.test);
-        addImageView(scalableLayout, TravelArray.X5, 60, 30, top, R.drawable.test);
+        addImageView(scalableLayout, TravelArray.X1, 60, 30, top, R.drawable.travel_empty_grid);
+        addImageView(scalableLayout, TravelArray.X2, 60, 30, top, R.drawable.travel_empty_grid);
+        addImageView(scalableLayout, TravelArray.X3, 60, 30, top, R.drawable.img_route_start_01);
+        addImageView(scalableLayout, TravelArray.X4, 60, 30, top, R.drawable.travel_empty_grid);
+        addImageView(scalableLayout, TravelArray.X5, 60, 30, top, R.drawable.travel_empty_grid);
         addImageView(scalableLayout, TravelArray.X6, 50, 30, top, R.drawable.travel_empty_grid);
     }
 
-    private void oneSecondRow(ScalableLayout scalableLayout, int top) {
-        addImageView(scalableLayout, 0, 50, 30, top, R.drawable.travel_empty_grid);
-        addImageView(scalableLayout, 50, 60, 30, top, R.drawable.test);
+    private void addRow2(ScalableLayout scalableLayout, int top) {
+        addImageView(scalableLayout, TravelArray.X0, 50, 30, top, R.drawable.travel_empty_grid);
+        addImageView(scalableLayout, TravelArray.X1, 60, 30, top, R.drawable.travel_empty_grid);
+        addImageView(scalableLayout, TravelArray.X2, 60, 30, top, R.drawable.travel_empty_grid);
+        addImageView(scalableLayout, TravelArray.X3, 60, 30, top, R.drawable.img_route_start_02);
+        addImageView(scalableLayout, TravelArray.X4, 60, 30, top, R.drawable.travel_empty_grid);
+        addImageView(scalableLayout, TravelArray.X5, 60, 30, top, R.drawable.travel_empty_grid);
+        addImageView(scalableLayout, TravelArray.X6, 50, 30, top, R.drawable.travel_empty_grid);
+    }
+
+    private void addRow3(ScalableLayout scalableLayout, int top) {
+        addImageView(scalableLayout, TravelArray.X0, 50, 30, top, R.drawable.travel_empty_grid);
+        addImageView(scalableLayout, TravelArray.X1, 60, 30, top, R.drawable.travel_empty_grid);
+        addImageView(scalableLayout, TravelArray.X2, 60, 30, top, R.drawable.travel_empty_grid);
+        addImageView(scalableLayout, TravelArray.X3, 60, 30, top, R.drawable.img_route_start_03);
+        addImageView(scalableLayout, TravelArray.X4, 60, 30, top, R.drawable.travel_empty_grid);
+        addImageView(scalableLayout, TravelArray.X5, 60, 30, top, R.drawable.travel_empty_grid);
+        addImageView(scalableLayout, TravelArray.X6, 50, 30, top, R.drawable.travel_empty_grid);
+    }
+
+    private void addRow4(ScalableLayout scalableLayout, int top) {
+        addImageView(scalableLayout, TravelArray.X0, 50, 30, top, R.drawable.travel_empty_grid);
+        addImageView(scalableLayout, TravelArray.X1, 60, 30, top, R.drawable.travel_empty_grid);
+        addImageView(scalableLayout, TravelArray.X2, 60, 30, top, R.drawable.travel_empty_grid);
+        addImageView(scalableLayout, TravelArray.X3, 60, 30, top, R.drawable.img_route_start_04);
+        addImageView(scalableLayout, TravelArray.X4, 60, 30, top, R.drawable.img_route_centerpoint);
+        addImageView(scalableLayout, TravelArray.X5, 60, 30, top, R.drawable.img_route_right_01);
+        addImageView(scalableLayout, TravelArray.X6, 50, 30, top, R.drawable.travel_empty_grid);
+    }
+
+    private void addRow5(ScalableLayout scalableLayout, int top) {
+        addImageView(scalableLayout, TravelArray.X0, 50, 30, top, R.drawable.travel_empty_grid);
+        addImageView(scalableLayout, TravelArray.X1, 60, 30, top, R.drawable.travel_empty_grid);
+        addImageView(scalableLayout, TravelArray.X2, 60, 30, top, R.drawable.travel_empty_grid);
+        addImageView(scalableLayout, TravelArray.X3, 60, 30, top, R.drawable.travel_empty_grid);
+        addImageView(scalableLayout, TravelArray.X4, 60, 30, top, R.drawable.travel_empty_grid);
+        addImageView(scalableLayout, TravelArray.X5, 60, 30, top, R.drawable.img_route_right_02);
+        addImageView(scalableLayout, TravelArray.X6, 50, 30, top, R.drawable.travel_empty_grid);
+    }
+
+    private void addRow6(ScalableLayout scalableLayout, int top) {
+        addImageView(scalableLayout, TravelArray.X0, 50, 30, top, R.drawable.travel_empty_grid);
+        addImageView(scalableLayout, TravelArray.X1, 60, 30, top, R.drawable.travel_empty_grid);
+        addImageView(scalableLayout, TravelArray.X2, 60, 30, top, R.drawable.travel_empty_grid);
+        addImageView(scalableLayout, TravelArray.X3, 60, 30, top, R.drawable.travel_empty_grid);
+        addImageView(scalableLayout, TravelArray.X4, 60, 30, top, R.drawable.img_comment_);
+        addImageView(scalableLayout, TravelArray.X5, 60, 30, top, R.drawable.img_route_right_03);
+        addImageView(scalableLayout, TravelArray.X6, 50, 30, top, R.drawable.travel_empty_grid);
+    }
+
+    private void addRow7(ScalableLayout scalableLayout, int top) {
+        addImageView(scalableLayout, TravelArray.X0, 50, 30, top, R.drawable.travel_empty_grid);
+        addImageView(scalableLayout, TravelArray.X1, 60, 30, top, R.drawable.img_route_left_01);
+        addImageView(scalableLayout, TravelArray.X2, 60, 30, top, R.drawable.img_route_centerpoint);
+        addImageView(scalableLayout, TravelArray.X3, 60, 30, top, R.drawable.img_route_center);
+        addImageView(scalableLayout, TravelArray.X4, 60, 30, top, R.drawable.img_route_centerpoint);
+        addImageView(scalableLayout, TravelArray.X5, 60, 30, top, R.drawable.img_route_right_04);
+        addImageView(scalableLayout, TravelArray.X6, 50, 30, top, R.drawable.travel_empty_grid);
+    }
+
+    private void addRow8(ScalableLayout scalableLayout, int top) {
+        addImageView(scalableLayout, TravelArray.X0, 50, 30, top, R.drawable.travel_empty_grid);
+        addImageView(scalableLayout, TravelArray.X1, 60, 30, top, R.drawable.img_route_left_02);
+        addImageView(scalableLayout, TravelArray.X2, 60, 30, top, R.drawable.img_route_centerpoint);
+        addImageView(scalableLayout, TravelArray.X3, 60, 30, top, R.drawable.img_route_center);
+        addImageView(scalableLayout, TravelArray.X4, 60, 30, top, R.drawable.img_route_centerpoint);
+        addImageView(scalableLayout, TravelArray.X5, 60, 30, top, R.drawable.img_route_right_04);
+        addImageView(scalableLayout, TravelArray.X6, 50, 30, top, R.drawable.travel_empty_grid);
+    }
+
+    private void addRow9(ScalableLayout scalableLayout, int top) {
+        addImageView(scalableLayout, TravelArray.X0, 50, 30, top, R.drawable.travel_empty_grid);
+        addImageView(scalableLayout, TravelArray.X1, 60, 30, top, R.drawable.img_route_left_03);
+        addImageView(scalableLayout, TravelArray.X2, 60, 30, top, R.drawable.img_route_centerpoint);
+        addImageView(scalableLayout, TravelArray.X3, 60, 30, top, R.drawable.img_route_center);
+        addImageView(scalableLayout, TravelArray.X4, 60, 30, top, R.drawable.img_route_centerpoint);
+        addImageView(scalableLayout, TravelArray.X5, 60, 30, top, R.drawable.img_route_right_04);
+        addImageView(scalableLayout, TravelArray.X6, 50, 30, top, R.drawable.travel_empty_grid);
+    }
+
+    private void addRow10(ScalableLayout scalableLayout, int top) {
+        addImageView(scalableLayout, TravelArray.X0, 50, 30, top, R.drawable.travel_empty_grid);
+        addImageView(scalableLayout, TravelArray.X1, 60, 30, top, R.drawable.img_route_left_04);
+        addImageView(scalableLayout, TravelArray.X2, 60, 30, top, R.drawable.img_route_centerpoint);
+        addImageView(scalableLayout, TravelArray.X3, 60, 30, top, R.drawable.img_route_center);
+        addImageView(scalableLayout, TravelArray.X4, 60, 30, top, R.drawable.img_route_centerpoint);
+        addImageView(scalableLayout, TravelArray.X5, 60, 30, top, R.drawable.img_route_right_04);
+        addImageView(scalableLayout, TravelArray.X6, 50, 30, top, R.drawable.travel_empty_grid);
     }
 
     class TravelArray {

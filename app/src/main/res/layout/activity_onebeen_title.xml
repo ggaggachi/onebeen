@@ -38,6 +38,5 @@
             android:background="#4dc4d7"
             android:paddingLeft="125dp"
             android:drawableLeft="@drawable/next"/>
-
     </LinearLayout>
 </LinearLayout>

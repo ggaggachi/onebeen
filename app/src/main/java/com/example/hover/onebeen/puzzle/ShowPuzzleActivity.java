@@ -76,8 +76,6 @@ public class ShowPuzzleActivity extends FragmentActivity {
 				v = mInflater.inflate(R.layout.fragment_show_puzzle, null);
 				((TextView) v.findViewById(R.id.puzzle_description)).setText("미소천사");
 				((ImageView) v.findViewById(R.id.puzzle_image)).setImageResource(R.drawable.first);
-//				((ImageView) v.findViewById(R.id.puzzle_image)).setImageResource(R.drawable.dsc05792);
-
 				((ImageView) v.findViewById(R.id.page_control1)).setImageResource(R.drawable.img_control_selected);
 			}
 			else if(position==1){

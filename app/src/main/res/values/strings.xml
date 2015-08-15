@@ -6,4 +6,6 @@
 	<string name="facebook_app_id">747024582086831</string>
     <string name="title_activity_profile">ProfileActivity</string>
     <string name="title_activity_map">MapActivity</string>
+    <string name="image_width">120</string>
+    <string name="image_height">60</string>
 </resources>

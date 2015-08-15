@@ -49,7 +49,7 @@ public class TravelDataSource {
             cursor.moveToFirst();
 
             ArrayList<Puzzle> puzzles = new ArrayList<>();
-            puzzles.add(puzzle());
+            puzzles.add(puzzle(1));
 
             travel = new Travel(cursor.getString(1), cursor.getString(2), puzzles);
         } catch (Exception e) {
@@ -63,19 +63,22 @@ public class TravelDataSource {
 
     public Travel getTravel(String userId, String travelId, String puzzleId) {
         ArrayList<Puzzle> puzzles = new ArrayList<>();
-        puzzles.add(puzzle());
+        puzzles.add(puzzle(1));
+        puzzles.add(puzzle(2));
+        puzzles.add(puzzle(3));
 
         return new Travel("ekdxhrl", "1", puzzles);
     }
 
-    private Puzzle puzzle() {
+    private Puzzle puzzle(Integer dummyId) {
         Puzzle puzzle = new Puzzle();
 
-        puzzle.setId(1L);
-        puzzle.setDescription("Description");
-        puzzle.setMediaUri("URL");
-        puzzle.setTitle("Title");
-        puzzle.setType("Type");
+        puzzle.setId(dummyId);
+        puzzle.setDescription("Description"+dummyId);
+        puzzle.setMediaUri("URL"+dummyId);
+        puzzle.setTitle("Title"+dummyId);
+        puzzle.setType("Type"+dummyId);
+
         return puzzle;
     }
 

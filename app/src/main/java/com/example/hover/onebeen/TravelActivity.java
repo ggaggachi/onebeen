@@ -20,18 +20,108 @@ public class TravelActivity extends FragmentActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_map);
+
+        ScalableLayout scalableLayout = new ScalableLayout(this, 400, 200);
+
+//        oneTestRow(scalableLayout);
+        oneFirstRow(scalableLayout, 0);
+        oneSecondRow(scalableLayout, 30);
+        oneSecondRow(scalableLayout, 60);
+        oneSecondRow(scalableLayout, 90);
+        oneSecondRow(scalableLayout, 120);
+        oneSecondRow(scalableLayout, 150);
+        oneSecondRow(scalableLayout, 180);
+        oneSecondRow(scalableLayout, 30);
+
+        setContentView(scalableLayout);
 
         travelDataSource = new TravelDataSource(this);
 
         Travel travel = travelDataSource.getTravel(null, null, null);
         Log.e("ekdxhrl", travel.toString());
 
-        setScalableLayout();
+//        setScalableLayout();
 //        registerDeleteEvent("1");
 
-        testInsertAndDelete();
+//        testInsertAndDelete();
 //        registerCancelCheckInEvent();
+    }
+
+    private void oneFirstRow(ScalableLayout scalableLayout, int top) {
+        addImageView(scalableLayout, TravelArray.X0, 50, 30, top, R.drawable.travel_empty_grid);
+        addImageView(scalableLayout, TravelArray.X1, 60, 30, top, R.drawable.test);
+        addImageView(scalableLayout, TravelArray.X2, 60, 30, top, R.drawable.test);
+        addImageView(scalableLayout, TravelArray.X3, 60, 30, top, R.drawable.test);
+        addImageView(scalableLayout, TravelArray.X4, 60, 30, top, R.drawable.test);
+        addImageView(scalableLayout, TravelArray.X5, 60, 30, top, R.drawable.test);
+        addImageView(scalableLayout, TravelArray.X6, 50, 30, top, R.drawable.travel_empty_grid);
+    }
+
+    private void oneSecondRow(ScalableLayout scalableLayout, int top) {
+        addImageView(scalableLayout, 0, 50, 30, top, R.drawable.travel_empty_grid);
+        addImageView(scalableLayout, 50, 60, 30, top, R.drawable.test);
+    }
+
+    class TravelArray {
+        final static int STANDARD_X = 60;
+
+        final static int X0 = 0;
+        final static int X1 = 50;
+        final static int X2 = X1 + STANDARD_X;
+        final static int X3 = X2 + STANDARD_X;
+        final static int X4 = X3 + STANDARD_X;
+        final static int X5 = X4 + STANDARD_X;
+        final static int X6 = X5 + STANDARD_X;
+        final static int X7 = X6 + STANDARD_X;
+    }
+
+    private void addImageView(ScalableLayout scalableLayout, int marginLeft, int width, int height, int top, int imageResource) {
+        ImageView imageView = new ImageView(this);
+        imageView.setImageResource(imageResource);
+        scalableLayout.addView(imageView, marginLeft, top, width, height);
+    }
+
+    private void oneTestRow(ScalableLayout scalableLayout) {
+        int width = 60;
+        int height = 30;
+        int marginLeft = 50;
+        int left = width;
+
+        int startIndex = 0;
+        int lastIndex = 6;
+
+        for (int count = startIndex; count <= lastIndex; count++) {
+            if (count == startIndex) {
+                leftPadding(scalableLayout, height, marginLeft);
+
+                ImageView imageView = new ImageView(this);
+                imageView.setImageResource(R.drawable.test);
+                scalableLayout.addView(imageView, marginLeft, 0, width, height);
+            } else {
+                ImageView imageView = new ImageView(this);
+                imageView.setImageResource(R.drawable.test);
+                scalableLayout.addView(imageView, left * count, 0, width, height);
+
+                if(count == lastIndex) {
+                    Log.e("ekdxhrl", Integer.toString(left * count));
+                    rightPadding(scalableLayout, width, height, left, count);
+                }
+            }
+        }
+    }
+
+    private void rightPadding(ScalableLayout scalableLayout, int width, int height, int left, int count) {
+        ImageView iv2 = new ImageView(this);
+        iv2.setImageResource(R.drawable.travel_empty_grid);
+        iv2.setBackgroundColor(Color.BLACK);
+        scalableLayout.addView(iv2, left * count, 0, width, height);
+    }
+
+    private void leftPadding(ScalableLayout scalableLayout, int height, int marginLeft) {
+        ImageView iv = new ImageView(this);
+        iv.setImageResource(R.drawable.travel_empty_grid);
+        iv.setBackgroundColor(Color.BLACK);
+        scalableLayout.addView(iv, 0, 0, marginLeft, height);
     }
 
     private void testInsertAndDelete() {

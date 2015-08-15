@@ -1,23 +1,23 @@
 package com.example.hover.onebeen.db.dto;
 
 public class TravelRequestParam {
-    private String _id;
+    private Integer _id;
     private String userId;
     private String travelId;
     private String puzzleId;
 
-    public TravelRequestParam(String _id, String userId, String travelId, String orderId, String puzzleId) {
+    public TravelRequestParam(Integer _id, String userId, String travelId, String puzzleId) {
         this._id = _id;
         this.userId = userId;
         this.travelId = travelId;
         this.puzzleId = puzzleId;
     }
 
-    public String get_id() {
+    public Integer get_id() {
         return _id;
     }
 
-    public void set_id(String _id) {
+    public void set_id(Integer _id) {
         this._id = _id;
     }
 

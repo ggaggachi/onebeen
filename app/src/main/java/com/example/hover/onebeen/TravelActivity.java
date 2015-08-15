@@ -8,30 +8,41 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.ImageView;
 import android.widget.TextView;
-
 import com.example.hover.onebeen.db.TravelDataSource;
 import com.example.hover.onebeen.db.dto.Travel;
+import com.example.hover.onebeen.db.dto.TravelRequestParam;
 import com.ssomai.android.scalablelayout.ScalableLayout;
 
 public class TravelActivity extends FragmentActivity {
+
+    TravelDataSource travelDataSource;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_map);
 
-        setScalableLayout();
-        registerDeleteEvent();
+        travelDataSource = new TravelDataSource(this);
 
-        TravelDataSource travelDataSource = new TravelDataSource(this);
         Travel travel = travelDataSource.getTravel(null, null, null);
         Log.e("ekdxhrl", travel.toString());
-//        registerAddPuzzleEvent();
+
+        setScalableLayout();
+//        registerDeleteEvent("1");
+
+        testInsertAndDelete();
 //        registerCancelCheckInEvent();
     }
 
-    private void registerDeleteEvent() {
+    private void testInsertAndDelete() {
+        TravelRequestParam travelRequestParam = new TravelRequestParam(null, "ekdxhrl", "1", "1");
+        travelDataSource.insertTravel(travelRequestParam);
 
+        travelDataSource.deletePuzzleInTravel("1");
+    }
+
+    private void registerDeleteEvent(String puzzleId) {
+        travelDataSource.deletePuzzleInTravel(puzzleId);
     }
 
     private void setScalableLayout() {

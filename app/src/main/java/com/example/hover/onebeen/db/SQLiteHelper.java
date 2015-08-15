@@ -4,6 +4,7 @@ import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 import com.example.hover.onebeen.db.schema.PuzzleTableSchema;
+import com.example.hover.onebeen.db.schema.TravelTableSchema;
 import com.example.hover.onebeen.db.schema.UserTableSchema;
 
 public class SQLiteHelper extends SQLiteOpenHelper {
@@ -19,6 +20,7 @@ public class SQLiteHelper extends SQLiteOpenHelper {
     public void onCreate(SQLiteDatabase database) {
         database.execSQL(UserTableSchema.CREATE_USER_TABLE);
         database.execSQL(PuzzleTableSchema.CREATE_PUZZLE_TABLE);
+        database.execSQL(TravelTableSchema.CREATE_TRAVEL_TABLE);
     }
 
     @Override

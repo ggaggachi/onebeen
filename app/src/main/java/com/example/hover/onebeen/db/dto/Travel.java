@@ -3,13 +3,11 @@ package com.example.hover.onebeen.db.dto;
 import java.util.List;
 
 public class Travel {
-    private Long _id;
     private String userId;
     private String travelId;
     private List<Puzzle> puzzles;
 
-    public Travel(Long _id, String userId, String travelId, List<Puzzle> puzzles) {
-        this._id = _id;
+    public Travel(String userId, String travelId, List<Puzzle> puzzles) {
         this.userId = userId;
         this.travelId = travelId;
         this.puzzles = puzzles;
@@ -31,14 +29,6 @@ public class Travel {
         this.travelId = travelId;
     }
 
-    public Long get_id() {
-        return _id;
-    }
-
-    public void set_id(Long _id) {
-        this._id = _id;
-    }
-
     public List<Puzzle> getPuzzles() {
         return puzzles;
     }
@@ -50,7 +40,6 @@ public class Travel {
     @Override
     public String toString() {
         return "Travel{" +
-                "_id=" + _id +
                 ", userId='" + userId + '\'' +
                 ", travelId='" + travelId + '\'' +
                 ", puzzles=" + puzzles +

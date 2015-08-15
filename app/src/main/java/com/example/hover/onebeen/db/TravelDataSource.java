@@ -1,8 +1,8 @@
 package com.example.hover.onebeen.db;
 
 import android.content.Context;
+import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
-import android.support.annotation.NonNull;
 
 import com.example.hover.onebeen.db.dto.Puzzle;
 import com.example.hover.onebeen.db.dto.Travel;
@@ -36,32 +36,36 @@ public class TravelDataSource {
         }
     }
 
-//    public Travel getTravel(String travelId) {
-//        SQLiteDatabase database = dbHelper.getReadableDatabase();
-//
-//        String[] args = {travelId};
-//
-//        Cursor cursor = database.rawQuery("select * from " + TravelTableSchema.TRAVEL_TABLE + " where travelId = ?", args);
-//
-//        Travel travel = null;
-//
-//        try {
-//            cursor.moveToFirst();
-//
-//            travel = new Travel(cursor.getString(0), cursor.getString(1), cursor.getString(2), cursor.getString(3), cursor.getString(4));
-//        } catch (Exception e) {
-//            e.printStackTrace();
-//        } finally {
-//            database.close();
-//        }
-//
-//        return travel;
-//    }
+    public Travel getTravel(String travelId) {
+        SQLiteDatabase database = dbHelper.getReadableDatabase();
+
+        String[] args = {travelId};
+
+        Cursor cursor = database.rawQuery("select * from " + TravelTableSchema.TRAVEL_TABLE + " where " + TravelTableSchema.TRAVEL_TRAVEL_ID_COLUMN + " = ?", args);
+
+        Travel travel = null;
+
+        try {
+            cursor.moveToFirst();
+
+            ArrayList<Puzzle> puzzles = new ArrayList<>();
+            puzzles.add(puzzle());
+
+            travel = new Travel(cursor.getString(1), cursor.getString(2), puzzles);
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            database.close();
+        }
+
+        return travel;
+    }
+
     public Travel getTravel(String userId, String travelId, String puzzleId) {
         ArrayList<Puzzle> puzzles = new ArrayList<>();
         puzzles.add(puzzle());
 
-        return new Travel(1L, "ekdxhrl", "1", puzzles);
+        return new Travel("ekdxhrl", "1", puzzles);
     }
 
     private Puzzle puzzle() {
@@ -73,5 +77,13 @@ public class TravelDataSource {
         puzzle.setTitle("Title");
         puzzle.setType("Type");
         return puzzle;
+    }
+
+    public void deletePuzzleInTravel(String puzzleId) {
+        SQLiteDatabase database = dbHelper.getReadableDatabase();
+
+        String[] args = {puzzleId};
+
+        database.rawQuery("delete from " + TravelTableSchema.TRAVEL_TABLE + " where " + TravelTableSchema.TRAVEL_PUZZLE_ID_COLUMN + " = ?", args);
     }
 }

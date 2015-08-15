@@ -1,19 +1,13 @@
 package com.example.hover.onebeen.puzzle;
 
 import android.app.Activity;
-import android.app.Fragment;
-import android.content.ActivityNotFoundException;
 import android.content.Intent;
-import android.database.Cursor;
 import android.graphics.Bitmap;
 import android.net.Uri;
 import android.os.Bundle;
-import android.os.Parcelable;
 import android.provider.MediaStore;
-import android.support.annotation.Nullable;
-import android.view.LayoutInflater;
+import android.util.Log;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Toast;
@@ -28,7 +22,7 @@ public class MakePuzzleActivity extends Activity {
 
 	@Override protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		setContentView(R.layout.make_puzzle);
+		setContentView(R.layout.activity_make_puzzle);
 
 		dummyPuzzle = new Puzzle();
 
@@ -48,12 +42,12 @@ public class MakePuzzleActivity extends Activity {
 				EditText title = (EditText) findViewById(R.id.puzzle_title);
 				EditText description = (EditText) findViewById(R.id.puzzle_description);
 
-				dummyPuzzle.setType("puzzle");
+//				dummyPuzzle.setType("puzzle");
 				dummyPuzzle.setTitle(title.getText().toString());
 				dummyPuzzle.setDescription(description.getText().toString());
 
 				PuzzleDataSource puzzleDataSource = new PuzzleDataSource(getApplicationContext());
-				puzzleDataSource.insertPuzzle(dummyPuzzle);
+				puzzleDataSource.addPuzzle(dummyPuzzle);
 
 				Toast.makeText(getApplicationContext(), "디비 저장 성공", Toast.LENGTH_LONG).show();
 				finish();
@@ -72,21 +66,21 @@ public class MakePuzzleActivity extends Activity {
 			titleArea.setText(title);
 			descriptionArea.setText(description);
 
-//			try {
-//				ImageView imageView = (ImageView) findViewById(R.id.imageView);
-//				Uri uri = Uri.parse(mediaUri);
-//
+			try {
+				ImageView imageView = (ImageView) findViewById(R.id.imageView);
+				Uri uri = Uri.parse(mediaUri);
+
 //				Bitmap photo = MediaStore.Images.Media.getBitmap(getContentResolver(), uri);
 //				Bitmap resized = Bitmap.createScaledBitmap(photo, photo.getWidth(), photo.getHeight(), true);
 //				imageView.setBackgroundResource(0);
 //				imageView.setImageBitmap(resized);
 //				imageView.setScaleType(ImageView.ScaleType.FIT_XY);
-//
-//				Toast.makeText(getApplicationContext(), "퍼즐 로딩 성공", Toast.LENGTH_LONG).show();
-//
-//			} catch (IOException e) {
-//				e.printStackTrace();
-//			}
+
+				Log.e("mediaUri" , mediaUri);
+
+			} catch (Exception e) {
+				Log.e("ERROR", e.toString());
+			}
 		}
 	}
 
@@ -98,7 +92,11 @@ public class MakePuzzleActivity extends Activity {
 
 		try {
 			ImageView imageView = (ImageView) findViewById(R.id.imageView);
-			Uri uri = data.getData();
+			Uri uri1 = data.getData();
+			String s = uri1.toString();
+			Uri uri = Uri.parse(s);
+
+			Toast.makeText(getApplicationContext(), uri.toString(), Toast.LENGTH_LONG).show();
 
 			Bitmap photo = MediaStore.Images.Media.getBitmap(getContentResolver(), uri);
 			Bitmap resized = Bitmap.createScaledBitmap(photo, photo.getWidth(), photo.getHeight(), true);
@@ -106,7 +104,9 @@ public class MakePuzzleActivity extends Activity {
 			imageView.setImageBitmap(resized);
 			imageView.setScaleType(ImageView.ScaleType.FIT_XY);
 
-			dummyPuzzle.setMediaUri(uri.toString());
+			String path = uri.toString();
+
+//			dummyPuzzle.setMediaUri(path);
 
 		} catch (IOException e) {
 			Toast.makeText(getApplicationContext(), "갤러리 이미지를 가져오는데 실패하였습니다.", Toast.LENGTH_LONG).show();

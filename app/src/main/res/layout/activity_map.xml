@@ -1,0 +1,88 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:sl="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:paddingLeft="@dimen/activity_horizontal_margin"
+    android:paddingRight="@dimen/activity_horizontal_margin"
+    android:paddingTop="@dimen/activity_vertical_margin"
+    android:paddingBottom="@dimen/activity_vertical_margin"
+    android:screenOrientation="landscape"
+    tools:context="com.example.hover.onebeen.TravelActivity">
+
+    <com.ssomai.android.scalablelayout.ScalableLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@android:color/white"
+        android:layout_above="@+id/main_textview"
+        sl:scale_base_width="400"
+        sl:scale_base_height="200">
+        <!--<TextView-->
+            <!--android:layout_width="wrap_content"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--sl:scale_left="20"-->
+            <!--sl:scale_top="40"-->
+            <!--sl:scale_width="100"-->
+            <!--sl:scale_height="30"-->
+            <!--sl:scale_textsize="20"-->
+            <!--android:text="@string/hello_world"-->
+            <!--android:textColor="@android:color/white"-->
+            <!--android:background="@android:color/black" />-->
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            sl:scale_left="100"
+            sl:scale_top="30"
+            sl:scale_width="50"
+            sl:scale_height="50"
+            android:src="@drawable/aa" />
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            sl:scale_left="150"
+            sl:scale_top="30"
+            sl:scale_width="50"
+            sl:scale_height="50"
+            android:src="@drawable/aa" />
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            sl:scale_left="200"
+            sl:scale_top="30"
+            sl:scale_width="50"
+            sl:scale_height="50"
+            android:src="@drawable/aa" />
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            sl:scale_left="250"
+            sl:scale_top="30"
+            sl:scale_width="50"
+            sl:scale_height="50"
+            android:src="@drawable/aa" />
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            sl:scale_left="300"
+            sl:scale_top="30"
+            sl:scale_width="50"
+            sl:scale_height="50"
+            android:src="@drawable/aa" />
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            sl:scale_left="350"
+            sl:scale_top="30"
+            sl:scale_width="50"
+            sl:scale_height="50"
+            android:src="@drawable/aa" />
+
+    </com.ssomai.android.scalablelayout.ScalableLayout>
+
+</RelativeLayout>
+

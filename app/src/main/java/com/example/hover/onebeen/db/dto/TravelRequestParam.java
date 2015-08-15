@@ -1,0 +1,47 @@
+package com.example.hover.onebeen.db.dto;
+
+public class TravelRequestParam {
+    private String _id;
+    private String userId;
+    private String travelId;
+    private String puzzleId;
+
+    public TravelRequestParam(String _id, String userId, String travelId, String orderId, String puzzleId) {
+        this._id = _id;
+        this.userId = userId;
+        this.travelId = travelId;
+        this.puzzleId = puzzleId;
+    }
+
+    public String get_id() {
+        return _id;
+    }
+
+    public void set_id(String _id) {
+        this._id = _id;
+    }
+
+    public String getUserId() {
+        return userId;
+    }
+
+    public void setUserId(String userId) {
+        this.userId = userId;
+    }
+
+    public String getTravelId() {
+        return travelId;
+    }
+
+    public void setTravelId(String travelId) {
+        this.travelId = travelId;
+    }
+
+    public String getPuzzleId() {
+        return puzzleId;
+    }
+
+    public void setPuzzleId(String puzzleId) {
+        this.puzzleId = puzzleId;
+    }
+}

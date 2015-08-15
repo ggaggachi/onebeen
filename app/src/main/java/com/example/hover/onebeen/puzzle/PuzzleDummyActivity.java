@@ -27,12 +27,12 @@ public class PuzzleDummyActivity extends Activity{
 			@Override public void onClick(View v) {
 				PuzzleDataSource puzzleDataSource = new PuzzleDataSource(getApplicationContext());
 				EditText editText = (EditText) findViewById(R.id.editText);
-				Puzzle puzzle = puzzleDataSource.getPuzzleById(Long.parseLong(editText.getText().toString()));
+				Puzzle puzzle = puzzleDataSource.getPuzzle(Long.parseLong(editText.getText().toString()));
 
 				Intent intent = new Intent(PuzzleDummyActivity.this, MakePuzzleActivity.class);
 				intent.putExtra("title", puzzle.getTitle());
 				intent.putExtra("description", puzzle.getDescription());
-				intent.putExtra("mediaUri", puzzle.getMediaUri());
+//				intent.putExtra("mediaUri", puzzle.getMediaUri());
 				startActivity(intent);
 			}
 		});

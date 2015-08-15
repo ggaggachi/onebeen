@@ -23,7 +23,6 @@
             android:background="#4dc4d7"
             android:text="여행시작하기"
             android:textColor="#ffffff"
-            android:drawableTop="@drawable/btn1"
             android:textSize="17sp"
             android:paddingTop="12dp"
             android:paddingBottom="8dp"/>
@@ -36,7 +35,6 @@
             android:background="#298fce"
             android:text="다녀온 여행지"
             android:textColor="#ffffff"
-            android:drawableTop="@drawable/btn2"
             android:textSize="17sp"
             android:paddingTop="12dp"
             android:paddingBottom="8dp"/>
@@ -49,7 +47,6 @@
             android:background="#13a7a3"
             android:text="진행중 여행지"
             android:textColor="#ffffff"
-            android:drawableTop="@drawable/btn3"
             android:textSize="17sp"
             android:paddingTop="12dp"
             android:paddingBottom="8dp"/>
@@ -62,7 +59,6 @@
             android:background="#4bbfab"
             android:text="계획중 여행지"
             android:textColor="#ffffff"
-            android:drawableTop="@drawable/btn4"
             android:textSize="17sp"
             android:paddingTop="12dp"
             android:paddingBottom="8dp"

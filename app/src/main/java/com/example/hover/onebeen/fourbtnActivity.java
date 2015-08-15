@@ -21,8 +21,8 @@ public class fourbtnActivity extends Activity {
     btn1.setOnClickListener(new View.OnClickListener() {
         @Override
         public void onClick(View v) {
-            Intent i = new Intent(fourbtnActivity.this,onebeen_title.class);
-            startActivity(i);
+//            Intent i = new Intent(fourbtnActivity.this,onebeen_title.class);
+//            startActivity(i);
         }
     });
 

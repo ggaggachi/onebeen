@@ -1,59 +1,77 @@
 package com.example.hover.onebeen.db;
 
+import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
+import android.support.annotation.NonNull;
 import com.example.hover.onebeen.db.dto.Puzzle;
-import com.example.hover.onebeen.db.dto.User;
 import com.example.hover.onebeen.db.schema.PuzzleTableSchema;
-import com.example.hover.onebeen.db.schema.UserTableSchema;
-
-import java.util.Objects;
 
 public class PuzzleDataSource {
+
 	private SQLiteHelper dbHelper;
 
 	public PuzzleDataSource(Context context) {
 		dbHelper = new SQLiteHelper(context);
 	}
 
-	public void insertPuzzle(Puzzle puzzle) {
+	public void addPuzzle(Puzzle puzzle) {
 		SQLiteDatabase database = dbHelper.getWritableDatabase();
 
-		Object[] args = {puzzle.getType(), puzzle.getTitle(), puzzle.getDescription(), puzzle.getMediaUri()};
-		try {
-			database.execSQL("INSERT INTO " + PuzzleTableSchema.PUZZLE_TABLE
-				+ "(" + PuzzleTableSchema.PUZZLE_TYPE_COLUMN
-				+ ", " + PuzzleTableSchema.PUZZLE_TITLE_COLUMN
-				+ ", " + PuzzleTableSchema.PUZZLE_DESCRIPTION_COLUMN
-				+ ", " + PuzzleTableSchema.PUZZLE_MEDIA_COLUMN
-				+ ") values(?, ?, ?, ?);", args);
+		ContentValues values = getPuzzleContentValues(puzzle);
 
-		} catch (Exception e) {
-			e.printStackTrace();
-		} finally {
-			database.close();
-		}
+		database.insert(PuzzleTableSchema.TABLE_NAME, null, values);
+		database.close();
 	}
 
-	public Puzzle getPuzzleById(long id) {
+	public Puzzle getPuzzle(long id) {
 		SQLiteDatabase database = dbHelper.getReadableDatabase();
-		String[] arg = {String.valueOf(id)};
+		String[] arg = { String.valueOf(id) };
 
-		Cursor cursor = database.rawQuery(
-			"select * from " + PuzzleTableSchema.PUZZLE_TABLE + " where " + PuzzleTableSchema.PUZZLE_ID_COLUMN + " is ?", arg);
+		Cursor cursor = database.query(PuzzleTableSchema.TABLE_NAME, null, PuzzleTableSchema.ID + "=?", arg, null, null, null);
 
-		Puzzle puzzle = null;
-		try {
-			cursor.moveToFirst();
-			puzzle = new Puzzle(cursor.getLong(0), cursor.getString(1), cursor.getString(2), cursor.getString(3), cursor.getString(4));
-
-		} catch (Exception e) {
-			e.printStackTrace();
-		} finally {
-			database.close();
+		if (!cursor.moveToNext()) {
+			cursor.close();
+			return new Puzzle();
 		}
 
-		return puzzle;
+		cursor.close();
+		return new Puzzle(cursor.getLong(0), cursor.getString(1), cursor.getString(2), cursor.getString(3),
+			cursor.getString(4), cursor.getString(5), cursor.getString(6), cursor.getString(7), cursor.getInt(8),
+			cursor.getString(9), cursor.getString(10), cursor.getString(11));
+	}
+
+	public int updatePuzzle(Puzzle puzzle) {
+		SQLiteDatabase database = dbHelper.getWritableDatabase();
+		String[] arg = { String.valueOf(puzzle.getId()) };
+
+		ContentValues values = getPuzzleContentValues(puzzle);
+
+		return database.update(PuzzleTableSchema.TABLE_NAME, values, PuzzleTableSchema.ID + "=?", arg);
+	}
+
+	public void deletePuzzle(Puzzle puzzle) {
+		SQLiteDatabase database = dbHelper.getWritableDatabase();
+		String[] arg = { String.valueOf(puzzle.getId()) };
+
+		database.delete(PuzzleTableSchema.TABLE_NAME, PuzzleTableSchema.ID + "=?", arg);
+		database.close();
+	}
+
+	@NonNull private ContentValues getPuzzleContentValues(Puzzle puzzle) {
+		ContentValues values = new ContentValues();
+		values.put(PuzzleTableSchema.USER_ID, puzzle.getUserId());
+		values.put(PuzzleTableSchema.STATUS, puzzle.getStatus());
+		values.put(PuzzleTableSchema.TITLE, puzzle.getTitle());
+		values.put(PuzzleTableSchema.DESCRIPTION, puzzle.getDescription());
+		values.put(PuzzleTableSchema.IMAGE_PATH1, puzzle.getImagePath1());
+		values.put(PuzzleTableSchema.IMAGE_PATH2, puzzle.getImagePath2());
+		values.put(PuzzleTableSchema.IMAGE_PATH3, puzzle.getImagePath3());
+		values.put(PuzzleTableSchema.ORDER, puzzle.getOrder());
+		values.put(PuzzleTableSchema.PLACE, puzzle.getPlace());
+		values.put(PuzzleTableSchema.TODO, puzzle.getTodo());
+		values.put(PuzzleTableSchema.TYPE, puzzle.getType());
+		return values;
 	}
 }

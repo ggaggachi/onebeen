@@ -75,7 +75,7 @@ public class TravelDataSource {
 
         puzzle.setId(dummyId);
         puzzle.setDescription("Description"+dummyId);
-        puzzle.setMediaUri("URL"+dummyId);
+//        puzzle.setMediaUri("URL"+dummyId);
         puzzle.setTitle("Title"+dummyId);
         puzzle.setType("Type"+dummyId);
 

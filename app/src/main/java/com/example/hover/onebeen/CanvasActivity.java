@@ -4,15 +4,15 @@ import android.app.Activity;
 import android.content.Context;
 import android.graphics.Canvas;
 import android.graphics.Color;
+import android.graphics.DashPathEffect;
 import android.graphics.Paint;
+import android.graphics.Path;
 import android.graphics.RectF;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageView;
-import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
+import android.widget.ScrollView;
 import android.widget.Toast;
 
 public class CanvasActivity extends Activity {
@@ -21,96 +21,189 @@ public class CanvasActivity extends Activity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
+        RelativeLayout a = new RelativeLayout(this);
         RelativeLayout parentLayout = new RelativeLayout(this);
-        parentLayout.setBackgroundColor(Color.BLACK);
+//        parentLayout.setBackgroundColor(Color.BLACK);
 
 //        relativeLayout.addView(new TT(this));
         int width = this.getResources().getDisplayMetrics().widthPixels;
         int height = this.getResources().getDisplayMetrics().heightPixels;
-        int marginLeft = width/2;
-        int marginTop = height/2;
+        int marginLeft = width / 2;
+        int marginTop = height / 2;
         int marginRight = 0;
         int marginBottom = 0;
-        RelativeLayout childLayout1 = new RelativeLayout(this);
-        Circle circle = new Circle(this);
-//        circle.setBackgroundColor(Color.BLACK);
-        circle.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Toast.makeText(CanvasActivity.this, "test", Toast.LENGTH_LONG).show();
-            }
-        });
 
-        childLayout1.addView(circle);
-        ViewGroup.MarginLayoutParams marginLayoutParams = new ViewGroup.MarginLayoutParams(width, height);
-        marginLayoutParams.setMargins(marginLeft, marginTop, marginRight, marginBottom);
-        RelativeLayout.LayoutParams params = new RelativeLayout.LayoutParams(marginLayoutParams);
-        childLayout1.setLayoutParams(params);
+        //        childLayout1.addView(circle);
+        parentLayout.addView(new RelativeQuadrangleLayout(this, 1));
+        parentLayout.addView(new RelativeQuadrangleLayout(this, 3));
+        parentLayout.addView(new RelativeQuadrangleLayout(this, 5));
+        parentLayout.addView(new RelativeChildLayout(this, marginLeft, marginTop, marginRight, marginBottom));
+        parentLayout.addView(new DashVerticalLine(this));
 
-        parentLayout.addView(new Quadrangle(this, 1));
-        parentLayout.addView(childLayout1);
 
 //        relativeLayout.addView(new HalfCircle(this));
 //        relativeLayout.addView(new VerticalLine(this, 0, 160, width / 2, 160));
 //        relativeLayout.addView(new VerticalLine(this, width / 2, 155, width / 2, 320));
 
-        setContentView(parentLayout);
+        ScrollView scrollView = new ScrollView(this);
+        scrollView.addView(parentLayout);
+        a.addView(scrollView);
+        setContentView(a);
     }
 
-    class Quadrangle extends View {
+    class DashVerticalLine extends View {
         private final int GREEN = Color.argb(255, 0, 204, 204);
-        private final float leftTopX;
-        private final float leftTopY;
-        private final float rightBottomX;
-        private final float rightBottomY;
 
-        public Quadrangle(Context context, int num) {
+        public DashVerticalLine(Context context) {
             super(context);
-
-            if (num == 1) {
-                int width = this.getResources().getDisplayMetrics().widthPixels;
-                int height = this.getResources().getDisplayMetrics().heightPixels;
-                int width10 = width / 10;
-                int height10 = height / 10;
-
-                this.leftTopX = width10;
-                this.leftTopY = height10 * 3;
-                this.rightBottomX = width10 * 9;
-                this.rightBottomY = height10 * 4;
-            } else {
-                this.leftTopX = 0;
-                this.leftTopY = 0;
-                this.rightBottomX = 0;
-                this.rightBottomY = 0;
-            }
         }
 
-        // 위 오른쪽 아래 왼쪽
         @Override
         protected void onDraw(Canvas canvas) {
             super.onDraw(canvas);
 
             Paint paint = new Paint();
-            paint.setAntiAlias(true);
+            paint.setColor(GREEN);
             paint.setStrokeWidth(8);
             paint.setStyle(Paint.Style.STROKE);
+            paint.setPathEffect(new DashPathEffect(new float[]{5, 5}, 0));
 
-            paint.setColor(GREEN);
-
-            float weightX = rightBottomX - leftTopX;
-            float weightY = rightBottomY - leftTopY;
-            float underY = 250;
-
-            canvas.drawLine(leftTopX, leftTopY, leftTopX + weightX, leftTopY, paint);
-            canvas.drawLine(leftTopX + weightX, leftTopY + weightY, leftTopX + weightX, leftTopY + weightY + underY, paint);
-            canvas.drawLine(leftTopX, leftTopY + weightY, leftTopX + weightX, leftTopY + weightY, paint);
-            canvas.drawLine(leftTopX, leftTopY, leftTopX, leftTopY + weightY, paint);
+            Path path = new Path();
+            path.moveTo(0, 250);
+            path.quadTo(250, 250, 500, 250);
+            canvas.drawPath(path, paint);
         }
     }
 
-    class Circle extends View {
-        final int GREEN = Color.argb(255, 0, 204, 204);
+    class RelativeQuadrangleLayout extends RelativeLayout {
+        public RelativeQuadrangleLayout(Context context, int ratio) {
+            super(context);
 
+            super.addView(new Quadrangle(context, ratio));
+        }
+
+        @Override
+        public void setLayoutParams(ViewGroup.LayoutParams params) {
+            int width = this.getResources().getDisplayMetrics().widthPixels;
+            int height = this.getResources().getDisplayMetrics().heightPixels;
+
+            ViewGroup.MarginLayoutParams marginLayoutParams = new ViewGroup.MarginLayoutParams(width, height);
+            marginLayoutParams.width = width;
+            marginLayoutParams.height = height;
+
+            super.setLayoutParams(new RelativeLayout.LayoutParams(marginLayoutParams));
+        }
+
+        class RatioCalculator {
+
+            public float getLeftTopY(Context context, int ratio) {
+                int height = context.getResources().getDisplayMetrics().heightPixels;
+                int height10 = height / 10;
+                return height10 * (Ratio.STANDARD_HEIGHT_RATIO + ratio);
+            }
+
+            public float getRightBottomY(Context context, int ratio) {
+                int height = context.getResources().getDisplayMetrics().heightPixels;
+                int height10 = height / 10;
+                return height10 * (Ratio.STANDARD_HEIGHT_RATIO + ratio + 1);
+            }
+        }
+
+        class Ratio {
+            public static final int STANDARD_HEIGHT_RATIO = 3;
+        }
+
+        class Quadrangle extends View {
+            private final float leftTopX;
+            private final float leftTopY;
+            private final float rightBottomX;
+            private final float rightBottomY;
+
+            public Quadrangle(Context context, int ratio) {
+                super(context);
+
+                int width = this.getResources().getDisplayMetrics().widthPixels;
+                int width10 = width / 10;
+                this.leftTopX = width10;
+                this.rightBottomX = width10 * 9;
+
+                int height = this.getResources().getDisplayMetrics().heightPixels;
+                int height10 = height / 10;
+
+                this.leftTopY = height10 * (Ratio.STANDARD_HEIGHT_RATIO + ratio);
+                this.rightBottomY = height10 * (Ratio.STANDARD_HEIGHT_RATIO + ratio + 1);
+            }
+
+            // 위 오른쪽 아래 왼쪽
+            @Override
+            protected void onDraw(Canvas canvas) {
+                super.onDraw(canvas);
+
+                Paint paint = new Paint();
+                paint.setAntiAlias(true);
+                paint.setStrokeWidth(8);
+                paint.setStyle(Paint.Style.STROKE);
+
+                paint.setColor(OneBeenColor.GREEN);
+
+                float weightX = rightBottomX - leftTopX;
+                float weightY = rightBottomY - leftTopY;
+                float underY = 250;
+
+                canvas.drawLine(leftTopX, leftTopY, leftTopX + weightX, leftTopY, paint);
+                canvas.drawLine(leftTopX + weightX, leftTopY + weightY, leftTopX + weightX, leftTopY + weightY + underY, paint);
+                canvas.drawLine(leftTopX, leftTopY + weightY, leftTopX + weightX, leftTopY + weightY, paint);
+                canvas.drawLine(leftTopX, leftTopY, leftTopX, leftTopY + weightY, paint);
+            }
+        }
+    }
+
+    class RelativeChildLayout extends RelativeLayout {
+        private int marginLeft;
+        private int marginTop;
+        private int marginRight;
+        private int marginBottom;
+
+        public RelativeChildLayout(Context context, int marginLeft, int marginTop, int marginRight, int marginBottom) {
+            super(context);
+
+            this.marginLeft = marginLeft;
+            this.marginRight = marginRight;
+            this.marginTop = marginTop;
+            this.marginBottom = marginBottom;
+
+            Circle circle = new Circle(context);
+//        circle.setBackgroundColor(Color.BLACK);
+            circle.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Toast.makeText(CanvasActivity.this, "test", Toast.LENGTH_LONG).show();
+                }
+            });
+
+            super.addView(circle);
+        }
+
+        @Override
+        public void setLayoutParams(ViewGroup.LayoutParams params) {
+            int width = this.getResources().getDisplayMetrics().widthPixels;
+            int height = this.getResources().getDisplayMetrics().heightPixels;
+
+            ViewGroup.MarginLayoutParams marginLayoutParams = new ViewGroup.MarginLayoutParams(width, height);
+            marginLayoutParams.setMargins(marginLeft, marginTop, marginRight, marginBottom);
+            marginLayoutParams.width = 150;
+            marginLayoutParams.height = 150;
+
+            super.setLayoutParams(new RelativeLayout.LayoutParams(marginLayoutParams));
+            super.setBackgroundColor(Color.BLACK);
+        }
+    }
+
+    static class OneBeenColor {
+        public static final int GREEN = Color.argb(255, 0, 204, 204);
+    }
+
+    class Circle extends View {
         public Circle(Context context) {
             super(context);
         }
@@ -123,7 +216,7 @@ public class CanvasActivity extends Activity {
 
             Paint paint = new Paint();
             paint.setStyle(Paint.Style.FILL_AND_STROKE);
-            paint.setColor(GREEN);
+            paint.setColor(OneBeenColor.GREEN);
 
             canvas.drawCircle(getWidth() / 2, getHeight() / 2, radius, paint);
         }

@@ -16,6 +16,7 @@ import android.widget.ScrollView;
 import android.widget.Toast;
 import com.example.hover.onebeen.utility.OneBeenColor;
 import com.example.hover.onebeen.view.RelativeQuadrangleLayout;
+import com.example.hover.onebeen.view.RelativeStartQuadrangleLayout;
 
 public class CanvasActivity extends Activity {
 
@@ -36,7 +37,7 @@ public class CanvasActivity extends Activity {
         int marginBottom = 0;
 
         //        childLayout1.addView(circle);
-        parentLayout.addView(new RelativeQuadrangleLayout(this, 1));
+        parentLayout.addView(new RelativeStartQuadrangleLayout(this, 1));
         parentLayout.addView(new RelativeQuadrangleLayout(this, 3));
         parentLayout.addView(new RelativeQuadrangleLayout(this, 5));
         parentLayout.addView(new RelativeChildLayout(this, marginLeft, marginTop, marginRight, marginBottom));

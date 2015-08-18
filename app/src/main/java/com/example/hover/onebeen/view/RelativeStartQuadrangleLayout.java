@@ -6,11 +6,10 @@ import android.graphics.Paint;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.RelativeLayout;
-
 import com.example.hover.onebeen.utility.OneBeenColor;
 
-public class RelativeQuadrangleLayout extends RelativeLayout {
-    public RelativeQuadrangleLayout(Context context, int ratio) {
+public class RelativeStartQuadrangleLayout extends RelativeLayout {
+    public RelativeStartQuadrangleLayout(Context context, int ratio) {
         super(context);
         super.addView(new Quadrangle(context, ratio));
     }
@@ -20,11 +19,11 @@ public class RelativeQuadrangleLayout extends RelativeLayout {
         int width = this.getResources().getDisplayMetrics().widthPixels;
         int height = this.getResources().getDisplayMetrics().heightPixels;
 
-        ViewGroup.MarginLayoutParams marginLayoutParams = new ViewGroup.MarginLayoutParams(width, height);
+        MarginLayoutParams marginLayoutParams = new MarginLayoutParams(width, height);
         marginLayoutParams.width = width;
         marginLayoutParams.height = height;
 
-        super.setLayoutParams(new RelativeLayout.LayoutParams(marginLayoutParams));
+        super.setLayoutParams(new LayoutParams(marginLayoutParams));
     }
 
     class RatioCalculator {
@@ -83,10 +82,12 @@ public class RelativeQuadrangleLayout extends RelativeLayout {
             float weightY = rightBottomY - leftTopY;
             float underY = 250;
 
-            canvas.drawLine(leftTopX, leftTopY, leftTopX + weightX, leftTopY, paint);
-            canvas.drawLine(leftTopX + weightX, leftTopY + weightY, leftTopX + weightX, leftTopY + weightY + underY, paint);
-            canvas.drawLine(leftTopX, leftTopY + weightY, leftTopX + weightX, leftTopY + weightY, paint);
-            canvas.drawLine(leftTopX, leftTopY, leftTopX, leftTopY + weightY, paint);
+            int width = this.getResources().getDisplayMetrics().widthPixels / 2;
+
+            canvas.drawLine(width, leftTopY, width + weightX, leftTopY, paint);
+            canvas.drawLine(width + weightX, leftTopY + weightY, width + weightX, leftTopY + weightY + underY, paint);
+            canvas.drawLine(width, leftTopY + weightY, width + weightX, leftTopY + weightY, paint);
+            canvas.drawLine(width, leftTopY, width, leftTopY + weightY, paint);
         }
     }
 }

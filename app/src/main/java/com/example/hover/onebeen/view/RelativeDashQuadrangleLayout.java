@@ -2,7 +2,10 @@ package com.example.hover.onebeen.view;
 
 import android.content.Context;
 import android.graphics.Canvas;
+import android.graphics.Color;
+import android.graphics.DashPathEffect;
 import android.graphics.Paint;
+import android.graphics.Path;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.RelativeLayout;
@@ -10,8 +13,8 @@ import android.widget.RelativeLayout;
 import com.example.hover.onebeen.utility.OneBeenColor;
 import com.example.hover.onebeen.utility.Ratio;
 
-public class RelativeQuadrangleLayout extends RelativeLayout {
-    public RelativeQuadrangleLayout(Context context, int ratio) {
+public class RelativeDashQuadrangleLayout extends RelativeLayout {
+    public RelativeDashQuadrangleLayout(Context context, int ratio) {
         super(context);
         super.addView(new Quadrangle(context, ratio));
     }
@@ -21,11 +24,11 @@ public class RelativeQuadrangleLayout extends RelativeLayout {
         int width = this.getResources().getDisplayMetrics().widthPixels;
         int height = this.getResources().getDisplayMetrics().heightPixels;
 
-        ViewGroup.MarginLayoutParams marginLayoutParams = new ViewGroup.MarginLayoutParams(width, height);
+        MarginLayoutParams marginLayoutParams = new MarginLayoutParams(width, height);
         marginLayoutParams.width = width;
         marginLayoutParams.height = 2500;
 
-        super.setLayoutParams(new RelativeLayout.LayoutParams(marginLayoutParams));
+        super.setLayoutParams(new LayoutParams(marginLayoutParams));
     }
 
     class Quadrangle extends View {
@@ -70,5 +73,29 @@ public class RelativeQuadrangleLayout extends RelativeLayout {
             canvas.drawLine(leftTopX, leftTopY + weightY, leftTopX + weightX, leftTopY + weightY, paint);
             canvas.drawLine(leftTopX, leftTopY, leftTopX, leftTopY + weightY, paint);
         }
+    }
+}
+
+class DashVerticalLine extends View {
+    private final int GREEN = Color.argb(255, 0, 204, 204);
+
+    public DashVerticalLine(Context context) {
+        super(context);
+    }
+
+    @Override
+    protected void onDraw(Canvas canvas) {
+        super.onDraw(canvas);
+
+        Paint paint = new Paint();
+        paint.setColor(GREEN);
+        paint.setStrokeWidth(8);
+        paint.setStyle(Paint.Style.STROKE);
+        paint.setPathEffect(new DashPathEffect(new float[]{5, 5}, 0));
+
+        Path path = new Path();
+        path.moveTo(0, 250);
+        path.quadTo(250, 250, 500, 250);
+        canvas.drawPath(path, paint);
     }
 }

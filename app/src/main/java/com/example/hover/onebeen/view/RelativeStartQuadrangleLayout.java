@@ -7,6 +7,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.RelativeLayout;
 import com.example.hover.onebeen.utility.OneBeenColor;
+import com.example.hover.onebeen.utility.Ratio;
 
 public class RelativeStartQuadrangleLayout extends RelativeLayout {
     public RelativeStartQuadrangleLayout(Context context, int ratio) {
@@ -26,26 +27,8 @@ public class RelativeStartQuadrangleLayout extends RelativeLayout {
         super.setLayoutParams(new LayoutParams(marginLayoutParams));
     }
 
-    class RatioCalculator {
-
-        public float getLeftTopY(Context context, int ratio) {
-            int height = context.getResources().getDisplayMetrics().heightPixels;
-            int height10 = height / 10;
-            return height10 * (Ratio.STANDARD_HEIGHT_RATIO + ratio);
-        }
-
-        public float getRightBottomY(Context context, int ratio) {
-            int height = context.getResources().getDisplayMetrics().heightPixels;
-            int height10 = height / 10;
-            return height10 * (Ratio.STANDARD_HEIGHT_RATIO + ratio + 1);
-        }
-    }
-
-    class Ratio {
-        public static final int STANDARD_HEIGHT_RATIO = 2;
-    }
-
     class Quadrangle extends View {
+        private final float height10;
         private final float leftTopX;
         private final float leftTopY;
         private final float rightBottomX;
@@ -54,16 +37,15 @@ public class RelativeStartQuadrangleLayout extends RelativeLayout {
         public Quadrangle(Context context, int ratio) {
             super(context);
 
-            int width = this.getResources().getDisplayMetrics().widthPixels;
-            int width10 = width / 10;
+            int width10 = Ratio.getWidth(context);
+
             this.leftTopX = width10;
-            this.rightBottomX = width10 * 9;
+            this.rightBottomX = width10 * 5;
 
-            int height = this.getResources().getDisplayMetrics().heightPixels;
-            int height10 = height / 10;
+            this.height10 = Ratio.getHeight(context);
 
-            this.leftTopY = height10 * (Ratio.STANDARD_HEIGHT_RATIO + ratio);
-            this.rightBottomY = height10 * (Ratio.STANDARD_HEIGHT_RATIO + ratio + 1);
+            this.leftTopY = this.height10 * (Ratio.STANDARD_HEIGHT_RATIO + ratio);
+            this.rightBottomY = this.height10 * (Ratio.STANDARD_HEIGHT_RATIO + ratio + 1);
         }
 
         // 위 오른쪽 아래 왼쪽
@@ -79,15 +61,13 @@ public class RelativeStartQuadrangleLayout extends RelativeLayout {
             paint.setColor(OneBeenColor.GREEN);
 
             float weightX = rightBottomX - leftTopX;
-            float weightY = rightBottomY - leftTopY;
-            float underY = 250;
+            float weightY = rightBottomY - leftTopY + this.height10;
 
-            int width = this.getResources().getDisplayMetrics().widthPixels / 2;
+            int halfWidth = this.getResources().getDisplayMetrics().widthPixels / 2;
 
-            canvas.drawLine(width, leftTopY, width + weightX, leftTopY, paint);
-            canvas.drawLine(width + weightX, leftTopY + weightY, width + weightX, leftTopY + weightY + underY, paint);
-            canvas.drawLine(width, leftTopY + weightY, width + weightX, leftTopY + weightY, paint);
-            canvas.drawLine(width, leftTopY, width, leftTopY + weightY, paint);
+            canvas.drawLine(halfWidth + weightX, leftTopY + weightY, halfWidth + weightX, leftTopY + weightY * 2, paint);
+            canvas.drawLine(halfWidth, leftTopY + weightY, halfWidth + weightX, leftTopY + weightY, paint);
+            canvas.drawLine(halfWidth, leftTopY, halfWidth, leftTopY + weightY, paint);
         }
     }
 }

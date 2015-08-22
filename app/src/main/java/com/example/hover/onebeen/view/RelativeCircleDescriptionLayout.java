@@ -7,24 +7,22 @@ import android.graphics.Paint;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.RelativeLayout;
-
 import com.example.hover.onebeen.utility.CircleDirection;
 import com.example.hover.onebeen.utility.CircleSize;
-import com.example.hover.onebeen.utility.OneBeenColor;
 import com.example.hover.onebeen.utility.Ratio;
 
-public class RelativeCircleLayout extends RelativeLayout {
+public class RelativeCircleDescriptionLayout extends RelativeLayout {
     private int marginLeft;
     private int marginTop;
     private int marginRight;
     private int marginBottom;
 
-    public RelativeCircleLayout(Context context, int ratio, CircleDirection direction) {
+    public RelativeCircleDescriptionLayout(Context context, int ratio, CircleDirection direction, String description) {
         super(context);
 
         initialize(context, ratio, direction);
 
-        super.addView(new Circle(context));
+        super.addView(new CircleDescription(context, description));
     }
 
     private void initialize(Context context, int ratio, CircleDirection direction) {
@@ -55,29 +53,32 @@ public class RelativeCircleLayout extends RelativeLayout {
         int height = this.getResources().getDisplayMetrics().heightPixels;
 
         ViewGroup.MarginLayoutParams marginLayoutParams = new ViewGroup.MarginLayoutParams(width, height);
-        marginLayoutParams.setMargins(marginLeft, marginTop, marginRight, marginBottom);
-        marginLayoutParams.width = 100;
-        marginLayoutParams.height = 100;
+        int leftWeight = marginLeft / 10;
+        int topWeight = marginTop / 10;
+        marginLayoutParams.setMargins(marginLeft - leftWeight, marginTop + (topWeight * 2), marginRight, marginBottom);
+        marginLayoutParams.width = 200;
+        marginLayoutParams.height = 150;
 
         super.setLayoutParams(new RelativeLayout.LayoutParams(marginLayoutParams));
     }
 }
 
-class Circle extends View {
+class CircleDescription extends View {
 
-    public Circle(Context context) {
+    private final String description;
+
+    public CircleDescription(Context context, String description) {
         super(context);
+        this.description = description;
     }
 
     @Override
     protected void onDraw(Canvas canvas) {
-        int radius = 50;
+        Paint textPaint = new Paint();
+        textPaint.setTextSize(30);
+        textPaint.setColor(Color.BLACK);
 
-        Paint paint = new Paint();
-        paint.setStyle(Paint.Style.FILL_AND_STROKE);
-        paint.setColor(OneBeenColor.GREEN);
-
-        canvas.drawCircle(CircleSize.getWidth() / 2, CircleSize.getHeight() / 2, radius, paint);
+        canvas.drawText(description, 0, 30, textPaint);
 
         super.onDraw(canvas);
     }

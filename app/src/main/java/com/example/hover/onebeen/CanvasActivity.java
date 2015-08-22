@@ -12,9 +12,11 @@ import android.widget.RelativeLayout;
 import android.widget.ScrollView;
 import android.widget.Toast;
 import com.example.hover.onebeen.utility.CircleDirection;
+import com.example.hover.onebeen.view.RelativeCircleDescriptionLayout;
 import com.example.hover.onebeen.view.RelativeCircleLayout;
 import com.example.hover.onebeen.view.RelativeQuadrangleLayout;
 import com.example.hover.onebeen.view.RelativeStartQuadrangleLayout;
+import com.facebook.login.widget.ProfilePictureView;
 
 public class CanvasActivity extends Activity {
 
@@ -26,12 +28,23 @@ public class CanvasActivity extends Activity {
         RelativeLayout parentLayout = new RelativeLayout(this);
         parentLayout.setMinimumHeight(2500);
 
-        parentLayout.addView(new RelativeStartQuadrangleLayout(this, 1));
+        ProfilePictureView profilePictureView = new ProfilePictureView(this);
+        parentLayout.addView(profilePictureView);
+
+        setViewRelatedToLine(parentLayout);
+        setViewRelatedToCircle(parentLayout);
+
+        ScrollView scrollView = new ScrollView(this);
+        scrollView.addView(parentLayout);
+        rootLayout.addView(scrollView);
+
+        setContentView(rootLayout);
+    }
+
+    private void setViewRelatedToCircle(RelativeLayout parentLayout) {
         parentLayout.addView(new RelativeCircleLayout(this, 1, CircleDirection.CENTER));
         parentLayout.addView(new RelativeCircleLayout(this, 3, CircleDirection.RIGHT));
-        parentLayout.addView(new RelativeQuadrangleLayout(this, 5));
-        parentLayout.addView(new RelativeQuadrangleLayout(this, 9));
-        parentLayout.addView(new RelativeQuadrangleLayout(this, 13));
+        parentLayout.addView(new RelativeCircleDescriptionLayout(this, 3, CircleDirection.RIGHT, "광안리 해수욕.."));
 
         RelativeCircleLayout circle = new RelativeCircleLayout(this, 5, CircleDirection.LEFT);
 
@@ -43,20 +56,18 @@ public class CanvasActivity extends Activity {
         });
         parentLayout.addView(circle);
         parentLayout.addView(new RelativeCircleLayout(this, 5, CircleDirection.RIGHT));
+        parentLayout.addView(new RelativeCircleDescriptionLayout(this, 5, CircleDirection.RIGHT, "광안리 해수욕.."));
         parentLayout.addView(new RelativeCircleLayout(this, 7, CircleDirection.LEFT));
         parentLayout.addView(new RelativeCircleLayout(this, 7, CircleDirection.RIGHT));
         parentLayout.addView(new RelativeCircleLayout(this, 9, CircleDirection.LEFT));
         parentLayout.addView(new RelativeCircleLayout(this, 13, CircleDirection.LEFT));
+    }
 
-//        relativeLayout.addView(new HalfCircle(this));
-//        relativeLayout.addView(new VerticalLine(this, 0, 160, width / 2, 160));
-//        relativeLayout.addView(new VerticalLine(this, width / 2, 155, width / 2, 320));
-
-        ScrollView scrollView = new ScrollView(this);
-        scrollView.addView(parentLayout);
-        rootLayout.addView(scrollView);
-
-        setContentView(rootLayout);
+    private void setViewRelatedToLine(RelativeLayout parentLayout) {
+        parentLayout.addView(new RelativeStartQuadrangleLayout(this, 1));
+        parentLayout.addView(new RelativeQuadrangleLayout(this, 5));
+        parentLayout.addView(new RelativeQuadrangleLayout(this, 9));
+        parentLayout.addView(new RelativeQuadrangleLayout(this, 13));
     }
 
     class HalfCircle extends View {

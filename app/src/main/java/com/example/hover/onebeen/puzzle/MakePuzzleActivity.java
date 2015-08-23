@@ -26,6 +26,10 @@ public class MakePuzzleActivity extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_make_puzzle);
 
+        Intent intent = getIntent();
+        String order = intent.getStringExtra("order");
+        Toast.makeText(this, order, Toast.LENGTH_LONG).show();
+
         dummyPuzzle = new Puzzle();
 
         View galleryBtn = findViewById(R.id.gallery_button);

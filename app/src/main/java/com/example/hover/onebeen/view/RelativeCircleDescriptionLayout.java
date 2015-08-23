@@ -54,8 +54,7 @@ public class RelativeCircleDescriptionLayout extends RelativeLayout {
 
         ViewGroup.MarginLayoutParams marginLayoutParams = new ViewGroup.MarginLayoutParams(width, height);
         int leftWeight = marginLeft / 10;
-        int topWeight = marginTop / 10;
-        marginLayoutParams.setMargins(marginLeft - leftWeight, marginTop + (topWeight * 2), marginRight, marginBottom);
+        marginLayoutParams.setMargins(marginLeft - leftWeight, marginTop + CircleSize.getHeight(), marginRight, marginBottom);
         marginLayoutParams.width = 200;
         marginLayoutParams.height = 150;
 

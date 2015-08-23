@@ -17,22 +17,25 @@ import com.example.hover.onebeen.utility.CircleSize;
 import com.example.hover.onebeen.utility.OneBeenColor;
 import com.example.hover.onebeen.utility.Ratio;
 
-public class RelativeCircleLayout extends RelativeLayout {
+/**
+ * Created by Dark on 2015. 8. 23..
+ */
+public class RelativeGrayCircleLayout extends RelativeLayout {
     private final Context context;
     private int marginLeft;
     private int marginTop;
     private int marginRight;
     private int marginBottom;
 
-    public RelativeCircleLayout(final Context context, String order, int ratio, CircleDirection direction) {
+    public RelativeGrayCircleLayout(final Context context, String order, int ratio, CircleDirection direction) {
         super(context);
         this.context = context;
 
         initialize(context, ratio, direction);
 
-        super.addView(new Circle(context));
+        super.addView(new GrayCircle(context));
         super.setTag(order);
-        super.setOnClickListener(new OnClickListener() {
+        super.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 onShowPopupMenu(v);
@@ -77,7 +80,7 @@ public class RelativeCircleLayout extends RelativeLayout {
 
     private void onShowPopupMenu(final View v) {
         PopupMenu popup = new PopupMenu(context, v);
-        Toast.makeText(context, (String)v.getTag(), Toast.LENGTH_LONG).show();
+        Toast.makeText(context, (String) v.getTag(), Toast.LENGTH_LONG).show();
 
         popup.getMenuInflater().inflate(R.menu.menu_canvas, popup.getMenu());
 
@@ -104,9 +107,9 @@ public class RelativeCircleLayout extends RelativeLayout {
     }
 }
 
-class Circle extends View {
+class GrayCircle extends View {
 
-    public Circle(Context context) {
+    public GrayCircle(Context context) {
         super(context);
     }
 
@@ -116,7 +119,7 @@ class Circle extends View {
 
         Paint paint = new Paint();
         paint.setStyle(Paint.Style.FILL_AND_STROKE);
-        paint.setColor(OneBeenColor.GREEN);
+        paint.setColor(OneBeenColor.GRAY);
 
         canvas.drawCircle(CircleSize.getWidth() / 2, CircleSize.getHeight() / 2, radius, paint);
 

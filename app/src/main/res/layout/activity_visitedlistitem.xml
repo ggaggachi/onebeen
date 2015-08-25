@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="132dp"
+    android:background="@drawable/itemptemp">
+
+    <ImageButton
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/nextbtn"
+        android:layout_gravity="right"
+        android:background="@drawable/nextbtn"
+        android:layout_centerVertical="true"
+        android:layout_marginRight="8dp"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true" />
+
+    <ImageView
+        android:layout_width="161dp"
+        android:layout_height="62dp"
+        android:id="@+id/centerimg"
+        android:layout_gravity="center_horizontal"
+        android:background="@drawable/centerblack"
+        android:layout_centerVertical="true"
+        android:layout_centerHorizontal="true" />
+
+    <ImageView
+        android:layout_width="152dp"
+        android:layout_height="2dp"
+        android:id="@+id/whitelineimg"
+        android:background="@drawable/whiteline"
+        android:layout_centerVertical="true"
+        android:layout_centerHorizontal="true" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="7pt"
+        android:text=""
+        android:layout_marginTop="18dp"
+        android:layout_marginBottom="8dp"
+        android:id="@+id/titletv"
+        android:textColor="#ffffff"
+        android:layout_above="@+id/whitelineimg"
+        android:layout_centerHorizontal="true" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text=""
+        android:textSize="7pt"
+        android:layout_marginTop="8dp"
+        android:id="@+id/datetv"
+        android:textColor="#ffffff"
+        android:layout_below="@+id/whitelineimg"
+        android:layout_centerHorizontal="true" />
+</RelativeLayout>

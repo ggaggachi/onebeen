@@ -11,7 +11,7 @@ public class PuzzleTableSchema {
     public static final String IMAGE_PATH1 = "puzzle_image_path1";
     public static final String IMAGE_PATH2 = "puzzle_image_path2";
     public static final String IMAGE_PATH3 = "puzzle_image_path3";
-    public static final String ORDER = "order";
+    public static final String ORDER = "ordering";
     public static final String PLACE = "place";
     public static final String TODO = "todo";
     public static final String TYPE = "type";
@@ -27,7 +27,7 @@ public class PuzzleTableSchema {
             + IMAGE_PATH1 + " TEXT, "
             + IMAGE_PATH2 + " TEXT, "
             + IMAGE_PATH3 + " TEXT, "
-            + ORDER + " INTEGER"
+            + ORDER + " INTEGER, "
             + PLACE + " TEXT, "
             + TODO + " TEXT, "
             + TYPE + " TEXT);";

@@ -1,6 +1,9 @@
 package com.example.hover.onebeen.db.dto;
 
-public class Puzzle {
+import android.os.Parcel;
+import android.os.Parcelable;
+
+public class Puzzle implements Parcelable{
     private long id;
     private String userId;
     private String status;
@@ -9,7 +12,7 @@ public class Puzzle {
     private String imagePath1;
     private String imagePath2;
     private String imagePath3;
-    private int order;
+    private int ordering;
     private String place;
     private String todo;
     private String type;
@@ -18,7 +21,7 @@ public class Puzzle {
     }
 
     public Puzzle(long id, String userId, String status, String title, String description, String imagePath1, String imagePath2,
-                  String imagePath3, int order, String place, String todo, String type) {
+                  String imagePath3, int ordering, String place, String todo, String type) {
         this.id = id;
         this.userId = userId;
         this.status = status;
@@ -27,11 +30,38 @@ public class Puzzle {
         this.imagePath1 = imagePath1;
         this.imagePath2 = imagePath2;
         this.imagePath3 = imagePath3;
-        this.order = order;
+        this.ordering = ordering;
         this.place = place;
         this.todo = todo;
         this.type = type;
     }
+
+    protected Puzzle(Parcel in) {
+        id = in.readLong();
+        userId = in.readString();
+        status = in.readString();
+        title = in.readString();
+        description = in.readString();
+        imagePath1 = in.readString();
+        imagePath2 = in.readString();
+        imagePath3 = in.readString();
+        ordering = in.readInt();
+        place = in.readString();
+        todo = in.readString();
+        type = in.readString();
+    }
+
+    public static final Creator<Puzzle> CREATOR = new Creator<Puzzle>() {
+        @Override
+        public Puzzle createFromParcel(Parcel in) {
+            return new Puzzle(in);
+        }
+
+        @Override
+        public Puzzle[] newArray(int size) {
+            return new Puzzle[size];
+        }
+    };
 
     public long getId() {
         return id;
@@ -97,12 +127,12 @@ public class Puzzle {
         this.imagePath3 = imagePath3;
     }
 
-    public int getOrder() {
-        return order;
+    public int getOrdering() {
+        return ordering;
     }
 
-    public void setOrder(int order) {
-        this.order = order;
+    public void setOrdering(int ordering) {
+        this.ordering = ordering;
     }
 
     public String getPlace() {
@@ -127,5 +157,27 @@ public class Puzzle {
 
     public void setType(String type) {
         this.type = type;
+    }
+
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    @Override
+    public void writeToParcel(Parcel dest, int flags) {
+
+        dest.writeLong(id);
+        dest.writeString(userId);
+        dest.writeString(status);
+        dest.writeString(title);
+        dest.writeString(description);
+        dest.writeString(imagePath1);
+        dest.writeString(imagePath2);
+        dest.writeString(imagePath3);
+        dest.writeInt(ordering);
+        dest.writeString(place);
+        dest.writeString(todo);
+        dest.writeString(type);
     }
 }

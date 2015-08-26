@@ -1,11 +1,17 @@
 package com.example.hover.onebeen.puzzle;
 
 import android.content.Context;
+import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.os.Bundle;
+import android.os.Environment;
 import android.os.Parcelable;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.view.PagerAdapter;
 import android.support.v4.view.ViewPager;
+import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.Button;
@@ -14,9 +20,10 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.hover.onebeen.R;
+import com.example.hover.onebeen.db.PuzzleDataSource;
 import com.example.hover.onebeen.db.dto.Puzzle;
 
-public class ShowPuzzleActivity extends FragmentActivity {
+public class ShowPuzzleActivity extends AppCompatActivity {
     private ViewPager mPager;
 
     @Override
@@ -24,13 +31,32 @@ public class ShowPuzzleActivity extends FragmentActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_show_puzzle);
 
-//		Intent intent = getIntent();
-//		Puzzle puzzle = (Puzzle) intent.getSerializableExtra("puzzle");
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        getSupportActionBar().setElevation(0);
+        setTitle("퍼즐보기");
 
-        Puzzle puzzle = new Puzzle();
+		Intent intent = getIntent();
+        Bundle extras = intent.getExtras();
+        long insertedRow = extras.getLong("insertedRow");
+
+        PuzzleDataSource puzzleDataSource = new PuzzleDataSource(getApplicationContext());
+        Puzzle puzzle = puzzleDataSource.getPuzzle(insertedRow);
+
+//		puzzle = intent.getParcelableExtra("puzzle");
 
         mPager = (ViewPager) findViewById(R.id.pager);
         mPager.setAdapter(new PagerAdapterClass(getApplicationContext(), puzzle));
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(android.view.MenuItem item) {
+        switch (item.getItemId()) {
+            case android.R.id.home:
+                // NavUtils.navigateUpFromSameTask(this);
+                finish();
+                return true;
+        }
+        return super.onOptionsItemSelected(item);
     }
 
     private void setCurrentInflateItem(int type) {
@@ -75,16 +101,39 @@ public class ShowPuzzleActivity extends FragmentActivity {
             View v = null;
             if (position == 0) {
                 v = mInflater.inflate(R.layout.fragment_show_puzzle, null);
-                ((TextView) v.findViewById(R.id.puzzle_description)).setText("미소천사");
-                ((ImageView) v.findViewById(R.id.puzzle_image)).setImageResource(R.drawable.first);
+
+                ((TextView) v.findViewById(R.id.puzzle_description)).setText(puzzle.getDescription());
+
+                String path = Environment.getExternalStorageDirectory().getAbsolutePath()+"/"+puzzle.getImagePath1();
+                BitmapFactory.Options bo = new BitmapFactory.Options();
+                bo.inSampleSize = 2;
+                Bitmap bmp = BitmapFactory.decodeFile(path, bo);
+                ((ImageView) v.findViewById(R.id.puzzle_image)).setImageBitmap(bmp);
+
                 ((ImageView) v.findViewById(R.id.page_control1)).setImageResource(R.drawable.img_control_selected);
             } else if (position == 1) {
                 v = mInflater.inflate(R.layout.fragment_show_puzzle, null);
-                ((TextView) v.findViewById(R.id.puzzle_description)).setText("2번");
+
+                ((TextView) v.findViewById(R.id.puzzle_description)).setText(puzzle.getDescription());
+
+                String path = Environment.getExternalStorageDirectory().getAbsolutePath()+"/"+puzzle.getImagePath1();
+                BitmapFactory.Options bo = new BitmapFactory.Options();
+                bo.inSampleSize = 2;
+                Bitmap bmp = BitmapFactory.decodeFile(path, bo);
+                ((ImageView) v.findViewById(R.id.puzzle_image)).setImageBitmap(bmp);
+
                 ((ImageView) v.findViewById(R.id.page_control2)).setImageResource(R.drawable.img_control_selected);
             } else {
                 v = mInflater.inflate(R.layout.fragment_show_puzzle, null);
-                ((TextView) v.findViewById(R.id.puzzle_description)).setText("3번");
+
+                ((TextView) v.findViewById(R.id.puzzle_description)).setText(puzzle.getDescription());
+
+                String path = Environment.getExternalStorageDirectory().getAbsolutePath()+"/"+puzzle.getImagePath1();
+                BitmapFactory.Options bo = new BitmapFactory.Options();
+                bo.inSampleSize = 2;
+                Bitmap bmp = BitmapFactory.decodeFile(path, bo);
+                ((ImageView) v.findViewById(R.id.puzzle_image)).setImageBitmap(bmp);
+
                 ((ImageView) v.findViewById(R.id.page_control3)).setImageResource(R.drawable.img_control_selected);
             }
 

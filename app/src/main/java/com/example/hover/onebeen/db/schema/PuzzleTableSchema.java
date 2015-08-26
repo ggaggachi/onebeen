@@ -4,6 +4,7 @@ public class PuzzleTableSchema {
     public static final String TABLE_NAME = "PUZZLE";
 
     public static final String ID = "_id";
+    public static final String TRAVEL_ID = "travel_id";
     public static final String USER_ID = "user_id";
     public static final String STATUS = "status";
     public static final String TITLE = "puzzle_title";
@@ -20,6 +21,7 @@ public class PuzzleTableSchema {
 
     public static final String CREATE_TABLE_SQL = "CREATE TABLE IF NOT EXISTS " + TABLE_NAME
             + "( " + ID + " INTEGER PRIMARY KEY AUTOINCREMENT, "
+            + TRAVEL_ID + " INTEGER, "
             + USER_ID + " INTEGER, "
             + STATUS + " TEXT, "
             + TITLE + " TEXT, "

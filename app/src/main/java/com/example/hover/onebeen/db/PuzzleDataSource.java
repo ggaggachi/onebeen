@@ -10,6 +10,9 @@ import android.util.Log;
 import com.example.hover.onebeen.db.dto.Puzzle;
 import com.example.hover.onebeen.db.schema.PuzzleTableSchema;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class PuzzleDataSource {
 
     private SQLiteHelper dbHelper;
@@ -77,5 +80,26 @@ public class PuzzleDataSource {
         values.put(PuzzleTableSchema.TODO, puzzle.getTodo());
         values.put(PuzzleTableSchema.TYPE, puzzle.getType());
         return values;
+    }
+
+    public List<Puzzle> getPuzzles(Long travelId) {
+        String[] arg = {String.valueOf(travelId)};
+
+        SQLiteDatabase database = dbHelper.getReadableDatabase();
+        Cursor cursor = database.query(PuzzleTableSchema.TABLE_NAME, null, PuzzleTableSchema.TRAVEL_ID + "=?", arg, null, null, null);
+
+        List<Puzzle> puzzles = new ArrayList<>();
+
+        while (cursor.moveToNext()) {
+            Puzzle puzzle = new Puzzle(cursor.getLong(0), cursor.getString(1), cursor.getString(2), cursor.getString(3),
+                    cursor.getString(4), cursor.getString(5), cursor.getString(6), cursor.getString(7), cursor.getInt(8),
+                    cursor.getString(9), cursor.getString(10), cursor.getString(11));
+
+            puzzles.add(puzzle);
+        }
+
+        cursor.close();
+
+        return puzzles;
     }
 }

@@ -64,10 +64,7 @@
         <activity
             android:name=".puzzle.PuzzleDummyActivity"
             android:theme="@style/ToolBarTheme">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
+
         </activity>
 
         <activity android:name=".puzzle.ShowPuzzleActivity">
@@ -78,13 +75,10 @@
             android:name=".TravelActivity"
             android:configChanges="orientation|screenSize"
             android:label="@string/title_activity_map">
-
-        </activity>
-
-        <activity
-            android:name=".CanvasActivity"
-            android:label="@string/title_activity_canvas">
-
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
         </activity>
 
     </application>

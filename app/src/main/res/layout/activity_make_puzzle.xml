@@ -29,8 +29,7 @@
                 android:layout_marginLeft="10dp"
                 android:gravity="center"
                 android:text="어디에서?"
-                android:textSize="20sp"
-                android:textStyle="bold|italic" />
+                android:textSize="20sp" />
 
             <TextView
                 android:id="@+id/puzzle_place"
@@ -38,8 +37,7 @@
                 android:layout_height="35dp"
                 android:gravity="center"
                 android:textColor="#000000"
-                android:textSize="18sp"
-                android:textStyle="italic" />
+                android:textSize="18sp" />
         </RelativeLayout>
 
         <RelativeLayout
@@ -56,8 +54,7 @@
                 android:layout_marginLeft="10dp"
                 android:gravity="center"
                 android:text="할일은?"
-                android:textSize="20sp"
-                android:textStyle="bold|italic" />
+                android:textSize="20sp" />
 
             <TextView
                 android:id="@+id/puzzle_todo"
@@ -65,8 +62,7 @@
                 android:layout_height="35dp"
                 android:gravity="center"
                 android:textColor="#000000"
-                android:textSize="18sp"
-                android:textStyle="italic" />
+                android:textSize="18sp" />
         </RelativeLayout>
 
         <EditText

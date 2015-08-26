@@ -33,6 +33,21 @@
         android:layout_gravity="center"
         android:layout_centerVertical="true"
         android:layout_centerHorizontal="true" />
+
+    <!--<ProgressBar-->
+        <!--android:background="#00000000"-->
+        <!--android:indeterminateDrawable="@drawable/progress_image"-->
+        <!--android:layout_width="wrap_content"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:layout_centerVertical="true"-->
+        <!--android:layout_centerHorizontal="true"-->
+        <!--android:id="@+id/white_logo"-->
+        <!--android:indeterminateDuration="1000"-->
+        <!--android:indeterminateOnly="true"-->
+        <!--android:indeterminateBehavior="cycle"-->
+        <!--/>-->
+
+
     <ImageView
         android:layout_width="80dp"
         android:layout_height="20dp"

@@ -10,8 +10,9 @@ import android.view.ViewGroup;
 import android.widget.PopupMenu;
 import android.widget.RelativeLayout;
 import android.widget.Toast;
+
 import com.example.hover.onebeen.R;
-import com.example.hover.onebeen.puzzle.MakePuzzleActivity;
+import com.example.hover.onebeen.puzzle.ShowPuzzleActivity;
 import com.example.hover.onebeen.utility.CircleDirection;
 import com.example.hover.onebeen.utility.CircleSize;
 import com.example.hover.onebeen.utility.OneBeenColor;
@@ -85,7 +86,9 @@ public class RelativeCircleLayout extends RelativeLayout {
             public boolean onMenuItemClick(MenuItem item) {
                 switch (item.getItemId()) {
                     case R.id.add_puzzle_menu:
-                        Intent intent = new Intent(context, MakePuzzleActivity.class);
+                        // TODO 수정
+//                        Intent intent = new Intent(context, MakePuzzleActivity.class);
+                        Intent intent = new Intent(context, ShowPuzzleActivity.class);
                         intent.putExtra("order", (String) v.getTag());
                         context.startActivity(intent);
                     case R.id.cancel_checkin_menu:

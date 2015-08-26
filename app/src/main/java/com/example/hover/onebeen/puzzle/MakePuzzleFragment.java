@@ -6,6 +6,7 @@ import android.database.Cursor;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Matrix;
+import android.graphics.Typeface;
 import android.media.ExifInterface;
 import android.net.Uri;
 import android.os.Bundle;
@@ -34,15 +35,24 @@ public class MakePuzzleFragment extends Fragment {
     private Puzzle puzzle;
     private View buttonView;
 
+//    private Typeface mTypeface;
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         final View root = inflater.inflate(R.layout.activity_make_puzzle, null);
 
+//        mTypeface = Typeface.createFromAsset(getActivity().getAssets(), "NotoSansCJKkr-Black.otf");
+        ViewGroup viewById = (ViewGroup) root.findViewById(android.R.id.content);
+
+        Typeface typeface = Typeface.createFromAsset(getActivity().getAssets(), "NotoSansCJKkr-DemiLight.otf");
+        TextView viewById1 = (TextView) root.findViewById(R.id.puzzle_place);
+        viewById1.setTypeface(typeface);
+
         Intent intent = getActivity().getIntent();
 //        puzzle = intent.getParcelableExtra("puzzle");
         puzzle = new Puzzle();
-        puzzle.setPlace("test");
-        puzzle.setTodo("test");
+        puzzle.setPlace("테스트테스트");
+        puzzle.setTodo("테스트테스트");
 
         ((TextView) root.findViewById(R.id.puzzle_place)).setText(puzzle.getPlace());
         ((TextView) root.findViewById(R.id.puzzle_todo)).setText(puzzle.getTodo());
@@ -115,6 +125,16 @@ public class MakePuzzleFragment extends Fragment {
 //        });
         return root;
     }
+
+//    void setGlobalFont(ViewGroup root) {
+//        for (int i = 0; i < root.getChildCount(); i++) {
+//            View child = root.getChildAt(i);
+//            if (child instanceof TextView)
+//                ((TextView)child).setTypeface(mTypeface);
+//            else if (child instanceof ViewGroup)
+//                setGlobalFont((ViewGroup)child);
+//        }
+//    }
 
 
     private void galleryEvent(View v, int order) {

@@ -1,15 +1,10 @@
 package com.example.hover.onebeen;
 
 import android.app.Activity;
-import android.content.Intent;
 import android.os.Bundle;
-import android.view.MenuItem;
-import android.view.View;
-import android.widget.PopupMenu;
 import android.widget.RelativeLayout;
 import android.widget.ScrollView;
-import android.widget.Toast;
-import com.example.hover.onebeen.puzzle.MakePuzzleActivity;
+
 import com.example.hover.onebeen.utility.CircleDirection;
 import com.example.hover.onebeen.view.RelativeCircleDescriptionLayout;
 import com.example.hover.onebeen.view.RelativeCircleLayout;

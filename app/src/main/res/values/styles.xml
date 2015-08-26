@@ -2,16 +2,17 @@
 
 	<!-- Base application theme. -->
 	<style name="ToolBarTheme" parent="Theme.AppCompat.Light.NoActionBar">
-
+		<item name="android:typeface">sans</item>
 		<item name="colorPrimary">#35c1d6</item>
 		<item name="colorPrimaryDark">#000000</item>
 		<!-- Customize your theme here. -->
 	</style>
 
 	<style name="AppTheme" parent="Theme.AppCompat.Light">
-
+		<item name="android:typeface">sans</item>
 		<item name="colorPrimary">#35c1d6</item>
 		<item name="colorPrimaryDark">#000000</item>
 		<!-- Customize your theme here. -->
 	</style>
+
 </resources>

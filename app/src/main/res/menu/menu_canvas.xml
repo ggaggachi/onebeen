@@ -1,7 +1,10 @@
-<menu xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    tools:context="com.example.hover.onebeen.CanvasActivity">
-    <item android:id="@+id/action_settings" android:title="@string/action_settings"
-        android:orderInCategory="100" app:showAsAction="never" />
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item android:id="@+id/add_puzzle_menu"
+        android:title="조각 추가" />
+    <item android:id="@+id/cancel_checkin_menu"
+        android:title="체크인 취소" />
+    <item android:id="@+id/delete_menu"
+        android:icon="@android:drawable/ic_menu_save"
+        android:title="삭제" />
 </menu>

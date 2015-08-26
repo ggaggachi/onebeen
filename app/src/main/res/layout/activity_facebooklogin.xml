@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#35c1d6">
+
+    <ImageView
+        android:layout_width="150dp"
+        android:layout_height="20dp"
+        android:id="@+id/title"
+        android:src="@drawable/title"
+        android:layout_gravity="center"
+        android:layout_above="@+id/onebeen"
+        android:layout_marginBottom="14dp"
+        android:layout_centerHorizontal="true" />
+
+
+    <ImageView
+        android:layout_width="200dp"
+        android:layout_height="40dp"
+        android:id="@+id/onebeen"
+        android:src="@drawable/onebeen"
+        android:layout_gravity="center"
+        android:layout_marginBottom="22dp"
+        android:layout_above="@+id/white_logo"
+        android:layout_centerHorizontal="true" />
+
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/white_logo"
+        android:src="@drawable/white_logo"
+        android:layout_gravity="center"
+        android:layout_centerVertical="true"
+        android:layout_centerHorizontal="true" />
+
+    <ImageView
+        android:layout_width="230dp"
+        android:layout_height="30dp"
+        android:id="@+id/facebooklogin"
+        android:src="@drawable/facebooklogin"
+        android:layout_gravity="center"
+        android:layout_above="@+id/nexters"
+        android:layout_marginBottom="20dp"
+        android:layout_alignLeft="@+id/onebeen"
+        android:layout_alignStart="@+id/onebeen" />
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/facebooklogin_line"
+        android:src="@drawable/facebooklogin_line"
+        android:layout_gravity="center"
+        android:layout_alignBottom="@+id/facebooklogin"
+        android:layout_centerHorizontal="true" />
+
+
+
+    <ImageView
+        android:layout_width="80dp"
+        android:layout_height="20dp"
+        android:id="@+id/nexters"
+        android:src="@drawable/nexters"
+        android:layout_gravity="center"
+        android:layout_alignParentBottom="true"
+        android:layout_marginBottom="12dp"
+        android:layout_centerHorizontal="true" />
+
+
+
+
+</RelativeLayout>

@@ -7,6 +7,7 @@ import android.database.sqlite.SQLiteDatabase;
 import com.example.hover.onebeen.db.dto.Puzzle;
 import com.example.hover.onebeen.db.dto.Travel;
 import com.example.hover.onebeen.db.dto.TravelRequestParam;
+import com.example.hover.onebeen.db.schema.PuzzleTableSchema;
 import com.example.hover.onebeen.db.schema.TravelTableSchema;
 
 import java.util.ArrayList;
@@ -21,14 +22,10 @@ public class TravelDataSource {
     public void insertTravel(TravelRequestParam travel) {
         SQLiteDatabase database = dbHelper.getWritableDatabase();
 
-        String[] args = {travel.getUserId(), travel.getTravelId(), travel.getPuzzleId()};
+        String[] args = {travel.getUserId(), travel.getTitle()};
 
         try {
-            database.execSQL("INSERT INTO " + TravelTableSchema.TRAVEL_TABLE +
-                    "(" + TravelTableSchema.TRAVEL_USER_ID_COLUMN + "," +
-                    " " + TravelTableSchema.TRAVEL_TRAVEL_ID_COLUMN + "," +
-                    " " + TravelTableSchema.TRAVEL_PUZZLE_ID_COLUMN +
-                    ") values(?, ?, ?);", args);
+            database.execSQL(TravelTableSchema.INSERT_TRAVEL_TABLE, args);
         } catch (Exception e) {
             e.printStackTrace();
         } finally {
@@ -41,7 +38,7 @@ public class TravelDataSource {
 
         String[] args = {travelId};
 
-        Cursor cursor = database.rawQuery("select * from " + TravelTableSchema.TRAVEL_TABLE + " where " + TravelTableSchema.TRAVEL_TRAVEL_ID_COLUMN + " = ?", args);
+        Cursor cursor = database.rawQuery("SELECT * FROM " + TravelTableSchema.TABLE_NAME + " LEFT JOIN " + PuzzleTableSchema.TABLE_NAME + " ON " + TravelTableSchema.TABLE_NAME + "." + TravelTableSchema.TRAVEL_ID_COLUMN + "=PUZZLE.travel_id;", null);
 
         Travel travel = null;
 
@@ -61,15 +58,6 @@ public class TravelDataSource {
         return travel;
     }
 
-    public Travel getTravel(String userId, String travelId, String puzzleId) {
-        ArrayList<Puzzle> puzzles = new ArrayList<>();
-        puzzles.add(puzzle(1));
-        puzzles.add(puzzle(2));
-        puzzles.add(puzzle(3));
-
-        return new Travel("ekdxhrl", "1", puzzles);
-    }
-
     private Puzzle puzzle(Integer dummyId) {
         Puzzle puzzle = new Puzzle();
 
@@ -82,11 +70,11 @@ public class TravelDataSource {
         return puzzle;
     }
 
-    public void deletePuzzleInTravel(String puzzleId) {
+    public void deletePuzzleInTravel(String travelId) {
         SQLiteDatabase database = dbHelper.getReadableDatabase();
 
-        String[] args = {puzzleId};
+        String[] args = {travelId};
 
-        database.rawQuery("delete from " + TravelTableSchema.TRAVEL_TABLE + " where " + TravelTableSchema.TRAVEL_PUZZLE_ID_COLUMN + " = ?", args);
+        database.rawQuery("delete from " + TravelTableSchema.TABLE_NAME + " where " + TravelTableSchema.TRAVEL_ID_COLUMN + " = ?", args);
     }
 }

@@ -3,14 +3,12 @@ package com.example.hover.onebeen.db.dto;
 public class TravelRequestParam {
     private Integer _id;
     private String userId;
-    private String travelId;
-    private String puzzleId;
+    private String title;
 
-    public TravelRequestParam(Integer _id, String userId, String travelId, String puzzleId) {
+    public TravelRequestParam(Integer _id, String userId, String title) {
         this._id = _id;
         this.userId = userId;
-        this.travelId = travelId;
-        this.puzzleId = puzzleId;
+        this.title = title;
     }
 
     public Integer get_id() {
@@ -29,19 +27,11 @@ public class TravelRequestParam {
         this.userId = userId;
     }
 
-    public String getTravelId() {
-        return travelId;
+    public String getTitle() {
+        return title;
     }
 
-    public void setTravelId(String travelId) {
-        this.travelId = travelId;
-    }
-
-    public String getPuzzleId() {
-        return puzzleId;
-    }
-
-    public void setPuzzleId(String puzzleId) {
-        this.puzzleId = puzzleId;
+    public void setTitle(String title) {
+        this.title = title;
     }
 }

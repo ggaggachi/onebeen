@@ -17,9 +17,6 @@ import com.example.hover.onebeen.utility.CircleSize;
 import com.example.hover.onebeen.utility.OneBeenColor;
 import com.example.hover.onebeen.utility.Ratio;
 
-/**
- * Created by Dark on 2015. 8. 23..
- */
 public class RelativeGrayCircleLayout extends RelativeLayout {
     private final Context context;
     private int marginLeft;
@@ -80,7 +77,6 @@ public class RelativeGrayCircleLayout extends RelativeLayout {
 
     private void onShowPopupMenu(final View v) {
         PopupMenu popup = new PopupMenu(context, v);
-        Toast.makeText(context, (String) v.getTag(), Toast.LENGTH_LONG).show();
 
         popup.getMenuInflater().inflate(R.menu.menu_canvas, popup.getMenu());
 

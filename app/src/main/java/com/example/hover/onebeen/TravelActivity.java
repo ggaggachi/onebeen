@@ -3,9 +3,8 @@ package com.example.hover.onebeen;
 import android.support.v4.app.FragmentActivity;
 import android.os.Bundle;
 import android.widget.ListView;
-
-import com.example.hover.onebeen.utility.TravelListViewAdapter;
 import com.example.hover.onebeen.utility.TravelItem;
+import com.example.hover.onebeen.utility.TravelListViewAdapter;
 
 import java.util.ArrayList;
 

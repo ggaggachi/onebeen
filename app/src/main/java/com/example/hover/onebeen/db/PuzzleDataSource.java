@@ -5,6 +5,7 @@ import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.support.annotation.NonNull;
+import android.util.Log;
 
 import com.example.hover.onebeen.db.dto.Puzzle;
 import com.example.hover.onebeen.db.schema.PuzzleTableSchema;
@@ -17,19 +18,20 @@ public class PuzzleDataSource {
         dbHelper = new SQLiteHelper(context);
     }
 
-    public void addPuzzle(Puzzle puzzle) {
+    public long addPuzzle(Puzzle puzzle) {
         SQLiteDatabase database = dbHelper.getWritableDatabase();
 
         ContentValues values = getPuzzleContentValues(puzzle);
 
-        database.insert(PuzzleTableSchema.TABLE_NAME, null, values);
+        long insert = database.insert(PuzzleTableSchema.TABLE_NAME, null, values);
         database.close();
+
+        return insert;
     }
 
     public Puzzle getPuzzle(long id) {
         SQLiteDatabase database = dbHelper.getReadableDatabase();
         String[] arg = {String.valueOf(id)};
-
         Cursor cursor = database.query(PuzzleTableSchema.TABLE_NAME, null, PuzzleTableSchema.ID + "=?", arg, null, null, null);
 
         if (!cursor.moveToNext()) {
@@ -37,10 +39,10 @@ public class PuzzleDataSource {
             return new Puzzle();
         }
 
-        cursor.close();
-        return new Puzzle(cursor.getLong(0), cursor.getString(1), cursor.getString(2), cursor.getString(3),
+        Puzzle puzzle = new Puzzle(cursor.getLong(0), cursor.getString(1), cursor.getString(2), cursor.getString(3),
                 cursor.getString(4), cursor.getString(5), cursor.getString(6), cursor.getString(7), cursor.getInt(8),
                 cursor.getString(9), cursor.getString(10), cursor.getString(11));
+        return puzzle;
     }
 
     public int updatePuzzle(Puzzle puzzle) {
@@ -70,7 +72,7 @@ public class PuzzleDataSource {
         values.put(PuzzleTableSchema.IMAGE_PATH1, puzzle.getImagePath1());
         values.put(PuzzleTableSchema.IMAGE_PATH2, puzzle.getImagePath2());
         values.put(PuzzleTableSchema.IMAGE_PATH3, puzzle.getImagePath3());
-        values.put(PuzzleTableSchema.ORDER, puzzle.getOrder());
+        values.put(PuzzleTableSchema.ORDER, puzzle.getOrdering());
         values.put(PuzzleTableSchema.PLACE, puzzle.getPlace());
         values.put(PuzzleTableSchema.TODO, puzzle.getTodo());
         values.put(PuzzleTableSchema.TYPE, puzzle.getType());

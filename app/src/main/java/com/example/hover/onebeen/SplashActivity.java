@@ -8,44 +8,57 @@ package com.example.hover.onebeen;
     import android.content.Intent;
     import android.os.Bundle;
     import android.os.Handler;
+    import android.util.Log;
     import android.view.Window;
     import android.view.WindowManager;
+    import android.view.animation.Animation;
+    import android.view.animation.LinearInterpolator;
+    import android.view.animation.RotateAnimation;
+    import android.widget.ImageView;
+
     import com.example.hover.onebeen.puzzle.PuzzleDummyActivity;
 
 public class SplashActivity extends Activity {
 
-        //Set waktu lama splashscreen
-        private static int splashInterval = 2000;
+    private static String TAG = SplashActivity.class.getName();
+    private static long SLEEP_TIME = 5;
 
-        @Override
-        protected void onCreate(Bundle savedInstanceState) {
-            super.onCreate(savedInstanceState);
-            requestWindowFeature(Window.FEATURE_NO_TITLE);
-            getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
-                    WindowManager.LayoutParams.FLAG_FULLSCREEN);
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
 
-            setContentView(R.layout.splashscreen);
+        this.requestWindowFeature(Window.FEATURE_NO_TITLE);
+        this.getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
+        setContentView(R.layout.activity_splash);
 
-            new Handler().postDelayed(new Runnable() {
+        ImageView viewById = (ImageView) findViewById(R.id.white_logo);
+
+        RotateAnimation anim = new RotateAnimation(0, 360, Animation.RELATIVE_TO_SELF, 0.5f, Animation.RELATIVE_TO_SELF, 0.5f);
+
+        anim.setInterpolator(new LinearInterpolator());
+        anim.setRepeatCount(Animation.INFINITE);
+        anim.setDuration(1200);
+
+        viewById.startAnimation(anim);
 
 
-                @Override
-                public void run() {
-                    // TODO Auto-generated method stub
-                    Intent i = new Intent(SplashActivity.this, MainActivity.class);
-                    startActivity(i);
-
-
-                    //jeda selesai Splashscreen
-                    this.finish();
-                }
-
-                private void finish() {
-                    // TODO Auto-generated method stub
-
-                }
-            }, splashInterval);
-
-        };
+        IntentLauncher launcher = new IntentLauncher();
+        launcher.start();
 
     }
+
+    private class IntentLauncher extends Thread {
+        public void run() {
+
+            try {
+                Thread.sleep(SLEEP_TIME*1000);
+            } catch (Exception e) {
+                Log.e(TAG, e.getMessage());
+            }
+
+            Intent intent = new Intent(SplashActivity.this, MainActivity.class);
+            SplashActivity.this.startActivity(intent);
+            SplashActivity.this.finish();
+        }
+    }
+}

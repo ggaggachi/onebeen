@@ -18,14 +18,14 @@ import com.example.hover.onebeen.utility.CircleSize;
 import com.example.hover.onebeen.utility.OneBeenColor;
 import com.example.hover.onebeen.utility.Ratio;
 
-public class RelativeCircleLayout extends RelativeLayout {
+public class RelativeGreenCircleLayout extends RelativeLayout {
     private final Context context;
     private int marginLeft;
     private int marginTop;
     private int marginRight;
     private int marginBottom;
 
-    public RelativeCircleLayout(final Context context, String order, int ratio, CircleDirection direction) {
+    public RelativeGreenCircleLayout(final Context context, String order, int ratio, CircleDirection direction) {
         super(context);
         this.context = context;
 

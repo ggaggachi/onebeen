@@ -7,4 +7,5 @@ import android.graphics.Color;
  */
 public class OneBeenColor {
     public static final int GREEN = Color.argb(255, 0, 204, 204);
+    public static final int GRAY = Color.argb(255, 190, 190, 190);
 }

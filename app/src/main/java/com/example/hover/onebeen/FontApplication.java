@@ -9,9 +9,9 @@ import android.graphics.Typeface;
 public class FontApplication extends Application {
     @Override
     public void onCreate() {
-        setDefaultFont(this, "DEFAULT", "NotoSansCJKkr-DemiLight.otf");
-        setDefaultFont(this, "SANS_SERIF", "NotoSansCJKkr-DemiLight.otf");
-        setDefaultFont(this, "SERIF", "NotoSansCJKkr-DemiLight.otf");
+//        setDefaultFont(this, "DEFAULT", "NotoSansCJKkr-DemiLight.otf");
+//        setDefaultFont(this, "SANS_SERIF", "NotoSansCJKkr-DemiLight.otf");
+//        setDefaultFont(this, "SERIF", "NotoSansCJKkr-DemiLight.otf");
     }
 
     public static void setDefaultFont(Context ctx,

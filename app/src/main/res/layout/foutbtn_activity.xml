@@ -8,62 +8,196 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:orientation="vertical"
+        android:background="#ffffff"
         android:gravity="center"
-        android:padding="15dp"
-        android:background="#ffffff">
+        android:orientation="vertical"
+        android:padding="15dp">
 
-        <Button
-            android:id="@+id/btn1"
+        <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="101dp"
-            android:background="#4dc4d7"
-            android:text="여행시작하기"
-            android:textColor="#ffffff"
-            android:textSize="17sp"
-            android:paddingTop="12dp"
-            android:paddingBottom="8dp"
-            android:drawableTop="@drawable/btn1"/>
+            android:layout_height="fill_parent"
+            android:layout_weight="1"
+            android:layout_marginBottom="10dp"
+            android:background="@drawable/travel_start">
 
-        <Button
-            android:id="@+id/btn2"
-            android:layout_width="match_parent"
-            android:layout_height="101dp"
-            android:layout_marginTop="16dp"
-            android:background="#298fce"
-            android:text="다녀온 여행지"
-            android:textColor="#ffffff"
-            android:textSize="17sp"
-            android:paddingTop="12dp"
-            android:paddingBottom="8dp"
-            android:drawableTop="@drawable/btn2"/>
+            <RelativeLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true">
 
-        <Button
-            android:id="@+id/btn3"
-            android:layout_width="match_parent"
-            android:layout_height="101dp"
-            android:layout_marginTop="16dp"
-            android:background="#13a7a3"
-            android:text="진행중 여행지"
-            android:textColor="#ffffff"
-            android:textSize="17sp"
-            android:paddingTop="12dp"
-            android:paddingBottom="8dp"
-            android:drawableTop="@drawable/btn3"/>
+                <ImageView
+                    android:id="@+id/travel_start_image"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerHorizontal="true"
+                    android:layout_marginBottom="5dp"
+                    android:src="@drawable/btn1" />
 
-        <Button
-            android:id="@+id/btn4"
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/travel_start_image"
+                    android:text="여행시작하기"
+                    android:textColor="#ffffff"
+                    android:textSize="18sp"
+                    android:textStyle="bold" />
+
+
+            </RelativeLayout>
+
+            <ImageButton
+                android:layout_width="20dp"
+                android:layout_height="30dp"
+                android:layout_alignParentEnd="true"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
+                android:layout_gravity="end"
+                android:layout_marginEnd="8dp"
+                android:layout_marginRight="8dp"
+                android:adjustViewBounds="true"
+                android:alpha="0.8"
+                android:background="@drawable/next_btn"
+                android:cropToPadding="false"
+                android:scaleType="fitCenter" />
+        </RelativeLayout>
+
+        <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="101dp"
-            android:layout_marginTop="16dp"
-            android:background="#4bbfab"
-            android:text="계획중 여행지"
-            android:textColor="#ffffff"
-            android:textSize="17sp"
-            android:paddingTop="12dp"
-            android:paddingBottom="8dp"
-            android:layout_marginBottom="16dp"
-            android:drawableTop="@drawable/btn4"/>
+            android:layout_height="fill_parent"
+            android:layout_weight="1"
+            android:layout_marginBottom="10dp"
+            android:background="@drawable/travel_been">
+
+            <RelativeLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true">
+
+                <ImageView
+                    android:id="@+id/travel_been_image"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerHorizontal="true"
+                    android:layout_marginBottom="5dp"
+                    android:src="@drawable/btn2" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/travel_been_image"
+                    android:text="다녀온 여행지"
+                    android:textColor="#ffffff"
+                    android:textSize="18sp"
+                    android:textStyle="bold" />
+            </RelativeLayout>
+
+            <ImageButton
+                android:layout_width="20dp"
+                android:layout_height="30dp"
+                android:layout_alignParentEnd="true"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
+                android:layout_gravity="end"
+                android:layout_marginEnd="8dp"
+                android:layout_marginRight="8dp"
+                android:adjustViewBounds="true"
+                android:alpha="0.8"
+                android:background="@drawable/next_btn"
+                android:cropToPadding="false"
+                android:scaleType="fitCenter" />
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="fill_parent"
+            android:layout_weight="1"
+            android:layout_marginBottom="10dp"
+            android:background="@drawable/travel_ongoing">
+
+            <RelativeLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true">
+
+                <ImageView
+                    android:id="@+id/travel_ongoing_image"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerHorizontal="true"
+                    android:layout_marginBottom="5dp"
+                    android:src="@drawable/btn3" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/travel_ongoing_image"
+                    android:text="진행중 여행지"
+                    android:textColor="#ffffff"
+                    android:textSize="18sp"
+                    android:textStyle="bold" />
+            </RelativeLayout>
+
+            <ImageButton
+                android:layout_width="20dp"
+                android:layout_height="30dp"
+                android:layout_alignParentEnd="true"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
+                android:layout_gravity="end"
+                android:layout_marginEnd="8dp"
+                android:layout_marginRight="8dp"
+                android:adjustViewBounds="true"
+                android:alpha="0.8"
+                android:background="@drawable/next_btn"
+                android:cropToPadding="false"
+                android:scaleType="fitCenter" />
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="fill_parent"
+            android:layout_weight="1"
+            android:layout_marginBottom="10dp"
+            android:background="@drawable/travel_planning">
+
+            <RelativeLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true">
+
+                <ImageView
+                    android:id="@+id/travel_planning_image"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerHorizontal="true"
+                    android:layout_marginBottom="5dp"
+                    android:src="@drawable/btn4" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/travel_planning_image"
+                    android:text="계획중 여행지"
+                    android:textColor="#ffffff"
+                    android:textSize="18sp"
+                    android:textStyle="bold" />
+            </RelativeLayout>
+
+            <ImageButton
+                android:layout_width="20dp"
+                android:layout_height="30dp"
+                android:layout_alignParentEnd="true"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
+                android:layout_gravity="end"
+                android:layout_marginEnd="8dp"
+                android:layout_marginRight="8dp"
+                android:adjustViewBounds="true"
+                android:alpha="0.8"
+                android:background="@drawable/next_btn"
+                android:cropToPadding="false"
+                android:scaleType="fitCenter" />
+        </RelativeLayout>
 
     </LinearLayout>
 </LinearLayout>

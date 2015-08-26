@@ -15,16 +15,6 @@ public class fourbtnActivity extends Activity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.foutbtn_activity);
-        btn1=(Button)findViewById(R.id.btn1);
-
-
-    btn1.setOnClickListener(new View.OnClickListener() {
-        @Override
-        public void onClick(View v) {
-            Intent i = new Intent(fourbtnActivity.this,onebeen_title.class);
-            startActivity(i);
-        }
-    });
 
     }
 

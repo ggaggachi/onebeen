@@ -14,6 +14,7 @@ import android.widget.Toast;
 
 import com.example.hover.onebeen.db.UserDataSource;
 import com.example.hover.onebeen.db.dto.User;
+import com.example.hover.onebeen.diary.TravelDiaryFragment;
 import com.facebook.CallbackManager;
 import com.facebook.FacebookCallback;
 import com.facebook.FacebookException;
@@ -26,6 +27,7 @@ public class MainActivity extends AppCompatActivity {
     CallbackManager callbackManager = null;
 
     private final HomeFragment homeFragment = new HomeFragment();
+    private TravelDiaryFragment travelDiaryFragment = new TravelDiaryFragment();
 
     Toolbar toolbar;
     DrawerLayout dlDrawer;

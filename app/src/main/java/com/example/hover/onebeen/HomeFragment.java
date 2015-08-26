@@ -12,23 +12,12 @@ import android.view.ViewGroup;
 import android.widget.Button;
 
 public class HomeFragment extends Fragment{
-    Button btn1;
 
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         final View root = inflater.inflate(R.layout.foutbtn_activity, null);
 
-        btn1=(Button) root.findViewById(R.id.btn1);
-
-
-        btn1.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent i = new Intent(getActivity(), onebeen_title.class);
-                startActivity(i);
-            }
-        });
 
         return root;
     }

@@ -57,7 +57,7 @@
                 android:textSize="20sp" />
 
             <TextView
-                android:id="@+id/puzzle_todo"
+                android:id="@+id/puzzle_item_todo"
                 android:layout_width="match_parent"
                 android:layout_height="35dp"
                 android:gravity="center"

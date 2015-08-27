@@ -12,6 +12,8 @@ import android.view.ViewGroup;
 import com.example.hover.onebeen.db.dto.TravelStatus;
 import com.example.hover.onebeen.diarylist.TravelDiaryListFragment;
 
+import com.example.hover.onebeen.diary.MakeDiary;
+
 public class HomeFragment extends Fragment{
 
     private static int TRAVEL_START_CODE = 1;

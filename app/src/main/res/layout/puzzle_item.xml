@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/puzzle_item_background"
+    android:layout_width="match_parent"
+    android:layout_height="120dp"
+    android:background="#53b2d5">
+
+    <ImageView
+        android:id="@+id/puzzle_route_img"
+        android:layout_width="55dp"
+        android:layout_height="130dp"
+        android:layout_alignParentLeft="true"
+        android:layout_centerVertical="true"
+        android:layout_marginLeft="30dp"
+        android:scaleType="centerCrop"
+        android:src="@drawable/img_route_vertical_current" />
+
+    <RelativeLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:layout_centerVertical="true"
+        android:layout_marginRight="20dp">
+
+        <TextView
+            android:id="@+id/puzzle_item_place"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:text="가고싶은곳"
+            android:textColor="#ffffff"
+            android:textSize="30sp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/puzzle_item_place"
+            android:layout_alignParentRight="true"
+            android:textSize="20sp"
+            android:textColor="#ffffff"
+            android:id="@+id/puzzle_item_todo"
+            android:text="하고싶은일" />
+
+        <TextView
+            android:id="@+id/puzzle_subtitle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_below="@id/puzzle_item_todo"
+            android:text="여행을 시작해보세요"
+            android:textColor="#ffffff"
+            android:textSize="12sp" />
+
+    </RelativeLayout>
+
+</RelativeLayout>

@@ -1,4 +1,4 @@
-package com.example.hover.onebeen;
+package com.example.hover.onebeen.diary;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -9,6 +9,8 @@ import android.widget.TextView;
 import com.example.hover.onebeen.db.TravelDiaryDataSource;
 import com.example.hover.onebeen.db.dto.TravelDiary;
 import com.example.hover.onebeen.utility.ActivityStatus;
+
+import com.example.hover.onebeen.R;
 
 public class MakeDiary extends AppCompatActivity {
 

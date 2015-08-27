@@ -55,7 +55,7 @@ public class MakePuzzleFragment extends Fragment {
         puzzle.setTodo("테스트테스트");
 
         ((TextView) root.findViewById(R.id.puzzle_place)).setText(puzzle.getPlace());
-        ((TextView) root.findViewById(R.id.puzzle_todo)).setText(puzzle.getTodo());
+        ((TextView) root.findViewById(R.id.puzzle_item_todo)).setText(puzzle.getTodo());
 
         root.findViewById(R.id.image_add_button1).setOnClickListener(new View.OnClickListener() {
             @Override

@@ -24,17 +24,7 @@ public class PuzzleDataSource {
     public long addPuzzle(Puzzle puzzle) {
         SQLiteDatabase database = dbHelper.getWritableDatabase();
 
-        ContentValues values = new ContentValues();
-        values.put(PuzzleTableSchema.TRAVEL_ID, puzzle.getTravelDiaryId());
-        values.put(PuzzleTableSchema.USER_ID, puzzle.getUserId());
-        values.put(PuzzleTableSchema.STATUS, puzzle.getStatus());
-        values.put(PuzzleTableSchema.IMAGE_PATH1, puzzle.getImagePath1());
-        values.put(PuzzleTableSchema.IMAGE_PATH2, puzzle.getImagePath2());
-        values.put(PuzzleTableSchema.IMAGE_PATH3, puzzle.getImagePath3());
-        values.put(PuzzleTableSchema.ORDER, puzzle.getOrdering());
-        values.put(PuzzleTableSchema.PLACE, puzzle.getPlace());
-        values.put(PuzzleTableSchema.TODO, puzzle.getTodo());
-        values.put(PuzzleTableSchema.TYPE, puzzle.getType());
+        ContentValues values = getPuzzleContentValues(puzzle);
 
         long insert = database.insert(PuzzleTableSchema.TABLE_NAME, null, values);
         database.close();
@@ -53,7 +43,7 @@ public class PuzzleDataSource {
         }
 
         Puzzle puzzle = new Puzzle(cursor.getLong(0), cursor.getString(1), cursor.getString(2), cursor.getString(3),
-                cursor.getString(4), cursor.getString(5), cursor.getString(6), cursor.getInt(7), cursor.getString(8), cursor.getString(9), cursor.getString(10));
+                cursor.getString(4), cursor.getString(5), cursor.getString(6), cursor.getInt(7), cursor.getString(8), cursor.getString(9), cursor.getString(10), cursor.getString(11));
 
         return puzzle;
     }
@@ -88,6 +78,7 @@ public class PuzzleDataSource {
         values.put(PuzzleTableSchema.PLACE, puzzle.getPlace());
         values.put(PuzzleTableSchema.TODO, puzzle.getTodo());
         values.put(PuzzleTableSchema.TYPE, puzzle.getType());
+        values.put(PuzzleTableSchema.DESCRIPTION, puzzle.getDescription());
         return values;
     }
 
@@ -101,7 +92,7 @@ public class PuzzleDataSource {
 
         while (cursor.moveToNext()) {
             Puzzle puzzle = new Puzzle(cursor.getLong(0), cursor.getString(1), cursor.getString(2), cursor.getString(3),
-                    cursor.getString(4), cursor.getString(5), cursor.getString(6), cursor.getInt(7), cursor.getString(8), cursor.getString(9), cursor.getString(10));
+                    cursor.getString(4), cursor.getString(5), cursor.getString(6), cursor.getInt(7), cursor.getString(8), cursor.getString(9), cursor.getString(10), cursor.getString(11));
 
             puzzles.add(puzzle);
         }

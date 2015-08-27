@@ -16,10 +16,16 @@ public class Puzzle implements Parcelable{
     private String todo;
     private String type;
 
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
+    private String description;
+
     public Puzzle() {
     }
 
-    public Puzzle(long id, String travelDiaryId, String userId, String status, String imagePath1, String imagePath2, String imagePath3, int ordering, String place, String todo, String type) {
+    public Puzzle(long id, String travelDiaryId, String userId, String status, String imagePath1, String imagePath2, String imagePath3, int ordering, String place, String todo, String type, String description) {
         this.id = id;
         this.travelDiaryId = travelDiaryId;
         this.userId = userId;
@@ -31,6 +37,7 @@ public class Puzzle implements Parcelable{
         this.place = place;
         this.todo = todo;
         this.type = type;
+        this.description = description;
     }
 
     protected Puzzle(Parcel in) {
@@ -181,5 +188,9 @@ public class Puzzle implements Parcelable{
                 ", todo='" + todo + '\'' +
                 ", type='" + type + '\'' +
                 '}';
+    }
+
+    public String getDescription() {
+        return description;
     }
 }

@@ -8,10 +8,13 @@ import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarActivity;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
 import android.widget.Toast;
 
 import com.example.hover.onebeen.db.UserDataSource;
@@ -28,32 +31,67 @@ public class MainActivity extends AppCompatActivity {
 
     CallbackManager callbackManager = null;
 
-    private final HomeFragment homeFragment = new HomeFragment();
-    private TravelDiaryFragment travelDiaryFragment = new TravelDiaryFragment();
+    String TITLES[] = {"여행 시작하기", "다녀온 여행지", "진행중 여행지", "계획중 여행지", "설정"};
+    int ICONS[] = {R.drawable.logo_green, R.drawable.logo_green, R.drawable.logo_green, R.drawable.logo_green, R.drawable.logo_green};
 
-    Toolbar toolbar;
-    DrawerLayout dlDrawer;
-    ActionBarDrawerToggle dtToggle;
+    String NAME = "이름";
+    String EMAIL = "이메일";
+    int PROFILE = R.drawable.logo_green;
+
+    private Toolbar toolbar;
+
+    RecyclerView mRecyclerView;
+    RecyclerView.Adapter mAdapter;
+    RecyclerView.LayoutManager mLayoutManager;
+    DrawerLayout Drawer;
+
+    ActionBarDrawerToggle mDrawerToggle;
     FragmentManager fragmentManager;
+
+    private HomeFragment homeFragment = new HomeFragment();
+    private TravelDiaryFragment travelDiaryFragment = new TravelDiaryFragment();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+        setContentView(R.layout.actionbar_activity);
 
-        toolbar = (Toolbar) findViewById(R.id.toolbar);
-        dlDrawer = (DrawerLayout) findViewById(R.id.drawer_layout);
-
+        toolbar = (Toolbar) findViewById(R.id.tool_bar);
         setSupportActionBar(toolbar);
+        getSupportActionBar().setDisplayShowTitleEnabled(false);
+
+        mRecyclerView = (RecyclerView) findViewById(R.id.RecyclerView);
+        mRecyclerView.setHasFixedSize(true);
+
+        mAdapter = new MyAdapter(TITLES, ICONS, NAME, EMAIL, PROFILE);
+        mRecyclerView.setAdapter(mAdapter);
+
+        mLayoutManager = new LinearLayoutManager(this);
+        mRecyclerView.setLayoutManager(mLayoutManager);
 
 
-        dtToggle = new ActionBarDrawerToggle(this, dlDrawer, R.string.app_name, R.string.app_name);
-        dlDrawer.setDrawerListener(dtToggle);
+        Drawer = (DrawerLayout) findViewById(R.id.DrawerLayout);
+        mDrawerToggle = new ActionBarDrawerToggle(this, Drawer, toolbar, R.string.openDrawer, R.string.closeDrawer) {
+
+            @Override
+            public void onDrawerOpened(View drawerView) {
+                super.onDrawerOpened(drawerView);
+                // code here will execute once the drawer is opened( As I dont want anything happened whe drawer is
+                // open I am not going to put anything here)
+            }
+
+            @Override
+            public void onDrawerClosed(View drawerView) {
+                super.onDrawerClosed(drawerView);
+                // Code here will execute once drawer is closed
+            }
+        };
+
+        Drawer.setDrawerListener(mDrawerToggle);
+        mDrawerToggle.syncState();
 
         fragmentManager = getSupportFragmentManager();
         fragmentManager.beginTransaction().replace(R.id.container, homeFragment).commit();
-
-//        getSupportActionBar().setDisplayShowTitleEnabled(false);
 
 //		FacebookSdk.sdkInitialize(this.getApplicationContext());
 //		callbackManager = CallbackManager.Factory.create();
@@ -111,31 +149,8 @@ public class MainActivity extends AppCompatActivity {
 //	}
 
     @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.menu_main, menu);
-        return true;
-    }
-
-    @Override
-    protected void onPostCreate(Bundle savedInstanceState) {
-        super.onPostCreate(savedInstanceState);
-
-// Sync the toggle state after onRestoreInstanceState has occurred.
-        dtToggle.syncState();
-    }
-
-    @Override
-    public void onConfigurationChanged(Configuration newConfig) {
-        super.onConfigurationChanged(newConfig);
-        dtToggle.onConfigurationChanged(newConfig);
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        if (dtToggle.onOptionsItemSelected(item)) {
-            return true;
-        }
-
-        return super.onOptionsItemSelected(item);
+    public void onBackPressed() {
+        super.onBackPressed();
+        Drawer.closeDrawers();
     }
 }

@@ -4,9 +4,9 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
-import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
+import android.widget.Button;
 import android.widget.ListView;
 import android.widget.TextView;
 import com.example.hover.onebeen.R;
@@ -17,13 +17,11 @@ import com.example.hover.onebeen.db.dto.Puzzle;
 import com.example.hover.onebeen.db.dto.TravelDiary;
 import com.example.hover.onebeen.db.dto.User;
 import com.example.hover.onebeen.puzzle.AddPuzzleActivity;
-import com.example.hover.onebeen.puzzle.PuzzleStatus;
 import com.example.hover.onebeen.puzzle.ShowPuzzleActivity;
 import com.facebook.FacebookSdk;
 import com.facebook.appevents.AppEventsLogger;
 import com.facebook.login.widget.ProfilePictureView;
 import java.util.ArrayList;
-import java.util.List;
 
 public class TravelDiaryActivity extends AppCompatActivity {
     @Override
@@ -46,6 +44,14 @@ public class TravelDiaryActivity extends AppCompatActivity {
 
         puzzles.add(null);
 
+        Button button = (Button) findViewById(R.id.register_travel_diary);
+        button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+            }
+        });
+
 //        ArrayList<Puzzle> puzzles = new ArrayList<>();
 //        puzzles.add(new Puzzle(1, null, PuzzleStatus.BEEN.toString(), null, null, null, null, null, 1, "해운대", "바나나보트 타기1", null));
 //        puzzles.add(new Puzzle(1, null, PuzzleStatus.BEEN.toString(), null, null, null, null, null, 1, "해운대", "바나나보트 타기2", null));
@@ -53,6 +59,8 @@ public class TravelDiaryActivity extends AppCompatActivity {
 //        puzzles.add(new Puzzle(1, null, PuzzleStatus.WANT.toString(), null, null, null, null, null, 1, "해운대", "바나나보트 타기4", null));
 //
 //        puzzles.add(null);
+
+
 
         ListView listView = (ListView) findViewById(R.id.puzzle_list_view);
         listView.setAdapter(new PuzzleListViewAdapter(getLayoutInflater(), R.layout.puzzle_item, puzzles));

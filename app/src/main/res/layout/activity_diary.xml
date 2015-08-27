@@ -110,6 +110,12 @@
 
     </LinearLayout>
 
+    <Button
+        android:id="@+id/register_travel_diary"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="등록"/>
+
 
 
 </RelativeLayout>

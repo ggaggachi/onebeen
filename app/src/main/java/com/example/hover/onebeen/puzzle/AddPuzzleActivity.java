@@ -14,6 +14,7 @@ import com.example.hover.onebeen.db.PuzzleDataSource;
 import com.example.hover.onebeen.db.UserDataSource;
 import com.example.hover.onebeen.db.dto.Puzzle;
 import com.example.hover.onebeen.db.dto.User;
+import com.example.hover.onebeen.diary.TravelDiaryActivity;
 
 public class AddPuzzleActivity extends AppCompatActivity {
 
@@ -26,16 +27,20 @@ public class AddPuzzleActivity extends AppCompatActivity {
         ((ImageButton) findViewById(R.id.register_diary)).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                insertPuzzle();
+                String travelDiaryId = insertPuzzle();
+                Intent intent = new Intent(AddPuzzleActivity.this, TravelDiaryActivity.class);
+                intent.putExtra("travelDiaryId", travelDiaryId);
+                startActivity(intent);
             }
         });
     }
 
-    private void insertPuzzle() {
+    private String insertPuzzle() {
         Intent intent = getIntent();
+        String travelDiaryId = intent.getExtras().getString("travelDiaryId");
 
         Puzzle puzzle = new Puzzle();
-        puzzle.setTravelDiaryId(intent.getExtras().getString("travelDiaryId"));
+        puzzle.setTravelDiaryId(travelDiaryId);
 
         EditText place = (EditText) findViewById(R.id.add_puzzle_place);
         puzzle.setPlace(place.getText().toString());
@@ -50,11 +55,13 @@ public class AddPuzzleActivity extends AppCompatActivity {
 
         Log.e("ekdxhrl", puzzle.toString());
 
-        long puzzle_id = puzzleDataSource.addPuzzle(puzzle);
-        Log.e("ekdxhrl", String.valueOf(puzzle_id));
-        Puzzle puzzle1 = puzzleDataSource.getPuzzle(puzzle_id);
+        long puzzleId = puzzleDataSource.addPuzzle(puzzle);
+        Log.e("ekdxhrl", String.valueOf(puzzleId));
+        Puzzle puzzle1 = puzzleDataSource.getPuzzle(puzzleId);
 
         Log.e("ekdxhrl", puzzle1.toString());
+
+        return travelDiaryId;
     }
 
     private void setActionbar() {

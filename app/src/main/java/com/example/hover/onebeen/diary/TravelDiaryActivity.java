@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.Button;
@@ -21,6 +22,7 @@ import com.example.hover.onebeen.db.dto.TravelStatus;
 import com.example.hover.onebeen.db.dto.User;
 import com.example.hover.onebeen.diarylist.TravelDiaryListItem;
 import com.example.hover.onebeen.puzzle.AddPuzzleActivity;
+import com.example.hover.onebeen.puzzle.SavePuzzleActivity;
 import com.example.hover.onebeen.puzzle.ShowPuzzleActivity;
 import com.facebook.FacebookSdk;
 import com.facebook.appevents.AppEventsLogger;
@@ -65,10 +67,14 @@ public class TravelDiaryActivity extends AppCompatActivity {
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 String tag = String.valueOf(view.getTag());
 
-                if (tag == "CURRENT") {
+                if ("CURRENT".equals(tag)) {
 //                    startActivity(new Intent(TravelDiaryActivity.this, ShowPuzzleActivity.class));
-                } else if (tag == "BEEN") {
+                } else if ("BEEN".equals(tag)) {
                     startActivity(new Intent(TravelDiaryActivity.this, ShowPuzzleActivity.class));
+                } else if ("WANT".equals(tag)) {
+                    Intent addPuzzleIntent = new Intent(TravelDiaryActivity.this, SavePuzzleActivity.class);
+                    addPuzzleIntent.putExtra("travelDiaryId", travelDiaryId);
+                    startActivity(addPuzzleIntent);
                 } else {
                     Intent addPuzzleIntent = new Intent(TravelDiaryActivity.this, AddPuzzleActivity.class);
                     addPuzzleIntent.putExtra("travelDiaryId", travelDiaryId);

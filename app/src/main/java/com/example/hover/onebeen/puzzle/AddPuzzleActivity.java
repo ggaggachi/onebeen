@@ -52,7 +52,7 @@ public class AddPuzzleActivity extends AppCompatActivity {
 
         UserDataSource userDataSource = new UserDataSource(this);
         puzzle.setUserId(userDataSource.getUser().getId());
-
+        puzzle.setStatus("WANT");
         Log.e("ekdxhrl", puzzle.toString());
 
         long puzzleId = puzzleDataSource.addPuzzle(puzzle);

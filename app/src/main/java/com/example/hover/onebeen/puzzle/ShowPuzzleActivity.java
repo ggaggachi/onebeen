@@ -11,6 +11,7 @@ import android.support.v4.app.FragmentActivity;
 import android.support.v4.view.PagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -31,21 +32,30 @@ public class ShowPuzzleActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_show_puzzle);
 
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-        getSupportActionBar().setElevation(0);
-        setTitle("퍼즐보기");
+        setActionbar();
 
-		Intent intent = getIntent();
-        Bundle extras = intent.getExtras();
-        long insertedRow = extras.getLong("insertedRow");
+//		Intent intent = getIntent();
+//        Bundle extras = intent.getExtras();
+//        long insertedRow = extras.getLong("insertedRow");
 
-        PuzzleDataSource puzzleDataSource = new PuzzleDataSource(getApplicationContext());
-        Puzzle puzzle = puzzleDataSource.getPuzzle(insertedRow);
+//        PuzzleDataSource puzzleDataSource = new PuzzleDataSource(getApplicationContext());
+//        Puzzle puzzle = puzzleDataSource.getPuzzle(insertedRow);
 
 //		puzzle = intent.getParcelableExtra("puzzle");
 
+        Puzzle puzzle = new Puzzle();
+
         mPager = (ViewPager) findViewById(R.id.pager);
         mPager.setAdapter(new PagerAdapterClass(getApplicationContext(), puzzle));
+    }
+
+    private void setActionbar() {
+        Toolbar toolbar = (Toolbar) findViewById(R.id.tool_bar);
+        setSupportActionBar(toolbar);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        getSupportActionBar().setDisplayShowHomeEnabled(true);
+
+        setTitle("퍼즐 간직하기");
     }
 
     @Override

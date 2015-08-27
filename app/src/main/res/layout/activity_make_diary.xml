@@ -3,57 +3,50 @@
     android:layout_height="fill_parent"
     android:orientation="vertical">
 
-    <LinearLayout
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:orientation="vertical">
+    <include
+        android:id="@+id/tool_bar"
+        layout="@layout/tool_bar_no_img">
 
-        <include
-            android:id="@+id/tool_bar"
-            layout="@layout/tool_bar_no_img">
+    </include>
 
-        </include>
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
 
-        <RelativeLayout
+        <TextView
+            android:id="@+id/make_diary_notice"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="40dp"
+            android:layout_marginTop="120dp"
+            android:text="여행 이름을 정해주세요"
+            android:textColor="#000000"
+            android:textSize="18sp" />
+
+        <EditText
+            android:id="@+id/make_diary_title"
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
+            android:layout_height="wrap_content"
+            android:layout_below="@id/make_diary_notice"
+            android:layout_centerHorizontal="true"
+            android:layout_marginLeft="30dp"
+            android:layout_marginRight="30dp"
+            android:layout_marginTop="22dp"
+            android:background="@drawable/maintitle"
+            android:hint="ex. 해변이 아름다운 제주 여행"
+            android:paddingLeft="15dp"
+            android:textColor="#000000"
+            android:textSize="18sp" />
 
-            <TextView
-                android:id="@+id/make_diary_notice"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="40dp"
-                android:layout_marginTop="120dp"
-                android:text="여행 이름을 정해주세요"
-                android:textColor="#000000"
-                android:textSize="18sp" />
+        <ImageButton
+            android:id="@+id/register_diary"
+            android:layout_width="300dp"
+            android:layout_height="70dp"
+            android:layout_below="@+id/make_diary_title"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="130dp"
+            android:background="#4dc4d7"
+            android:src="@drawable/next" />
+    </RelativeLayout>
 
-            <EditText
-                android:id="@+id/make_diary_title"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_below="@id/make_diary_notice"
-                android:layout_centerHorizontal="true"
-                android:layout_marginLeft="30dp"
-                android:layout_marginRight="30dp"
-                android:layout_marginTop="22dp"
-                android:background="@drawable/maintitle"
-                android:hint="ex. 해변이 아름다운 제주 여행"
-                android:paddingLeft="15dp"
-                android:textColor="#000000"
-                android:textSize="18sp" />
-
-            <ImageButton
-                android:id="@+id/register_diary"
-                android:layout_width="300dp"
-                android:layout_height="70dp"
-                android:layout_below="@+id/make_diary_title"
-                android:layout_centerHorizontal="true"
-                android:layout_marginTop="130dp"
-                android:background="#4dc4d7"
-                android:src="@drawable/next" />
-        </RelativeLayout>
-
-
-    </LinearLayout>
 </LinearLayout>

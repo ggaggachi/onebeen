@@ -9,4 +9,71 @@
 
     </include>
 
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <TextView
+            android:id="@+id/add_puzzle_notice"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="40dp"
+            android:layout_marginTop="80dp"
+            android:text="어디를 가고 싶은가요?"
+            android:textColor="#000000"
+            android:textSize="18sp" />
+
+        <EditText
+            android:id="@+id/add_puzzle_place"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/add_puzzle_notice"
+            android:layout_centerHorizontal="true"
+            android:layout_marginLeft="30dp"
+            android:layout_marginRight="30dp"
+            android:layout_marginTop="10dp"
+            android:background="@drawable/maintitle"
+            android:hint="ex. 해운대 해수욕장"
+            android:paddingLeft="15dp"
+            android:textColor="#000000"
+            android:textSize="18sp" />
+
+        <TextView
+            android:id="@+id/add_puzzle_todo_notice"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="40dp"
+            android:layout_marginTop="50dp"
+            android:layout_below="@id/add_puzzle_place"
+            android:text="무엇을 하고 싶은가요?"
+            android:textColor="#000000"
+            android:textSize="18sp" />
+
+        <EditText
+            android:id="@+id/add_puzzle_todo"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/add_puzzle_todo_notice"
+            android:layout_centerHorizontal="true"
+            android:layout_marginLeft="30dp"
+            android:layout_marginRight="30dp"
+            android:layout_marginTop="10dp"
+            android:background="@drawable/maintitle"
+            android:hint="ex. 수영하기"
+            android:paddingLeft="15dp"
+            android:textColor="#000000"
+            android:textSize="18sp" />
+
+        <ImageButton
+            android:id="@+id/register_diary"
+            android:layout_width="300dp"
+            android:layout_height="70dp"
+            android:layout_below="@+id/add_puzzle_todo_notice"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="130dp"
+            android:background="#4dc4d7"
+            android:src="@drawable/next" />
+
+    </RelativeLayout>
+
 </LinearLayout>

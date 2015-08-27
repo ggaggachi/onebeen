@@ -47,7 +47,7 @@ public class TravelDiaryActivity extends AppCompatActivity {
 
         PuzzleDataSource puzzleDataSource = new PuzzleDataSource(this);
 
-        ArrayList<Puzzle> puzzles = puzzleDataSource.getPuzzles(Long.valueOf(travelDiaryId));
+        final ArrayList<Puzzle> puzzles = puzzleDataSource.getPuzzles(Long.valueOf(travelDiaryId));
 
         convertToViewAccodingToTravelStatus(travelStatus, puzzles);
 
@@ -66,14 +66,17 @@ public class TravelDiaryActivity extends AppCompatActivity {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 String tag = String.valueOf(view.getTag());
-
+                String puzzleId = String.valueOf(view.getTag("puzzleId".hashCode()));
+Log.e("ekdxhrl PuzzledId", puzzleId);
                 if ("CURRENT".equals(tag)) {
 //                    startActivity(new Intent(TravelDiaryActivity.this, ShowPuzzleActivity.class));
                 } else if ("BEEN".equals(tag)) {
-                    startActivity(new Intent(TravelDiaryActivity.this, ShowPuzzleActivity.class));
+//                    startActivity(new Intent(TravelDiaryActivity.this, ShowPuzzleActivity.class));
+//                    addPuzzleIntent.putExtra("puzzleId", puzzledId);
+//                    startActivity(addPuzzleIntent);
                 } else if ("WANT".equals(tag)) {
                     Intent addPuzzleIntent = new Intent(TravelDiaryActivity.this, SavePuzzleActivity.class);
-                    addPuzzleIntent.putExtra("travelDiaryId", travelDiaryId);
+                    addPuzzleIntent.putExtra("id", puzzleId);
                     startActivity(addPuzzleIntent);
                 } else {
                     Intent addPuzzleIntent = new Intent(TravelDiaryActivity.this, AddPuzzleActivity.class);

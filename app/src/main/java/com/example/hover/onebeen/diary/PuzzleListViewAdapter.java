@@ -71,6 +71,7 @@ public class PuzzleListViewAdapter extends BaseAdapter {
         }
 
         convertView.setTag(status);
+        convertView.setTag("puzzleId".hashCode(), puzzle.getId());
 
         return convertView;
     }

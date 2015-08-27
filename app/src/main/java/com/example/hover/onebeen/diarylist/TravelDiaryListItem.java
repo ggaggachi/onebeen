@@ -1,16 +1,18 @@
 package com.example.hover.onebeen.diarylist;
 
 public class TravelDiaryListItem {
+    private Long id;
     private String tripTitle;
     private String tripStartDate;
     private String tripEndDate;
     private String subTitle;
 
-    public TravelDiaryListItem(String tripTitle, String tripStartDate, String tripEndDate, String subTitle) {
+    public TravelDiaryListItem(String tripTitle, String tripStartDate, String tripEndDate, String subTitle, Long id) {
         this.tripTitle = tripTitle;
         this.tripStartDate = tripStartDate;
         this.tripEndDate = tripEndDate;
         this.subTitle = subTitle;
+        this.id = id;
     }
 
     public String getTripTitle() {
@@ -43,5 +45,13 @@ public class TravelDiaryListItem {
 
     public void setSubTitle(String subTitle) {
         this.subTitle = subTitle;
+    }
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
     }
 }

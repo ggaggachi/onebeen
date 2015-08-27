@@ -17,7 +17,9 @@ import com.example.hover.onebeen.db.TravelDiaryDataSource;
 import com.example.hover.onebeen.db.UserDataSource;
 import com.example.hover.onebeen.db.dto.Puzzle;
 import com.example.hover.onebeen.db.dto.TravelDiary;
+import com.example.hover.onebeen.db.dto.TravelStatus;
 import com.example.hover.onebeen.db.dto.User;
+import com.example.hover.onebeen.diarylist.TravelDiaryListItem;
 import com.example.hover.onebeen.puzzle.AddPuzzleActivity;
 import com.example.hover.onebeen.puzzle.ShowPuzzleActivity;
 import com.facebook.FacebookSdk;
@@ -37,6 +39,7 @@ public class TravelDiaryActivity extends AppCompatActivity {
 
         Intent intent = getIntent();
         final String travelDiaryId = intent.getExtras().getString("travelDiaryId");
+        String travelStatus = intent.getExtras().getString("travelStatus");
 
         setTopMenu(travelDiaryId);
 
@@ -44,7 +47,7 @@ public class TravelDiaryActivity extends AppCompatActivity {
 
         ArrayList<Puzzle> puzzles = puzzleDataSource.getPuzzles(Long.valueOf(travelDiaryId));
 
-        puzzles.add(null);
+        convertToViewAccodingToTravelStatus(travelStatus, puzzles);
 
 //        ArrayList<Puzzle> puzzles = new ArrayList<>();
 //        puzzles.add(new Puzzle(1, null, PuzzleStatus.BEEN.toString(), null, null, null, null, null, 1, "해운대", "바나나보트 타기1", null));
@@ -81,6 +84,24 @@ public class TravelDiaryActivity extends AppCompatActivity {
                 startActivity(intent1);
             }
         });
+    }
+
+    private void convertToViewAccodingToTravelStatus(String travelStatus, ArrayList<Puzzle> puzzles) {
+        if(travelStatus == null) {
+            puzzles.add(null);
+        }
+
+        if(TravelStatus.BEEN.getValue() == travelStatus) {
+
+        }
+
+        if(TravelStatus.ONGOING.getValue() == travelStatus) {
+
+        }
+
+        if(TravelStatus.PLANNING.getValue() == travelStatus) {
+
+        }
     }
 
     private void setTopMenu(String travelDiaryId) {

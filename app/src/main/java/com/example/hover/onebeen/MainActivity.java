@@ -12,6 +12,8 @@ import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.View;
+import android.widget.AdapterView;
+import android.widget.ListView;
 import android.widget.Toast;
 import com.example.hover.onebeen.db.TravelDiaryDataSource;
 import com.example.hover.onebeen.db.UserDataSource;
@@ -103,13 +105,12 @@ public class MainActivity extends AppCompatActivity {
         mDrawerToggle.syncState();
 
         fragmentManager = getSupportFragmentManager();
+
         fragmentManager
                 .beginTransaction()
                 .setCustomAnimations(R.anim.slide_in_left, R.anim.slide_out_right)
                 .replace(R.id.container, homeFragment)
                 .commit();
-
-        insertMockData();
     }
 
     @NonNull
@@ -123,23 +124,7 @@ public class MainActivity extends AppCompatActivity {
         return user;
     }
 
-    private void insertMockData() {
-        TravelDiaryDataSource travelDiaryDataSource = new TravelDiaryDataSource(this);
 
-        try {
-            TravelDiary travelDiary1 = travelDiaryDataSource.getTravelDiary(1L);
-        } catch(Exception e) {
-            for (int i = 0; i < 10; i++) {
-                TravelDiary travelDiary = new TravelDiary(null, "title" + i, "2015.08.25", "2015.08.30", TravelStatus.BEEN, "");
-                travelDiaryDataSource.insertTravelDiary(travelDiary);
-            }
-
-            for (int i = 0; i < 10; i++) {
-                TravelDiary travelDiary = new TravelDiary(null, "title" + i, "2015.08.25", "2015.08.30", TravelStatus.ONGOING, "");
-                travelDiaryDataSource.insertTravelDiary(travelDiary);
-            }
-        }
-    }
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {

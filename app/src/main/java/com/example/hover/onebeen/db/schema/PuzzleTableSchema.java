@@ -14,6 +14,7 @@ public class PuzzleTableSchema {
     public static final String PLACE = "place";
     public static final String TODO = "todo";
     public static final String TYPE = "type";
+    public static final String DESCRIPTION = "description";
 
     public static final String DROP_TABLE_SQL = "DROP TABLE IF EXISTS " + TABLE_NAME;
 
@@ -28,5 +29,6 @@ public class PuzzleTableSchema {
             + ORDER + " INTEGER, "
             + PLACE + " TEXT, "
             + TODO + " TEXT, "
-            + TYPE + " TEXT);";
+            + TYPE + " TEXT, "
+            + DESCRIPTION + " TEXT);";
 }

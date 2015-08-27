@@ -14,7 +14,7 @@ import com.example.hover.onebeen.db.schema.UserTableSchema;
 public class SQLiteHelper extends SQLiteOpenHelper {
     private static final String DATABASE_NAME = "onebeen.db";
 
-    private static final int DATABASE_VERSION = 12;
+    private static final int DATABASE_VERSION = 15;
 
     public SQLiteHelper(Context context) {
         super(context, DATABASE_NAME, null, DATABASE_VERSION);
@@ -27,7 +27,7 @@ public class SQLiteHelper extends SQLiteOpenHelper {
         database.execSQL(TravelDiarySchema.CREATE_TRAVEL_DIARY_TABLE);
 
         // puzzle table 새로 생성
-        database.execSQL(PuzzleTableSchema.DROP_TABLE_SQL);
+//        database.execSQL(PuzzleTableSchema.DROP_TABLE_SQL);
         database.execSQL(PuzzleTableSchema.CREATE_TABLE_SQL);
     }
 

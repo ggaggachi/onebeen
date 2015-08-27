@@ -4,24 +4,26 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Toast;
+
+import com.example.hover.onebeen.db.dto.TravelStatus;
+import com.example.hover.onebeen.diarylist.TravelDiaryListFragment;
 
 import com.example.hover.onebeen.diary.MakeDiary;
 
 public class HomeFragment extends Fragment{
-    private static int TRAVEL_START_CODE = 1;
-    private static int TRAVEL_BEEN_CODE = 2;
-    private static int TRAVEL_ONGOING_CODE = 3;
-    private static int TRAVEL_PLANNING_CODE = 4;
 
+    private static int TRAVEL_START_CODE = 1;
 
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         final View root = inflater.inflate(R.layout.home_activity, null);
+
+        final FragmentManager fragmentManager = getFragmentManager();
 
         root.findViewById(R.id.travel_start_btn).setOnClickListener(new View.OnClickListener() {
             @Override
@@ -30,36 +32,55 @@ public class HomeFragment extends Fragment{
                 startActivityForResult(intent, TRAVEL_START_CODE);
             }
         });
+
+        root.findViewById(R.id.traven_ongoing_btn).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                TravelDiaryListFragment travelDiaryListFragment = new TravelDiaryListFragment();
+
+                Bundle args = new Bundle();
+                args.putString("travelStatus", TravelStatus.ONGOING.getValue());
+
+                travelDiaryListFragment.setArguments(args);
+
+                fragmentManager.beginTransaction()
+                        .replace(R.id.container, travelDiaryListFragment)
+                        .commit();
+            }
+        });
+
+        root.findViewById(R.id.travel_been_btn).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                TravelDiaryListFragment travelDiaryListFragment = new TravelDiaryListFragment();
+
+                Bundle args = new Bundle();
+                args.putString("travelStatus", TravelStatus.BEEN.getValue());
+
+                travelDiaryListFragment.setArguments(args);
+
+                fragmentManager.beginTransaction()
+                        .replace(R.id.container, travelDiaryListFragment)
+                        .commit();
+            }
+        });
+
+        root.findViewById(R.id.travel_planning_btn).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                TravelDiaryListFragment travelDiaryListFragment = new TravelDiaryListFragment();
+
+                Bundle args = new Bundle();
+                args.putString("travelStatus", TravelStatus.PLANNING.getValue());
+
+                travelDiaryListFragment.setArguments(args);
+
+                fragmentManager.beginTransaction()
+                        .replace(R.id.container, travelDiaryListFragment)
+                        .commit();
+            }
+        });
+
         return root;
     }
-
-    @Override
-    public void onActivityResult(int requestCode, int resultCode, Intent data) {
-        switch (requestCode) {
-            case 1 :
-            Toast.makeText(getActivity(), "정상 호출", Toast.LENGTH_SHORT).show();
-        }
-    }
-
-    //    @Override
-//    public boolean onCreateOptionsMenu(Menu menu) {
-//        // Inflate the menu; this adds items to the action bar if it is present.
-//        getMenuInflater().inflate(R.menu.menu_main, menu);
-//        return true;
-//    }
-//
-//    @Override
-//    public boolean onOptionsItemSelected(MenuItem item) {
-//        // Handle action bar item clicks here. The action bar will
-//        // automatically handle clicks on the Home/Up button, so long
-//        // as you specify a parent activity in AndroidManifest.xml.
-//        int id = item.getItemId();
-//
-//        //noinspection SimplifiableIfStatement
-//        if (id == R.id.action_settings) {
-//            return true;
-//        }
-//
-//        return super.onOptionsItemSelected(item);
-//    }
 }

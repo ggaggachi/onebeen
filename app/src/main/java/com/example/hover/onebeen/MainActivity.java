@@ -1,5 +1,6 @@
 package com.example.hover.onebeen;
 
+import android.app.Fragment;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.FragmentManager;
@@ -13,9 +14,13 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Toast;
 
+import com.example.hover.onebeen.db.TravelDiaryDataSource;
 import com.example.hover.onebeen.db.UserDataSource;
+import com.example.hover.onebeen.db.dto.TravelDiary;
+import com.example.hover.onebeen.db.dto.TravelStatus;
 import com.example.hover.onebeen.db.dto.User;
 import com.example.hover.onebeen.diarylist.TravelDiaryListFragment;
+import com.example.hover.onebeen.utility.ActivityStatus;
 import com.facebook.CallbackManager;
 import com.facebook.FacebookCallback;
 import com.facebook.FacebookException;
@@ -45,7 +50,6 @@ public class MainActivity extends AppCompatActivity {
     FragmentManager fragmentManager;
 
     private HomeFragment homeFragment = new HomeFragment();
-    private TravelDiaryListFragment travelDiaryListFragment = new TravelDiaryListFragment();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -89,9 +93,29 @@ public class MainActivity extends AppCompatActivity {
         fragmentManager = getSupportFragmentManager();
         fragmentManager.beginTransaction().replace(R.id.container, homeFragment).commit();
 
+        insertMockData();
+
 //		FacebookSdk.sdkInitialize(this.getApplicationContext());
 //		callbackManager = CallbackManager.Factory.create();
 //		registerFacebookLoginButtonEvent();
+    }
+
+    private void insertMockData() {
+        TravelDiaryDataSource travelDiaryDataSource = new TravelDiaryDataSource(this);
+
+        try {
+            TravelDiary travelDiary1 = travelDiaryDataSource.getTravelDiary(1L);
+        } catch(Exception e) {
+            for (int i = 0; i < 10; i++) {
+                TravelDiary travelDiary = new TravelDiary(null, "title" + i, "2015.08.25", "2015.08.30", TravelStatus.BEEN, "");
+                travelDiaryDataSource.insertTravelDiary(travelDiary);
+            }
+
+            for (int i = 0; i < 10; i++) {
+                TravelDiary travelDiary = new TravelDiary(null, "title" + i, "2015.08.25", "2015.08.30", TravelStatus.ONGOING, "");
+                travelDiaryDataSource.insertTravelDiary(travelDiary);
+            }
+        }
     }
 
     private void registerFacebookLoginButtonEvent() {
@@ -132,17 +156,21 @@ public class MainActivity extends AppCompatActivity {
         super.onActivityResult(requestCode, resultCode, data);
 //        callbackManager.onActivityResult(requestCode, resultCode, data);
 
-        if (resultCode == 1) {
-            homeFragment.startActivityForResult(data, requestCode);
+        if (resultCode == ActivityStatus.MAKE_DIARY.getActivityStatus()) {
+            moveToTravelDiaryListFragment(data);
         }
     }
 
-//	@Override
-//	protected void onResume() {
-//		super.onResume();
-//
-//		AppEventsLogger.activateApp(this);
-//	}
+    private void moveToTravelDiaryListFragment(Intent data) {
+        TravelDiaryListFragment travelDiaryListFragment = new TravelDiaryListFragment();
+        Bundle args = new Bundle();
+        args.putString("travelDiaryId", data.getStringExtra("travelDiaryId"));
+        travelDiaryListFragment.setArguments(args);
+        fragmentManager
+                .beginTransaction()
+                .replace(R.id.container, travelDiaryListFragment)
+                .commit();
+    }
 
     @Override
     public void onBackPressed() {

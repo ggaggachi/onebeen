@@ -6,7 +6,10 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
+
+import com.example.hover.onebeen.db.dto.User;
+import com.facebook.login.widget.ProfilePictureView;
+
 public class MyAdapter extends RecyclerView.Adapter<MyAdapter.ViewHolder> {
     private static final int TYPE_HEADER = 0;  // Declaring Variable to Understand which View is being worked on
     // IF the view under inflation and population is header or Item
@@ -16,8 +19,15 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.ViewHolder> {
     private int mIcons[];       // Int Array to store the passed icons resource value from MainActivity.java
 
     private String name;        //String Resource for header View Name
-    private int profile;        //int Resource for header view profile picture
-    private String email;       //String Resource for header view email
+    private String userId;        //int Resource for header view userId picture
+
+    public MyAdapter(String[] titles, int[] icons, User user) {
+        // titles, icons, name, email, userId pic are passed from the main activity as we
+        mNavTitles = titles;                //have seen earlier
+        mIcons = icons;
+        name = user.getName();
+        userId = user.getId();                     //here we assign those passed values to the values we declared here
+    }
 
 
     // Creating a ViewHolder which extends the RecyclerView View Holder
@@ -28,12 +38,12 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.ViewHolder> {
 
         TextView textView;
         ImageView imageView;
-        ImageView profile;
+        ProfilePictureView profilePictureView;
         TextView Name;
         TextView email;
 
 
-        public ViewHolder(View itemView,int ViewType) {                 // Creating ViewHolder Constructor with View and viewType As a parameter
+        public ViewHolder(View itemView,int ViewType, String userId) {                 // Creating ViewHolder Constructor with View and viewType As a parameter
             super(itemView);
 
 
@@ -48,31 +58,14 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.ViewHolder> {
 
 
                 Name = (TextView) itemView.findViewById(R.id.name);         // Creating Text View object from header.xml for name
-                email = (TextView) itemView.findViewById(R.id.email);       // Creating Text View object from header.xml for email
-                profile = (ImageView) itemView.findViewById(R.id.circleView);// Creating Image view object from header.xml for profile pic
+                profilePictureView = (ProfilePictureView) itemView.findViewById(R.id.circleView);// Creating Image view object from header.xml for userId pic
+                profilePictureView.setProfileId(userId);
                 Holderid = 0;                                                // Setting holder id = 0 as the object being populated are of type header view
             }
         }
 
 
     }
-
-
-
-    MyAdapter(String Titles[],int Icons[],String Name,String Email, int Profile){ // MyAdapter Constructor with titles and icons parameter
-        // titles, icons, name, email, profile pic are passed from the main activity as we
-        mNavTitles = Titles;                //have seen earlier
-        mIcons = Icons;
-        name = Name;
-        email = Email;
-        profile = Profile;                     //here we assign those passed values to the values we declared here
-        //in adapter
-
-
-
-    }
-
-
 
     //Below first we ovverride the method onCreateViewHolder which is called when the ViewHolder is
     //Created, In this method we inflate the item_row.xml layout if the viewType is Type_ITEM or else we inflate header.xml
@@ -85,7 +78,7 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.ViewHolder> {
         if (viewType == TYPE_ITEM) {
             View v = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_row,parent,false); //Inflating the layout
 
-            ViewHolder vhItem = new ViewHolder(v,viewType); //Creating ViewHolder and passing the object of type view
+            ViewHolder vhItem = new ViewHolder(v,viewType, userId); //Creating ViewHolder and passing the object of type view
 
             return vhItem; // Returning the created object
 
@@ -95,7 +88,7 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.ViewHolder> {
 
             View v = LayoutInflater.from(parent.getContext()).inflate(R.layout.header,parent,false); //Inflating the layout
 
-            ViewHolder vhHeader = new ViewHolder(v,viewType); //Creating ViewHolder and passing the object of type view
+            ViewHolder vhHeader = new ViewHolder(v,viewType, userId); //Creating ViewHolder and passing the object of type view
 
             return vhHeader; //returning the object created
 
@@ -117,9 +110,7 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.ViewHolder> {
         }
         else{
 
-            holder.profile.setImageResource(profile);           // Similarly we set the resources for header view
             holder.Name.setText(name);
-            holder.email.setText(email);
         }
     }
 

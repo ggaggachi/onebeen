@@ -10,6 +10,8 @@ import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
 
+import com.example.hover.onebeen.db.UserDataSource;
+import com.example.hover.onebeen.db.dto.User;
 import com.example.hover.onebeen.diarylist.TravelDiaryListFragment;
 
 public class TestActionBar extends AppCompatActivity {
@@ -44,8 +46,9 @@ public class TestActionBar extends AppCompatActivity {
 
         mRecyclerView = (RecyclerView) findViewById(R.id.RecyclerView);
         mRecyclerView.setHasFixedSize(true);
-
-        mAdapter = new MyAdapter(TITLES, ICONS, NAME, EMAIL, PROFILE);
+        UserDataSource userDataSource = new UserDataSource(this);
+        User user = userDataSource.getUser();
+        mAdapter = new MyAdapter(TITLES, ICONS, user);
         mRecyclerView.setAdapter(mAdapter);
 
         mLayoutManager = new LinearLayoutManager(this);

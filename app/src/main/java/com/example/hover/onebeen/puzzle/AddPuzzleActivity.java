@@ -1,23 +1,24 @@
-package com.example.hover.onebeen;
+package com.example.hover.onebeen.puzzle;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 
-public class MakeDiary extends AppCompatActivity {
+import com.example.hover.onebeen.R;
+
+public class AddPuzzleActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
-        setTitle("여행 일정 만들기");
-        setContentView(R.layout.activity_make_diary);
+        setContentView(R.layout.activity_add_puzzle);
 
         Toolbar toolbar = (Toolbar) findViewById(R.id.tool_bar);
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setDisplayShowHomeEnabled(true);
+
+        setTitle("퍼즐 추가하기");
     }
 
     @Override
@@ -29,13 +30,5 @@ public class MakeDiary extends AppCompatActivity {
                 return true;
         }
         return super.onOptionsItemSelected(item);
-    }
-
-    @Override
-    protected void onDestroy() {
-        super.onDestroy();
-
-        Intent intent = new Intent();
-        setResult(1, intent);
     }
 }

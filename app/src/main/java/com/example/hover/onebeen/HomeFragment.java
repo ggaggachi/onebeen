@@ -9,6 +9,8 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Toast;
 
+import com.example.hover.onebeen.diary.MakeDiary;
+
 public class HomeFragment extends Fragment{
     private static int TRAVEL_START_CODE = 1;
     private static int TRAVEL_BEEN_CODE = 2;

@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <include
+        android:id="@+id/tool_bar"
+        layout="@layout/tool_bar_transparent">
+    </include>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="fill_parent"
+            android:layout_weight="75"
+            android:id="@+id/diary_info">
+
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:src="@drawable/travel_been"
+                android:scaleType="centerCrop" />
+
+            <de.hdodenhof.circleimageview.CircleImageView
+                android:layout_width="80dp"
+                android:layout_height="80dp"
+                android:src="@drawable/default_profile"
+                android:layout_marginLeft="30dp"
+                android:layout_centerVertical="true"
+                android:id="@+id/circleView" />
+
+            <RelativeLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_toRightOf="@+id/circleView"
+                android:layout_centerVertical="true"
+                android:layout_marginLeft="20dp">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textSize="30sp"
+                    android:textColor="#ffffff"
+                    android:textStyle="bold"
+                    android:text="다이어리 이름"
+                    android:id="@+id/diary_info_title"/>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textSize="12sp"
+                    android:textColor="#ffffff"
+                    android:layout_below="@id/diary_info_title"
+                    android:textStyle="italic"
+                    android:layout_marginBottom="2dp"
+                    android:id="@+id/diary_info_subtitle"
+                    android:text="여행을 시작해보세요"/>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textSize="18sp"
+                    android:textColor="#ffffff"
+                    android:layout_below="@id/diary_info_subtitle"
+                    android:text="허버허버"/>
+
+
+            </RelativeLayout>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="15sp"
+                android:textColor="#ffffff"
+                android:layout_alignParentBottom="true"
+                android:layout_alignParentRight="true"
+                android:textStyle="bold"
+                android:text="35%"
+                />
+        </RelativeLayout>
+
+
+
+        <ProgressBar
+            style="?android:attr/progressBarStyleHorizontal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/progressBar" />
+
+        <ListView
+            android:layout_width="match_parent"
+            android:layout_height="fill_parent"
+            android:layout_weight="25"
+            android:id="@+id/puzzle_list_view" />
+
+    </LinearLayout>
+
+
+
+</RelativeLayout>

@@ -44,6 +44,7 @@
                 android:textSize="18sp" />
 
             <ImageButton
+                android:id="@+id/register_diary"
                 android:layout_width="300dp"
                 android:layout_height="70dp"
                 android:layout_below="@+id/make_diary_title"

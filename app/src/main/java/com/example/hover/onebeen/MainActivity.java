@@ -16,6 +16,7 @@ import android.widget.Toast;
 import com.example.hover.onebeen.db.UserDataSource;
 import com.example.hover.onebeen.db.dto.User;
 import com.example.hover.onebeen.diarylist.TravelDiaryListFragment;
+import com.example.hover.onebeen.utility.ActivityStatus;
 import com.facebook.CallbackManager;
 import com.facebook.FacebookCallback;
 import com.facebook.FacebookException;
@@ -132,8 +133,8 @@ public class MainActivity extends AppCompatActivity {
         super.onActivityResult(requestCode, resultCode, data);
 //        callbackManager.onActivityResult(requestCode, resultCode, data);
 
-        if (resultCode == 1) {
-            homeFragment.startActivityForResult(data, requestCode);
+        if (resultCode == ActivityStatus.MAKE_DIARY.getActivityStatus()) {
+            fragmentManager.beginTransaction().replace(R.id.container, travelDiaryListFragment).commit();
         }
     }
 

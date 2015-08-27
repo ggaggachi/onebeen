@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical" android:layout_width="match_parent"
+    xmlns:facebook="http://schemas.android.com/apk/res-auto"
     android:layout_height="match_parent">
 
     <include
@@ -20,18 +21,28 @@
             android:id="@+id/diary_info">
 
             <ImageView
+                android:id="@+id/diary_background"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:src="@drawable/travel_been"
                 android:scaleType="centerCrop" />
 
-            <de.hdodenhof.circleimageview.CircleImageView
+            <!--<de.hdodenhof.circleimageview.CircleImageView-->
+                <!--android:layout_width="80dp"-->
+                <!--android:layout_height="80dp"-->
+                <!--android:src="@drawable/default_profile"-->
+                <!--android:layout_marginLeft="30dp"-->
+                <!--android:layout_centerVertical="true"-->
+                <!--android:id="@+id/circleView" />-->
+
+            <com.facebook.login.widget.ProfilePictureView
+                android:id="@+id/profile"
                 android:layout_width="80dp"
                 android:layout_height="80dp"
-                android:src="@drawable/default_profile"
                 android:layout_marginLeft="30dp"
+                android:layout_marginTop="38dp"
                 android:layout_centerVertical="true"
-                android:id="@+id/circleView" />
+                facebook:preset_size="normal"/>
 
             <RelativeLayout
                 android:layout_width="wrap_content"
@@ -41,13 +52,13 @@
                 android:layout_marginLeft="20dp">
 
                 <TextView
+                    android:id="@+id/diary_info_title"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:textSize="30sp"
                     android:textColor="#ffffff"
                     android:textStyle="bold"
-                    android:text="다이어리 이름"
-                    android:id="@+id/diary_info_title"/>
+                    android:text="다이어리 이름" />
 
                 <TextView
                     android:layout_width="wrap_content"
@@ -61,6 +72,7 @@
                     android:text="여행을 시작해보세요"/>
 
                 <TextView
+                    android:id="@+id/user_name"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:textSize="18sp"

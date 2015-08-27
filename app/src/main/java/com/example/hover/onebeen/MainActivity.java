@@ -1,25 +1,21 @@
 package com.example.hover.onebeen;
 
 import android.content.Intent;
-import android.content.res.Configuration;
 import android.os.Bundle;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.widget.DrawerLayout;
-import android.support.v7.app.ActionBarActivity;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
-import android.view.Menu;
-import android.view.MenuItem;
 import android.view.View;
 import android.widget.Toast;
 
 import com.example.hover.onebeen.db.UserDataSource;
 import com.example.hover.onebeen.db.dto.User;
-import com.example.hover.onebeen.diary.TravelDiaryFragment;
+import com.example.hover.onebeen.diarylist.TravelDiaryListFragment;
 import com.facebook.CallbackManager;
 import com.facebook.FacebookCallback;
 import com.facebook.FacebookException;
@@ -36,7 +32,7 @@ public class MainActivity extends AppCompatActivity {
 
     String NAME = "이름";
     String EMAIL = "이메일";
-    int PROFILE = R.drawable.logo_green;
+    int PROFILE = R.drawable.default_profile;
 
     private Toolbar toolbar;
 
@@ -49,7 +45,7 @@ public class MainActivity extends AppCompatActivity {
     FragmentManager fragmentManager;
 
     private HomeFragment homeFragment = new HomeFragment();
-    private TravelDiaryFragment travelDiaryFragment = new TravelDiaryFragment();
+    private TravelDiaryListFragment travelDiaryListFragment = new TravelDiaryListFragment();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

@@ -10,7 +10,7 @@ import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
 
-import com.example.hover.onebeen.diary.TravelDiaryFragment;
+import com.example.hover.onebeen.diarylist.TravelDiaryListFragment;
 
 public class TestActionBar extends AppCompatActivity {
     String TITLES[] = {"여행 시작하기", "다녀온 여행지", "진행중 여행지", "계획중 여행지", "설정"};
@@ -31,7 +31,7 @@ public class TestActionBar extends AppCompatActivity {
     FragmentManager fragmentManager;
 
     private final HomeFragment homeFragment = new HomeFragment();
-    private TravelDiaryFragment travelDiaryFragment = new TravelDiaryFragment();
+    private TravelDiaryListFragment travelDiaryListFragment = new TravelDiaryListFragment();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

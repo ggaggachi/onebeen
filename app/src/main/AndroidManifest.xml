@@ -40,10 +40,6 @@
             </intent-filter>
         </activity>
 
-        <activity android:name=".fourbtnActivity">
-
-        </activity>
-
         <activity android:name=".MakeDiary">
 
         </activity>

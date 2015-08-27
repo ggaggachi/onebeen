@@ -7,15 +7,24 @@ import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
+import android.widget.ImageView;
 import android.widget.ListView;
+import android.widget.TextView;
+
 import com.example.hover.onebeen.R;
 import com.example.hover.onebeen.db.PuzzleDataSource;
 import com.example.hover.onebeen.db.TravelDiaryDataSource;
+import com.example.hover.onebeen.db.UserDataSource;
 import com.example.hover.onebeen.db.dto.Puzzle;
 import com.example.hover.onebeen.db.dto.TravelDiary;
+import com.example.hover.onebeen.db.dto.User;
 import com.example.hover.onebeen.puzzle.AddPuzzleActivity;
 import com.example.hover.onebeen.puzzle.PuzzleStatus;
 import com.example.hover.onebeen.puzzle.ShowPuzzleActivity;
+import com.facebook.FacebookSdk;
+import com.facebook.appevents.AppEventsLogger;
+import com.facebook.login.widget.ProfilePictureView;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -23,6 +32,8 @@ public class TravelDiaryActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        FacebookSdk.sdkInitialize(this.getApplicationContext());
 
         setContentView(R.layout.activity_diary);
         setSupportActionBar();
@@ -32,12 +43,7 @@ public class TravelDiaryActivity extends AppCompatActivity {
 
         Log.e("gg", travelDiaryId);
 
-        TravelDiaryDataSource travelDiaryDataSource = new TravelDiaryDataSource(this);
-        TravelDiary travelDiary = travelDiaryDataSource.getTravelDiary(Long.valueOf(travelDiaryId));
-        Log.e("ekdxhrl travel:", travelDiary.toString());
-//
-//        travelDiary.getTitle();
-//        travelDiary.getBackgroundImagePath();
+        setTopMenu(travelDiaryId);
 //
 //        PuzzleDataSource puzzleDataSource = new PuzzleDataSource(this);
 //
@@ -72,12 +78,42 @@ public class TravelDiaryActivity extends AppCompatActivity {
         });
     }
 
+    private void setTopMenu(String travelDiaryId) {
+        TravelDiaryDataSource travelDiaryDataSource = new TravelDiaryDataSource(this);
+        TravelDiary travelDiary = travelDiaryDataSource.getTravelDiary(Long.valueOf(travelDiaryId));
+
+        ((TextView) findViewById(R.id.diary_info_title)).setText(travelDiary.getTitle());
+//        ImageView viewById = (ImageView) findViewById(R.id.diary_background);
+//        viewById.setImageURI();
+        travelDiary.getBackgroundImagePath();
+
+        UserDataSource userDataSource = new UserDataSource(this);
+        User user = userDataSource.getUser();
+
+        ProfilePictureView profilePictureView = (ProfilePictureView) findViewById(R.id.profile);
+        profilePictureView.setProfileId(user.getId());
+
+        if( user == null ) {
+            user = new User(null, "Guest");
+        }
+
+        TextView userName = (TextView) findViewById(R.id.user_name);
+        userName.setText(user.getName());
+    }
+
     private void setSupportActionBar() {
         Toolbar toolbar = (Toolbar) findViewById(R.id.tool_bar);
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayShowTitleEnabled(false);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setDisplayShowHomeEnabled(true);
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+
+        AppEventsLogger.activateApp(this);
     }
 
     @Override

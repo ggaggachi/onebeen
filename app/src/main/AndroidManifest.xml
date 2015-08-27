@@ -75,6 +75,10 @@
         <activity android:name=".puzzle.AddPuzzleActivity">
         </activity>
 
+        <activity android:name=".puzzle.SavePuzzleActivity">
+            
+        </activity>
+
     </application>
 
 </manifest>

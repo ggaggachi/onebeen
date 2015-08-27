@@ -1,51 +1,45 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-			  android:orientation="vertical"
-			  android:layout_width="match_parent"
-			  android:layout_height="match_parent" android:background="#3344A9DF">
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#3344A9DF"
+    android:orientation="vertical"
+    android:paddingLeft="10dp"
+    android:paddingRight="10dp"
+    android:paddingTop="10dp">
 
-	<LinearLayout
-			android:orientation="vertical"
-			android:layout_width="356dp"
-			android:layout_height="wrap_content"
-			android:layout_marginTop="20dp"
-			android:layout_marginBottom="8dp"
-			android:layout_gravity="center_horizontal"
-			android:background="@drawable/rounded_layout">
-		<ImageView
-				android:layout_width="340dp"
-				android:layout_height="340dp"
-				android:id="@+id/puzzle_image" android:maxHeight="340dp" android:maxWidth="340dp" android:background="#333333" android:adjustViewBounds="true"/>
-		<TextView
-				android:layout_width="340dp"
-				android:layout_height="50dp"
-				android:paddingTop="10dp"
-				android:paddingBottom="10dp"
-				android:paddingLeft="10dp"
-				android:paddingRight="10dp"
-				android:textColor="#090909"
-				android:gravity="center_vertical"
-				android:id="@+id/puzzle_description"/>
-	</LinearLayout>
-	<LinearLayout
-			android:orientation="horizontal"
-			android:layout_width="match_parent"
-			android:layout_height="match_parent"
-			android:gravity="center_horizontal">
-		<ImageView
-				android:layout_width="wrap_content"
-				android:layout_height="wrap_content"
-				android:layout_margin="5dp"
-				android:id="@+id/page_control1" android:background="@drawable/img_control_others"/>
-		<ImageView
-				android:layout_width="wrap_content"
-				android:layout_height="wrap_content"
-				android:layout_margin="5dp"
-				android:id="@+id/page_control2" android:background="@drawable/img_control_others"/>
-		<ImageView
-				android:layout_width="wrap_content"
-				android:layout_height="wrap_content"
-				android:layout_margin="5dp"
-				android:id="@+id/page_control3" android:background="@drawable/img_control_others"/>
-	</LinearLayout>
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:layout_gravity="center_horizontal"
+        android:background="@drawable/rounded_layout"
+        android:orientation="vertical"
+        android:paddingLeft="8dp"
+        android:paddingRight="8dp"
+        android:paddingTop="8dp">
+
+        <ImageView
+            android:id="@+id/puzzle_image"
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:layout_weight="2"
+            android:adjustViewBounds="true"
+            android:scaleType="centerInside"
+            android:src="@drawable/login_background" />
+
+        <TextView
+            android:id="@+id/puzzle_description"
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:layout_weight="8"
+            android:gravity="center_vertical|center_horizontal"
+            android:paddingBottom="10dp"
+            android:paddingLeft="10dp"
+            android:paddingRight="10dp"
+            android:paddingTop="10dp"
+            android:textColor="#000000"
+
+            android:text="여행 소감"/>
+    </LinearLayout>
+
 </LinearLayout>

@@ -55,7 +55,7 @@ public class ShowPuzzleActivity extends AppCompatActivity {
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setDisplayShowHomeEnabled(true);
 
-        setTitle("퍼즐 간직하기");
+        setTitle("추억 꺼내보기");
     }
 
     @Override
@@ -112,39 +112,51 @@ public class ShowPuzzleActivity extends AppCompatActivity {
             if (position == 0) {
                 v = mInflater.inflate(R.layout.fragment_show_puzzle, null);
 
-//                ((TextView) v.findViewById(R.id.puzzle_description)).setText(puzzle.getDescription());
+                if (puzzle.getDescription() != null && !"".equals(puzzle.getDescription())) {
+                    ((TextView) v.findViewById(R.id.puzzle_description)).setText(puzzle.getDescription());
+                }
 
-                String path = Environment.getExternalStorageDirectory().getAbsolutePath()+"/"+puzzle.getImagePath1();
-                BitmapFactory.Options bo = new BitmapFactory.Options();
-                bo.inSampleSize = 2;
-                Bitmap bmp = BitmapFactory.decodeFile(path, bo);
-                ((ImageView) v.findViewById(R.id.puzzle_image)).setImageBitmap(bmp);
+                if (puzzle.getImagePath1() != null) {
+                    String path = Environment.getExternalStorageDirectory().getAbsolutePath() + "/" + puzzle.getImagePath1();
+                    BitmapFactory.Options bo = new BitmapFactory.Options();
+                    bo.inSampleSize = 2;
+                    Bitmap bmp = BitmapFactory.decodeFile(path, bo);
+                    ((ImageView) v.findViewById(R.id.puzzle_image)).setImageBitmap(bmp);
+                }
 
-                ((ImageView) v.findViewById(R.id.page_control1)).setImageResource(R.drawable.img_control_selected);
+//                ((ImageView) v.findViewById(R.id.page_control1)).setImageResource(R.drawable.img_control_selected);
             } else if (position == 1) {
                 v = mInflater.inflate(R.layout.fragment_show_puzzle, null);
 
-//                ((TextView) v.findViewById(R.id.puzzle_description)).setText(puzzle.getDescription());
+                if (puzzle.getDescription() != null && !"".equals(puzzle.getDescription())) {
+                    ((TextView) v.findViewById(R.id.puzzle_description)).setText(puzzle.getDescription());
+                }
 
-                String path = Environment.getExternalStorageDirectory().getAbsolutePath()+"/"+puzzle.getImagePath1();
-                BitmapFactory.Options bo = new BitmapFactory.Options();
-                bo.inSampleSize = 2;
-                Bitmap bmp = BitmapFactory.decodeFile(path, bo);
-                ((ImageView) v.findViewById(R.id.puzzle_image)).setImageBitmap(bmp);
+                if (puzzle.getImagePath2() != null) {
+                    String path = Environment.getExternalStorageDirectory().getAbsolutePath() + "/" + puzzle.getImagePath2();
+                    BitmapFactory.Options bo = new BitmapFactory.Options();
+                    bo.inSampleSize = 2;
+                    Bitmap bmp = BitmapFactory.decodeFile(path, bo);
+                    ((ImageView) v.findViewById(R.id.puzzle_image)).setImageBitmap(bmp);
+                }
 
-                ((ImageView) v.findViewById(R.id.page_control2)).setImageResource(R.drawable.img_control_selected);
+//                ((ImageView) v.findViewById(R.id.page_control2)).setImageResource(R.drawable.img_control_selected);
             } else {
                 v = mInflater.inflate(R.layout.fragment_show_puzzle, null);
 
-//                ((TextView) v.findViewById(R.id.puzzle_description)).setText(puzzle.getDescription());
+                if (puzzle.getDescription() != null && !"".equals(puzzle.getDescription())) {
+                    ((TextView) v.findViewById(R.id.puzzle_description)).setText(puzzle.getDescription());
+                }
 
-                String path = Environment.getExternalStorageDirectory().getAbsolutePath()+"/"+puzzle.getImagePath1();
-                BitmapFactory.Options bo = new BitmapFactory.Options();
-                bo.inSampleSize = 2;
-                Bitmap bmp = BitmapFactory.decodeFile(path, bo);
-                ((ImageView) v.findViewById(R.id.puzzle_image)).setImageBitmap(bmp);
+                if (puzzle.getImagePath3() != null) {
+                    String path = Environment.getExternalStorageDirectory().getAbsolutePath() + "/" + puzzle.getImagePath3();
+                    BitmapFactory.Options bo = new BitmapFactory.Options();
+                    bo.inSampleSize = 2;
+                    Bitmap bmp = BitmapFactory.decodeFile(path, bo);
+                    ((ImageView) v.findViewById(R.id.puzzle_image)).setImageBitmap(bmp);
+                }
 
-                ((ImageView) v.findViewById(R.id.page_control3)).setImageResource(R.drawable.img_control_selected);
+//                ((ImageView) v.findViewById(R.id.page_control3)).setImageResource(R.drawable.img_control_selected);
             }
 
             ((ViewPager) pager).addView(v, 0);

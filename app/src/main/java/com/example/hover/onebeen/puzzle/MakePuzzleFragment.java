@@ -39,14 +39,14 @@ public class MakePuzzleFragment extends Fragment {
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        final View root = inflater.inflate(R.layout.activity_make_puzzle, null);
+        final View root = inflater.inflate(R.layout.activity_save_puzzle, null);
 
 //        mTypeface = Typeface.createFromAsset(getActivity().getAssets(), "NotoSansCJKkr-Black.otf");
         ViewGroup viewById = (ViewGroup) root.findViewById(android.R.id.content);
 
         Typeface typeface = Typeface.createFromAsset(getActivity().getAssets(), "NotoSansCJKkr-DemiLight.otf");
-        TextView viewById1 = (TextView) root.findViewById(R.id.puzzle_place);
-        viewById1.setTypeface(typeface);
+//        TextView viewById1 = (TextView) root.findViewById(R.id.puzzle_place);
+//        viewById1.setTypeface(typeface);
 
         Intent intent = getActivity().getIntent();
 //        puzzle = intent.getParcelableExtra("puzzle");
@@ -54,7 +54,7 @@ public class MakePuzzleFragment extends Fragment {
         puzzle.setPlace("테스트테스트");
         puzzle.setTodo("테스트테스트");
 
-        ((TextView) root.findViewById(R.id.puzzle_place)).setText(puzzle.getPlace());
+//        ((TextView) root.findViewById(R.id.puzzle_place)).setText(puzzle.getPlace());
         ((TextView) root.findViewById(R.id.puzzle_item_todo)).setText(puzzle.getTodo());
 
         root.findViewById(R.id.image_add_button1).setOnClickListener(new View.OnClickListener() {

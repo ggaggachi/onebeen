@@ -18,6 +18,7 @@ import com.example.hover.onebeen.db.UserDataSource;
 import com.example.hover.onebeen.db.dto.TravelDiary;
 import com.example.hover.onebeen.db.dto.TravelStatus;
 import com.example.hover.onebeen.db.dto.User;
+import com.example.hover.onebeen.diary.TravelDiaryActivity;
 import com.example.hover.onebeen.diarylist.TravelDiaryListFragment;
 import com.example.hover.onebeen.utility.ActivityStatus;
 import com.example.hover.onebeen.utility.BackPressHandler;
@@ -146,20 +147,24 @@ public class MainActivity extends AppCompatActivity {
 //        callbackManager.onActivityResult(requestCode, resultCode, data);
 
         if (resultCode == ActivityStatus.MAKE_DIARY.getActivityStatus()) {
-            moveToTravelDiaryListFragment(data);
+            Intent intent = new Intent(MainActivity.this, TravelDiaryActivity.class);
+            intent.putExtra("travelDiaryId", data.getStringExtra("travelDiaryId"));
+            startActivity(intent);
+//            moveToTravelDiaryListFragment(data);
         }
     }
 
-    private void moveToTravelDiaryListFragment(Intent data) {
-        TravelDiaryListFragment travelDiaryListFragment = new TravelDiaryListFragment();
-        Bundle args = new Bundle();
-        args.putString("travelDiaryId", data.getStringExtra("travelDiaryId"));
-        travelDiaryListFragment.setArguments(args);
-        fragmentManager
-                .beginTransaction()
-                .replace(R.id.container, travelDiaryListFragment)
-                .commit();
-    }
+//    private void moveToTravelDiaryListFragment(Intent data) {
+//
+//        TravelDiaryListFragment travelDiaryListFragment = new TravelDiaryListFragment();
+//        Bundle args = new Bundle();
+//        args.putString("travelDiaryId", data.getStringExtra("travelDiaryId"));
+//        travelDiaryListFragment.setArguments(args);
+//        fragmentManager
+//                .beginTransaction()
+//                .replace(R.id.container, travelDiaryListFragment)
+//                .commit();
+//    }
 
     @Override
     public void onBackPressed() {

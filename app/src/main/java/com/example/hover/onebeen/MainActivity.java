@@ -1,8 +1,8 @@
 package com.example.hover.onebeen;
 
-import android.app.Fragment;
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
@@ -13,7 +13,6 @@ import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.View;
 import android.widget.Toast;
-
 import com.example.hover.onebeen.db.TravelDiaryDataSource;
 import com.example.hover.onebeen.db.UserDataSource;
 import com.example.hover.onebeen.db.dto.TravelDiary;
@@ -25,14 +24,13 @@ import com.example.hover.onebeen.utility.BackPressHandler;
 import com.facebook.CallbackManager;
 import com.facebook.FacebookCallback;
 import com.facebook.FacebookException;
+import com.facebook.FacebookSdk;
 import com.facebook.Profile;
+import com.facebook.appevents.AppEventsLogger;
 import com.facebook.login.LoginManager;
 import com.facebook.login.LoginResult;
 
 public class MainActivity extends AppCompatActivity {
-
-    CallbackManager callbackManager = null;
-
     String TITLES[] = {"여행 시작하기", "다녀온 여행지", "진행중 여행지", "계획중 여행지", "설정"};
     int ICONS[] = {R.drawable.logo_green, R.drawable.logo_green, R.drawable.logo_green, R.drawable.logo_green, R.drawable.logo_green};
 
@@ -62,6 +60,9 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        FacebookSdk.sdkInitialize(this.getApplicationContext());
+
         setContentView(R.layout.actionbar_activity);
 
         backPressHandler = new BackPressHandler(this);
@@ -73,7 +74,7 @@ public class MainActivity extends AppCompatActivity {
         mRecyclerView = (RecyclerView) findViewById(R.id.RecyclerView);
         mRecyclerView.setHasFixedSize(true);
 
-        mAdapter = new MyAdapter(TITLES, ICONS, NAME, EMAIL, PROFILE);
+        mAdapter = new MyAdapter(TITLES, ICONS, getUser());
         mRecyclerView.setAdapter(mAdapter);
 
         mLayoutManager = new LinearLayoutManager(this);
@@ -108,10 +109,17 @@ public class MainActivity extends AppCompatActivity {
                 .commit();
 
         insertMockData();
+    }
 
-//		FacebookSdk.sdkInitialize(this.getApplicationContext());
-//		callbackManager = CallbackManager.Factory.create();
-//		registerFacebookLoginButtonEvent();
+    @NonNull
+    private User getUser() {
+        UserDataSource userDataSource = new UserDataSource(this);
+        User user = userDataSource.getUser();
+
+        if(user == null) {
+            user = new User(null, "Guest");
+        }
+        return user;
     }
 
     private void insertMockData() {
@@ -130,39 +138,6 @@ public class MainActivity extends AppCompatActivity {
                 travelDiaryDataSource.insertTravelDiary(travelDiary);
             }
         }
-    }
-
-    private void registerFacebookLoginButtonEvent() {
-        LoginManager.getInstance().registerCallback(callbackManager,
-                new FacebookCallback<LoginResult>() {
-                    @Override
-                    public void onSuccess(LoginResult loginResult) {
-                        insertUserInformation();
-
-                        startActivity(new Intent(MainActivity.this, ProfileActivity.class));
-                    }
-
-                    @Override
-                    public void onCancel() {
-                        Toast.makeText(getApplicationContext(), "Cancel!", Toast.LENGTH_LONG).show();
-                    }
-
-                    @Override
-                    public void onError(FacebookException exception) {
-                        Log.e("ekdxhrl", exception.getMessage());
-                        Toast.makeText(getApplicationContext(), "Error!", Toast.LENGTH_LONG).show();
-                    }
-                });
-    }
-
-    private void insertUserInformation() {
-        UserDataSource userDataSource = new UserDataSource(getApplicationContext());
-
-        Profile profile = Profile.getCurrentProfile();
-
-        String fullName = profile.getLastName() + profile.getFirstName();
-
-        userDataSource.insertUser(new User(profile.getId(), fullName));
     }
 
     @Override
@@ -202,5 +177,12 @@ public class MainActivity extends AppCompatActivity {
         }
 
         backPressHandler.onBackPressed();
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+
+        AppEventsLogger.activateApp(this);
     }
 }

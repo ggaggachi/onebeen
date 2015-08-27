@@ -21,6 +21,7 @@ import com.example.hover.onebeen.db.dto.TravelStatus;
 import com.example.hover.onebeen.db.dto.User;
 import com.example.hover.onebeen.diarylist.TravelDiaryListFragment;
 import com.example.hover.onebeen.utility.ActivityStatus;
+import com.example.hover.onebeen.utility.BackPressHandler;
 import com.facebook.CallbackManager;
 import com.facebook.FacebookCallback;
 import com.facebook.FacebookException;
@@ -51,10 +52,19 @@ public class MainActivity extends AppCompatActivity {
 
     private HomeFragment homeFragment = new HomeFragment();
 
+    private BackPressHandler backPressHandler;
+    private boolean isHomeFragment = true;
+
+    public void setIsHomeFragment(boolean isHomeFragment) {
+        this.isHomeFragment = isHomeFragment;
+    }
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.actionbar_activity);
+
+        backPressHandler = new BackPressHandler(this);
 
         toolbar = (Toolbar) findViewById(R.id.tool_bar);
         setSupportActionBar(toolbar);
@@ -91,7 +101,11 @@ public class MainActivity extends AppCompatActivity {
         mDrawerToggle.syncState();
 
         fragmentManager = getSupportFragmentManager();
-        fragmentManager.beginTransaction().replace(R.id.container, homeFragment).commit();
+        fragmentManager
+                .beginTransaction()
+                .setCustomAnimations(R.anim.slide_in_left, R.anim.slide_out_right)
+                .replace(R.id.container, homeFragment)
+                .commit();
 
         insertMockData();
 
@@ -174,7 +188,19 @@ public class MainActivity extends AppCompatActivity {
 
     @Override
     public void onBackPressed() {
-        super.onBackPressed();
+//        super.onBackPressed();
         Drawer.closeDrawers();
+
+        if (!isHomeFragment) {
+            isHomeFragment = true;
+            fragmentManager
+                    .beginTransaction()
+                    .setCustomAnimations(R.anim.slide_in_left, R.anim.slide_out_right)
+                    .replace(R.id.container, homeFragment)
+                    .commit();
+            return;
+        }
+
+        backPressHandler.onBackPressed();
     }
 }

@@ -36,6 +36,7 @@ public class HomeFragment extends Fragment{
         root.findViewById(R.id.traven_ongoing_btn).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                ((MainActivity)getActivity()).setIsHomeFragment(false);
                 TravelDiaryListFragment travelDiaryListFragment = new TravelDiaryListFragment();
 
                 Bundle args = new Bundle();
@@ -44,6 +45,7 @@ public class HomeFragment extends Fragment{
                 travelDiaryListFragment.setArguments(args);
 
                 fragmentManager.beginTransaction()
+                        .setCustomAnimations(R.anim.slide_in_light, R.anim.slide_out_left)
                         .replace(R.id.container, travelDiaryListFragment)
                         .commit();
             }
@@ -52,6 +54,7 @@ public class HomeFragment extends Fragment{
         root.findViewById(R.id.travel_been_btn).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                ((MainActivity)getActivity()).setIsHomeFragment(false);
                 TravelDiaryListFragment travelDiaryListFragment = new TravelDiaryListFragment();
 
                 Bundle args = new Bundle();
@@ -60,6 +63,7 @@ public class HomeFragment extends Fragment{
                 travelDiaryListFragment.setArguments(args);
 
                 fragmentManager.beginTransaction()
+                        .setCustomAnimations(R.anim.slide_in_light, R.anim.slide_out_left)
                         .replace(R.id.container, travelDiaryListFragment)
                         .commit();
             }
@@ -68,6 +72,7 @@ public class HomeFragment extends Fragment{
         root.findViewById(R.id.travel_planning_btn).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                ((MainActivity)getActivity()).setIsHomeFragment(false);
                 TravelDiaryListFragment travelDiaryListFragment = new TravelDiaryListFragment();
 
                 Bundle args = new Bundle();
@@ -76,6 +81,7 @@ public class HomeFragment extends Fragment{
                 travelDiaryListFragment.setArguments(args);
 
                 fragmentManager.beginTransaction()
+                        .setCustomAnimations(R.anim.slide_in_light, R.anim.slide_out_left)
                         .replace(R.id.container, travelDiaryListFragment)
                         .commit();
             }

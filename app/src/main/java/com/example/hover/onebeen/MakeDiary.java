@@ -44,7 +44,7 @@ public class MakeDiary extends AppCompatActivity {
                 Long travelDiaryId = travelDiaryDataSource.insertTravelDiary(new TravelDiary(diaryTitle.getText().toString()));
 
                 Intent intent = new Intent();
-                intent.putExtra("travelDiaryId", travelDiaryId);
+                intent.putExtra("travelDiaryId", String.valueOf(travelDiaryId));
 
                 setResult(ActivityStatus.MAKE_DIARY.getActivityStatus(), intent);
                 finish();

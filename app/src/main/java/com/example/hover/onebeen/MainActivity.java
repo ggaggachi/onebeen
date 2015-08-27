@@ -46,7 +46,6 @@ public class MainActivity extends AppCompatActivity {
     FragmentManager fragmentManager;
 
     private HomeFragment homeFragment = new HomeFragment();
-    private TravelDiaryListFragment travelDiaryListFragment = new TravelDiaryListFragment();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -134,16 +133,20 @@ public class MainActivity extends AppCompatActivity {
 //        callbackManager.onActivityResult(requestCode, resultCode, data);
 
         if (resultCode == ActivityStatus.MAKE_DIARY.getActivityStatus()) {
-            fragmentManager.beginTransaction().replace(R.id.container, travelDiaryListFragment).commit();
+            moveToTravelDiaryListFragment(data);
         }
     }
 
-//	@Override
-//	protected void onResume() {
-//		super.onResume();
-//
-//		AppEventsLogger.activateApp(this);
-//	}
+    private void moveToTravelDiaryListFragment(Intent data) {
+        TravelDiaryListFragment travelDiaryListFragment = new TravelDiaryListFragment();
+        Bundle args = new Bundle();
+        args.putString("travelDiaryId", data.getStringExtra("travelDiaryId"));
+        travelDiaryListFragment.setArguments(args);
+        fragmentManager
+                .beginTransaction()
+                .replace(R.id.container, travelDiaryListFragment)
+                .commit();
+    }
 
     @Override
     public void onBackPressed() {

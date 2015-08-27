@@ -31,7 +31,7 @@
         <!-- Main activity -->
         <activity android:name=".MainActivity" >
         </activity>
-        <activity android:name=".MakeDiary" >
+        <activity android:name=".diary.MakeDiary" >
         </activity>
         <activity
             android:name="com.facebook.FacebookActivity"

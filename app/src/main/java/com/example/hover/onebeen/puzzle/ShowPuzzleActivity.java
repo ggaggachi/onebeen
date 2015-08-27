@@ -112,9 +112,9 @@ public class ShowPuzzleActivity extends AppCompatActivity {
             if (position == 0) {
                 v = mInflater.inflate(R.layout.fragment_show_puzzle, null);
 
-                if (puzzle.getDescription() != null && !"".equals(puzzle.getDescription())) {
-                    ((TextView) v.findViewById(R.id.puzzle_description)).setText(puzzle.getDescription());
-                }
+//                if (puzzle.getDescription() != null && !"".equals(puzzle.getDescription())) {
+//                    ((TextView) v.findViewById(R.id.puzzle_description)).setText(puzzle.getDescription());
+//                }
 
                 if (puzzle.getImagePath1() != null) {
                     String path = Environment.getExternalStorageDirectory().getAbsolutePath() + "/" + puzzle.getImagePath1();
@@ -128,9 +128,9 @@ public class ShowPuzzleActivity extends AppCompatActivity {
             } else if (position == 1) {
                 v = mInflater.inflate(R.layout.fragment_show_puzzle, null);
 
-                if (puzzle.getDescription() != null && !"".equals(puzzle.getDescription())) {
-                    ((TextView) v.findViewById(R.id.puzzle_description)).setText(puzzle.getDescription());
-                }
+//                if (puzzle.getDescription() != null && !"".equals(puzzle.getDescription())) {
+//                    ((TextView) v.findViewById(R.id.puzzle_description)).setText(puzzle.getDescription());
+//                }
 
                 if (puzzle.getImagePath2() != null) {
                     String path = Environment.getExternalStorageDirectory().getAbsolutePath() + "/" + puzzle.getImagePath2();
@@ -144,9 +144,9 @@ public class ShowPuzzleActivity extends AppCompatActivity {
             } else {
                 v = mInflater.inflate(R.layout.fragment_show_puzzle, null);
 
-                if (puzzle.getDescription() != null && !"".equals(puzzle.getDescription())) {
-                    ((TextView) v.findViewById(R.id.puzzle_description)).setText(puzzle.getDescription());
-                }
+//                if (puzzle.getDescription() != null && !"".equals(puzzle.getDescription())) {
+//                    ((TextView) v.findViewById(R.id.puzzle_description)).setText(puzzle.getDescription());
+//                }
 
                 if (puzzle.getImagePath3() != null) {
                     String path = Environment.getExternalStorageDirectory().getAbsolutePath() + "/" + puzzle.getImagePath3();

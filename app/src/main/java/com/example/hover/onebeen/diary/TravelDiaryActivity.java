@@ -9,6 +9,8 @@ import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.ListView;
 import android.widget.TextView;
+
+import com.example.hover.onebeen.MainActivity;
 import com.example.hover.onebeen.R;
 import com.example.hover.onebeen.db.PuzzleDataSource;
 import com.example.hover.onebeen.db.TravelDiaryDataSource;
@@ -44,14 +46,6 @@ public class TravelDiaryActivity extends AppCompatActivity {
 
         puzzles.add(null);
 
-        Button button = (Button) findViewById(R.id.register_travel_diary);
-        button.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-
-            }
-        });
-
 //        ArrayList<Puzzle> puzzles = new ArrayList<>();
 //        puzzles.add(new Puzzle(1, null, PuzzleStatus.BEEN.toString(), null, null, null, null, null, 1, "해운대", "바나나보트 타기1", null));
 //        puzzles.add(new Puzzle(1, null, PuzzleStatus.BEEN.toString(), null, null, null, null, null, 1, "해운대", "바나나보트 타기2", null));
@@ -59,8 +53,6 @@ public class TravelDiaryActivity extends AppCompatActivity {
 //        puzzles.add(new Puzzle(1, null, PuzzleStatus.WANT.toString(), null, null, null, null, null, 1, "해운대", "바나나보트 타기4", null));
 //
 //        puzzles.add(null);
-
-
 
         ListView listView = (ListView) findViewById(R.id.puzzle_list_view);
         listView.setAdapter(new PuzzleListViewAdapter(getLayoutInflater(), R.layout.puzzle_item, puzzles));
@@ -79,6 +71,14 @@ public class TravelDiaryActivity extends AppCompatActivity {
                     addPuzzleIntent.putExtra("travelDiaryId", travelDiaryId);
                     startActivity(addPuzzleIntent);
                 }
+            }
+        });
+
+        ((Button) findViewById(R.id.register_travel_diary)).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent1 = new Intent(TravelDiaryActivity.this, MainActivity.class);
+                startActivity(intent1);
             }
         });
     }

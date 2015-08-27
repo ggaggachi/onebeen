@@ -5,7 +5,7 @@ public class TravelDiary {
     private String title = "";
     private String startDate = "";
     private String endDate = "";
-    private TravelStatus travelStatus = TravelStatus.PLANNING;
+    private TravelStatus travelStatus = null;
     private String backgroundImagePath = "";
 
     public TravelDiary(Long id, String title, String startDate, String endDate, TravelStatus travelStatus, String backgroundImagePath) {
@@ -21,9 +21,9 @@ public class TravelDiary {
         this.title = title;
     }
 
-    public TravelDiary(String title, String startDate) {
+    public TravelDiary(String title, TravelStatus travelStatus) {
         this.title = title;
-        this.startDate = startDate;
+        this.travelStatus = travelStatus;
     }
 
     public Long getId() {

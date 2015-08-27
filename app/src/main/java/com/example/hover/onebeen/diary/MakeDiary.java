@@ -9,6 +9,7 @@ import android.widget.EditText;
 import android.widget.TextView;
 import com.example.hover.onebeen.db.TravelDiaryDataSource;
 import com.example.hover.onebeen.db.dto.TravelDiary;
+import com.example.hover.onebeen.db.dto.TravelStatus;
 import com.example.hover.onebeen.utility.ActivityStatus;
 
 import com.example.hover.onebeen.R;
@@ -47,7 +48,7 @@ public class MakeDiary extends AppCompatActivity {
 
                 TravelDiaryDataSource travelDiaryDataSource = new TravelDiaryDataSource(MakeDiary.this);
 
-                Long travelDiaryId = travelDiaryDataSource.insertTravelDiary(new TravelDiary(diaryTitle.getText().toString()));
+                Long travelDiaryId = travelDiaryDataSource.insertTravelDiary(new TravelDiary(diaryTitle.getText().toString(), TravelStatus.PLANNING));
 
                 Intent intent = new Intent();
                 intent.putExtra("travelDiaryId", String.valueOf(travelDiaryId));

@@ -5,24 +5,41 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
-import android.view.Menu;
-import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
+import android.widget.Toast;
 
 public class HomeFragment extends Fragment{
+    private static int TRAVEL_START_CODE = 1;
+    private static int TRAVEL_BEEN_CODE = 2;
+    private static int TRAVEL_ONGOING_CODE = 3;
+    private static int TRAVEL_PLANNING_CODE = 4;
+
 
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        final View root = inflater.inflate(R.layout.foutbtn_activity, null);
+        final View root = inflater.inflate(R.layout.home_activity, null);
 
-
+        root.findViewById(R.id.travel_start_btn).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getActivity(), MakeDiary.class);
+                startActivityForResult(intent, TRAVEL_START_CODE);
+            }
+        });
         return root;
     }
 
-//    @Override
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        switch (requestCode) {
+            case 1 :
+            Toast.makeText(getActivity(), "정상 호출", Toast.LENGTH_SHORT).show();
+        }
+    }
+
+    //    @Override
 //    public boolean onCreateOptionsMenu(Menu menu) {
 //        // Inflate the menu; this adds items to the action bar if it is present.
 //        getMenuInflater().inflate(R.menu.menu_main, menu);

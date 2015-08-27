@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.v7.widget.Toolbar xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="#35c1d6"
+    android:theme="@style/ThemeOverlay.AppCompat.Dark"
+    android:elevation="4dp" >
+
+    <ImageView
+        android:layout_width="150dp"
+        android:layout_height="20dp"
+        android:layout_gravity="center"
+        android:scaleType="centerInside"
+        android:src="@drawable/onebeen" />
+
+</android.support.v7.widget.Toolbar>

@@ -3,6 +3,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
+    android:paddingTop="5dp"
     tools:context=".MainActivity">
 
     <LinearLayout
@@ -10,15 +11,16 @@
         android:layout_height="match_parent"
         android:background="#ffffff"
         android:gravity="center"
-        android:orientation="vertical"
-        android:padding="15dp">
+        android:orientation="vertical">
 
         <RelativeLayout
+            android:id="@+id/travel_start_btn"
             android:layout_width="match_parent"
             android:layout_height="fill_parent"
+            android:layout_marginBottom="5dp"
             android:layout_weight="1"
-            android:layout_marginBottom="10dp"
-            android:background="@drawable/travel_start">
+            android:background="@drawable/travel_start"
+            android:elevation="5dp">
 
             <RelativeLayout
                 android:layout_width="wrap_content"
@@ -62,11 +64,13 @@
         </RelativeLayout>
 
         <RelativeLayout
+            android:id="@+id/travel_been_btn"
             android:layout_width="match_parent"
             android:layout_height="fill_parent"
+            android:layout_marginBottom="5dp"
             android:layout_weight="1"
-            android:layout_marginBottom="10dp"
-            android:background="@drawable/travel_been">
+            android:background="@drawable/travel_been"
+            android:elevation="5dp">
 
             <RelativeLayout
                 android:layout_width="wrap_content"
@@ -108,11 +112,13 @@
         </RelativeLayout>
 
         <RelativeLayout
+            android:id="@+id/traven_ongoing_btn"
             android:layout_width="match_parent"
             android:layout_height="fill_parent"
+            android:layout_marginBottom="5dp"
             android:layout_weight="1"
-            android:layout_marginBottom="10dp"
-            android:background="@drawable/travel_ongoing">
+            android:background="@drawable/travel_ongoing"
+            android:elevation="5dp">
 
             <RelativeLayout
                 android:layout_width="wrap_content"
@@ -154,11 +160,13 @@
         </RelativeLayout>
 
         <RelativeLayout
+            android:id="@+id/travel_planning_btn"
             android:layout_width="match_parent"
             android:layout_height="fill_parent"
+            android:layout_marginBottom="5dp"
             android:layout_weight="1"
-            android:layout_marginBottom="10dp"
-            android:background="@drawable/travel_planning">
+            android:background="@drawable/travel_planning"
+            android:elevation="5dp">
 
             <RelativeLayout
                 android:layout_width="wrap_content"

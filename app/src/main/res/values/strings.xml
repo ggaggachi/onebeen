@@ -10,4 +10,6 @@
     <string name="image_height">60</string>
     <string name="title_activity_canvas">CanvasActivity</string>
     <string name="title_activity_travel">TravelActivity</string>
+    <string name="openDrawer">열림</string>
+    <string name="closeDrawer">닫힘</string>
 </resources>

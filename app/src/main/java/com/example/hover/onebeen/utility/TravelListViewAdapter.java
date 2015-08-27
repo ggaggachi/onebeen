@@ -53,7 +53,7 @@ public class TravelListViewAdapter extends BaseAdapter {
         ImageView icon2 = (ImageView) convertView.findViewById(R.id.travel_count);
         icon2.setImageResource(travelItem.getStartLineImage());
 
-        TextView title = (TextView) convertView.findViewById(R.id.title);
+        TextView title = (TextView) convertView.findViewById(R.id.make_diary_title);
         title.setText(travelItem.getTitle());
 
         TextView date = (TextView) convertView.findViewById(R.id.date);

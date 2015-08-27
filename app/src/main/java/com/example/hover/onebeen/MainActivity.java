@@ -5,10 +5,12 @@ import android.content.res.Configuration;
 import android.os.Bundle;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.widget.DrawerLayout;
+import android.support.v7.app.ActionBarActivity;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
+import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.Toast;
 
@@ -40,23 +42,18 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         toolbar = (Toolbar) findViewById(R.id.toolbar);
-
-        setSupportActionBar(toolbar);
-
         dlDrawer = (DrawerLayout) findViewById(R.id.drawer_layout);
 
-
-        dlDrawer.closeDrawers();
-
         setSupportActionBar(toolbar);
 
-        dtToggle = new ActionBarDrawerToggle(this, dlDrawer, toolbar, R.string.app_name, R.string.app_name);
+
+        dtToggle = new ActionBarDrawerToggle(this, dlDrawer, R.string.app_name, R.string.app_name);
         dlDrawer.setDrawerListener(dtToggle);
 
         fragmentManager = getSupportFragmentManager();
         fragmentManager.beginTransaction().replace(R.id.container, homeFragment).commit();
 
-        getSupportActionBar().setDisplayShowTitleEnabled(false);
+//        getSupportActionBar().setDisplayShowTitleEnabled(false);
 
 //		FacebookSdk.sdkInitialize(this.getApplicationContext());
 //		callbackManager = CallbackManager.Factory.create();
@@ -99,7 +96,11 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        callbackManager.onActivityResult(requestCode, resultCode, data);
+//        callbackManager.onActivityResult(requestCode, resultCode, data);
+
+        if (resultCode == 1) {
+            homeFragment.startActivityForResult(data, requestCode);
+        }
     }
 
 //	@Override
@@ -109,10 +110,11 @@ public class MainActivity extends AppCompatActivity {
 //		AppEventsLogger.activateApp(this);
 //	}
 
-    public void closeDrawers() {
-        dlDrawer.closeDrawers();
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.menu_main, menu);
+        return true;
     }
-
 
     @Override
     protected void onPostCreate(Bundle savedInstanceState) {

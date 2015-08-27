@@ -21,6 +21,11 @@ public class TravelDiary {
         this.title = title;
     }
 
+    public TravelDiary(String title, String startDate) {
+        this.title = title;
+        this.startDate = startDate;
+    }
+
     public Long getId() {
         return id;
     }
@@ -67,5 +72,17 @@ public class TravelDiary {
 
     public void setBackgroundImagePath(String backgroundImagePath) {
         this.backgroundImagePath = backgroundImagePath;
+    }
+
+    @Override
+    public String toString() {
+        return "TravelDiary{" +
+                "id=" + id +
+                ", title='" + title + '\'' +
+                ", startDate='" + startDate + '\'' +
+                ", endDate='" + endDate + '\'' +
+                ", travelStatus=" + travelStatus +
+                ", backgroundImagePath='" + backgroundImagePath + '\'' +
+                '}';
     }
 }

@@ -5,12 +5,18 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
+import android.widget.EditText;
 import android.widget.TextView;
 import com.example.hover.onebeen.db.TravelDiaryDataSource;
 import com.example.hover.onebeen.db.dto.TravelDiary;
 import com.example.hover.onebeen.utility.ActivityStatus;
 
 import com.example.hover.onebeen.R;
+import com.example.hover.onebeen.utility.Time;
+
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.Locale;
 
 public class MakeDiary extends AppCompatActivity {
 
@@ -37,9 +43,10 @@ public class MakeDiary extends AppCompatActivity {
         (findViewById(R.id.register_diary)).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                TextView diaryTitle = (TextView) findViewById(R.id.make_diary_notice);
+                EditText diaryTitle = (EditText) findViewById(R.id.make_diary_title);
 
                 TravelDiaryDataSource travelDiaryDataSource = new TravelDiaryDataSource(MakeDiary.this);
+
                 Long travelDiaryId = travelDiaryDataSource.insertTravelDiary(new TravelDiary(diaryTitle.getText().toString()));
 
                 Intent intent = new Intent();

@@ -6,7 +6,6 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import com.example.hover.onebeen.db.dto.TravelDiary;
 import com.example.hover.onebeen.db.dto.TravelStatus;
-import com.example.hover.onebeen.db.schema.PuzzleTableSchema;
 import com.example.hover.onebeen.db.schema.TravelDiarySchema;
 import java.util.ArrayList;
 
@@ -60,7 +59,7 @@ public class TravelDiaryDataSource {
 
         String[] arg = { String.valueOf(travelDiaryId) };
 
-        Cursor cursor = database.query(TravelDiarySchema.TABLE_NAME, null, PuzzleTableSchema.TRAVEL_ID + "=?", arg, null, null, null);
+        Cursor cursor = database.query(TravelDiarySchema.TABLE_NAME, null, TravelDiarySchema.ID_COLUMN + "=?", arg, null, null, null);
 
         cursor.moveToNext();
 

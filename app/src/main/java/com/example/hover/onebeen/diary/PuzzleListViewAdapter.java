@@ -1,6 +1,5 @@
 package com.example.hover.onebeen.diary;
 
-import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -10,7 +9,6 @@ import android.widget.TextView;
 
 import com.example.hover.onebeen.R;
 import com.example.hover.onebeen.db.dto.Puzzle;
-import com.example.hover.onebeen.puzzle.AddPuzzleActivity;
 import com.example.hover.onebeen.puzzle.PuzzleStatus;
 
 import java.util.ArrayList;
@@ -63,6 +61,7 @@ public class PuzzleListViewAdapter extends BaseAdapter {
         ((TextView) convertView.findViewById(R.id.puzzle_item_todo)).setText(puzzle.getTodo());
 
         String status = puzzle.getStatus();
+
         if (PuzzleStatus.BEEN.toString().equals(status)) {
             ((ImageView) convertView.findViewById(R.id.puzzle_route_img)).setImageResource(R.drawable.img_route_vertical_route);
         } else if (PuzzleStatus.CURRENT.toString().equals(status)){
@@ -70,6 +69,8 @@ public class PuzzleListViewAdapter extends BaseAdapter {
         } else {
             ((ImageView) convertView.findViewById(R.id.puzzle_route_img)).setImageResource(R.drawable.img_route_vertical_noroute);
         }
+
+        convertView.setTag(status);
 
         return convertView;
     }

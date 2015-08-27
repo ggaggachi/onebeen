@@ -33,43 +33,6 @@ public class TravelDataSource {
         }
     }
 
-    public Travel getTravel(String travelId) {
-        SQLiteDatabase database = dbHelper.getReadableDatabase();
-
-        String[] args = {travelId};
-
-        Cursor cursor = database.rawQuery("SELECT * FROM " + TravelTableSchema.TABLE_NAME + " LEFT JOIN " + PuzzleTableSchema.TABLE_NAME + " ON " + TravelTableSchema.TABLE_NAME + "." + TravelTableSchema.TRAVEL_ID_COLUMN + "=PUZZLE.travel_id;", null);
-
-        Travel travel = null;
-
-        try {
-            cursor.moveToFirst();
-
-            ArrayList<Puzzle> puzzles = new ArrayList<>();
-            puzzles.add(puzzle(1));
-
-            travel = new Travel(cursor.getString(1), cursor.getString(2), puzzles);
-        } catch (Exception e) {
-            e.printStackTrace();
-        } finally {
-            database.close();
-        }
-
-        return travel;
-    }
-
-    private Puzzle puzzle(Integer dummyId) {
-        Puzzle puzzle = new Puzzle();
-
-        puzzle.setId(dummyId);
-        puzzle.setDescription("Description"+dummyId);
-//        puzzle.setMediaUri("URL"+dummyId);
-        puzzle.setTitle("Title"+dummyId);
-        puzzle.setType("Type"+dummyId);
-
-        return puzzle;
-    }
-
     public void deletePuzzleInTravel(String travelId) {
         SQLiteDatabase database = dbHelper.getReadableDatabase();
 

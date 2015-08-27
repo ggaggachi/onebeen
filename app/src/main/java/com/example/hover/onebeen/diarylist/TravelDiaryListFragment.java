@@ -42,6 +42,12 @@ public class TravelDiaryListFragment extends Fragment {
             }
         }
 
+        if(TravelStatus.PLANNING.getValue() == travelStatus) {
+            for (TravelDiary travelDiary : travelDiaries) {
+                diaryItems.add(new TravelDiaryListItem(travelDiary.getTitle(), travelDiary.getStartDate(), null, "계획 중"));
+            }
+        }
+
         ListView listView = (ListView) root.findViewById(R.id.diary_list_view);
 
         TravelDiaryListViewAdapter adapter = new TravelDiaryListViewAdapter(getActivity(), R.layout.travel_diary_item, diaryItems);

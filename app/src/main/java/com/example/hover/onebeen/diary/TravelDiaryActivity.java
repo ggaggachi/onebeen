@@ -7,10 +7,8 @@ import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
-import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
-
 import com.example.hover.onebeen.R;
 import com.example.hover.onebeen.db.PuzzleDataSource;
 import com.example.hover.onebeen.db.TravelDiaryDataSource;
@@ -24,7 +22,6 @@ import com.example.hover.onebeen.puzzle.ShowPuzzleActivity;
 import com.facebook.FacebookSdk;
 import com.facebook.appevents.AppEventsLogger;
 import com.facebook.login.widget.ProfilePictureView;
-
 import java.util.ArrayList;
 import java.util.List;
 
@@ -39,23 +36,23 @@ public class TravelDiaryActivity extends AppCompatActivity {
         setSupportActionBar();
 
         Intent intent = getIntent();
-        String travelDiaryId = intent.getExtras().getString("travelDiaryId");
-
-        Log.e("gg", travelDiaryId);
+        final String travelDiaryId = intent.getExtras().getString("travelDiaryId");
 
         setTopMenu(travelDiaryId);
-//
-//        PuzzleDataSource puzzleDataSource = new PuzzleDataSource(this);
-//
-//        List<Puzzle> puzzles1 = puzzleDataSource.getPuzzles(travelId);
 
-        ArrayList<Puzzle> puzzles = new ArrayList<>();
-        puzzles.add(new Puzzle(1, null, PuzzleStatus.BEEN.toString(), null, null, null, null, null, 1, "해운대", "바나나보트 타기1", null));
-        puzzles.add(new Puzzle(1, null, PuzzleStatus.BEEN.toString(), null, null, null, null, null, 1, "해운대", "바나나보트 타기2", null));
-        puzzles.add(new Puzzle(1, null, PuzzleStatus.CURRENT.toString(), null, null, null, null, null, 1, "해운대", "바나나보트 타기3", null));
-        puzzles.add(new Puzzle(1, null, PuzzleStatus.WANT.toString(), null, null, null, null, null, 1, "해운대", "바나나보트 타기4", null));
+        PuzzleDataSource puzzleDataSource = new PuzzleDataSource(this);
+
+        ArrayList<Puzzle> puzzles = puzzleDataSource.getPuzzles(Long.valueOf(travelDiaryId));
 
         puzzles.add(null);
+
+//        ArrayList<Puzzle> puzzles = new ArrayList<>();
+//        puzzles.add(new Puzzle(1, null, PuzzleStatus.BEEN.toString(), null, null, null, null, null, 1, "해운대", "바나나보트 타기1", null));
+//        puzzles.add(new Puzzle(1, null, PuzzleStatus.BEEN.toString(), null, null, null, null, null, 1, "해운대", "바나나보트 타기2", null));
+//        puzzles.add(new Puzzle(1, null, PuzzleStatus.CURRENT.toString(), null, null, null, null, null, 1, "해운대", "바나나보트 타기3", null));
+//        puzzles.add(new Puzzle(1, null, PuzzleStatus.WANT.toString(), null, null, null, null, null, 1, "해운대", "바나나보트 타기4", null));
+//
+//        puzzles.add(null);
 
         ListView listView = (ListView) findViewById(R.id.puzzle_list_view);
         listView.setAdapter(new PuzzleListViewAdapter(getLayoutInflater(), R.layout.puzzle_item, puzzles));
@@ -65,14 +62,14 @@ public class TravelDiaryActivity extends AppCompatActivity {
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 String tag = String.valueOf(view.getTag());
 
-                Log.e("ekdxhrl", tag);
-
                 if (tag == "CURRENT") {
 //                    startActivity(new Intent(TravelDiaryActivity.this, ShowPuzzleActivity.class));
                 } else if (tag == "BEEN") {
                     startActivity(new Intent(TravelDiaryActivity.this, ShowPuzzleActivity.class));
                 } else {
-                    startActivity(new Intent(TravelDiaryActivity.this, AddPuzzleActivity.class));
+                    Intent addPuzzleIntent = new Intent(TravelDiaryActivity.this, AddPuzzleActivity.class);
+                    addPuzzleIntent.putExtra("travelDiaryId", travelDiaryId);
+                    startActivity(addPuzzleIntent);
                 }
             }
         });
@@ -90,12 +87,12 @@ public class TravelDiaryActivity extends AppCompatActivity {
         UserDataSource userDataSource = new UserDataSource(this);
         User user = userDataSource.getUser();
 
-        ProfilePictureView profilePictureView = (ProfilePictureView) findViewById(R.id.profile);
-        profilePictureView.setProfileId(user.getId());
-
         if( user == null ) {
             user = new User(null, "Guest");
         }
+
+        ProfilePictureView profilePictureView = (ProfilePictureView) findViewById(R.id.profile);
+        profilePictureView.setProfileId(user.getId());
 
         TextView userName = (TextView) findViewById(R.id.user_name);
         userName.setText(user.getName());

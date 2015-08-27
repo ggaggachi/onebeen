@@ -24,7 +24,17 @@ public class PuzzleDataSource {
     public long addPuzzle(Puzzle puzzle) {
         SQLiteDatabase database = dbHelper.getWritableDatabase();
 
-        ContentValues values = getPuzzleContentValues(puzzle);
+        ContentValues values = new ContentValues();
+        values.put(PuzzleTableSchema.TRAVEL_ID, puzzle.getTravelDiaryId());
+        values.put(PuzzleTableSchema.USER_ID, puzzle.getUserId());
+        values.put(PuzzleTableSchema.STATUS, puzzle.getStatus());
+        values.put(PuzzleTableSchema.IMAGE_PATH1, puzzle.getImagePath1());
+        values.put(PuzzleTableSchema.IMAGE_PATH2, puzzle.getImagePath2());
+        values.put(PuzzleTableSchema.IMAGE_PATH3, puzzle.getImagePath3());
+        values.put(PuzzleTableSchema.ORDER, puzzle.getOrdering());
+        values.put(PuzzleTableSchema.PLACE, puzzle.getPlace());
+        values.put(PuzzleTableSchema.TODO, puzzle.getTodo());
+        values.put(PuzzleTableSchema.TYPE, puzzle.getType());
 
         long insert = database.insert(PuzzleTableSchema.TABLE_NAME, null, values);
         database.close();
@@ -43,8 +53,8 @@ public class PuzzleDataSource {
         }
 
         Puzzle puzzle = new Puzzle(cursor.getLong(0), cursor.getString(1), cursor.getString(2), cursor.getString(3),
-                cursor.getString(4), cursor.getString(5), cursor.getString(6), cursor.getString(7), cursor.getInt(8),
-                cursor.getString(9), cursor.getString(10), cursor.getString(11));
+                cursor.getString(4), cursor.getString(5), cursor.getString(6), cursor.getInt(7), cursor.getString(8), cursor.getString(9), cursor.getString(10));
+
         return puzzle;
     }
 
@@ -68,10 +78,9 @@ public class PuzzleDataSource {
     @NonNull
     private ContentValues getPuzzleContentValues(Puzzle puzzle) {
         ContentValues values = new ContentValues();
+        values.put(PuzzleTableSchema.TRAVEL_ID, puzzle.getTravelDiaryId());
         values.put(PuzzleTableSchema.USER_ID, puzzle.getUserId());
         values.put(PuzzleTableSchema.STATUS, puzzle.getStatus());
-        values.put(PuzzleTableSchema.TITLE, puzzle.getTitle());
-        values.put(PuzzleTableSchema.DESCRIPTION, puzzle.getDescription());
         values.put(PuzzleTableSchema.IMAGE_PATH1, puzzle.getImagePath1());
         values.put(PuzzleTableSchema.IMAGE_PATH2, puzzle.getImagePath2());
         values.put(PuzzleTableSchema.IMAGE_PATH3, puzzle.getImagePath3());
@@ -82,18 +91,17 @@ public class PuzzleDataSource {
         return values;
     }
 
-    public List<Puzzle> getPuzzles(Long travelId) {
+    public ArrayList<Puzzle> getPuzzles(Long travelId) {
         String[] arg = {String.valueOf(travelId)};
 
         SQLiteDatabase database = dbHelper.getReadableDatabase();
         Cursor cursor = database.query(PuzzleTableSchema.TABLE_NAME, null, PuzzleTableSchema.TRAVEL_ID + "=?", arg, null, null, null);
 
-        List<Puzzle> puzzles = new ArrayList<>();
+        ArrayList<Puzzle> puzzles = new ArrayList<>();
 
         while (cursor.moveToNext()) {
             Puzzle puzzle = new Puzzle(cursor.getLong(0), cursor.getString(1), cursor.getString(2), cursor.getString(3),
-                    cursor.getString(4), cursor.getString(5), cursor.getString(6), cursor.getString(7), cursor.getInt(8),
-                    cursor.getString(9), cursor.getString(10), cursor.getString(11));
+                    cursor.getString(4), cursor.getString(5), cursor.getString(6), cursor.getInt(7), cursor.getString(8), cursor.getString(9), cursor.getString(10));
 
             puzzles.add(puzzle);
         }

@@ -112,7 +112,7 @@ public class ShowPuzzleActivity extends AppCompatActivity {
             if (position == 0) {
                 v = mInflater.inflate(R.layout.fragment_show_puzzle, null);
 
-                ((TextView) v.findViewById(R.id.puzzle_description)).setText(puzzle.getDescription());
+//                ((TextView) v.findViewById(R.id.puzzle_description)).setText(puzzle.getDescription());
 
                 String path = Environment.getExternalStorageDirectory().getAbsolutePath()+"/"+puzzle.getImagePath1();
                 BitmapFactory.Options bo = new BitmapFactory.Options();
@@ -124,7 +124,7 @@ public class ShowPuzzleActivity extends AppCompatActivity {
             } else if (position == 1) {
                 v = mInflater.inflate(R.layout.fragment_show_puzzle, null);
 
-                ((TextView) v.findViewById(R.id.puzzle_description)).setText(puzzle.getDescription());
+//                ((TextView) v.findViewById(R.id.puzzle_description)).setText(puzzle.getDescription());
 
                 String path = Environment.getExternalStorageDirectory().getAbsolutePath()+"/"+puzzle.getImagePath1();
                 BitmapFactory.Options bo = new BitmapFactory.Options();
@@ -136,7 +136,7 @@ public class ShowPuzzleActivity extends AppCompatActivity {
             } else {
                 v = mInflater.inflate(R.layout.fragment_show_puzzle, null);
 
-                ((TextView) v.findViewById(R.id.puzzle_description)).setText(puzzle.getDescription());
+//                ((TextView) v.findViewById(R.id.puzzle_description)).setText(puzzle.getDescription());
 
                 String path = Environment.getExternalStorageDirectory().getAbsolutePath()+"/"+puzzle.getImagePath1();
                 BitmapFactory.Options bo = new BitmapFactory.Options();

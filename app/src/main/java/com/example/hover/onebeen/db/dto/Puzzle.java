@@ -5,10 +5,9 @@ import android.os.Parcelable;
 
 public class Puzzle implements Parcelable{
     private long id;
+    private String travelDiaryId;
     private String userId;
     private String status;
-    private String title;
-    private String description;
     private String imagePath1;
     private String imagePath2;
     private String imagePath3;
@@ -20,13 +19,11 @@ public class Puzzle implements Parcelable{
     public Puzzle() {
     }
 
-    public Puzzle(long id, String userId, String status, String title, String description, String imagePath1, String imagePath2,
-                  String imagePath3, int ordering, String place, String todo, String type) {
+    public Puzzle(long id, String travelDiaryId, String userId, String status, String imagePath1, String imagePath2, String imagePath3, int ordering, String place, String todo, String type) {
         this.id = id;
+        this.travelDiaryId = travelDiaryId;
         this.userId = userId;
         this.status = status;
-        this.title = title;
-        this.description = description;
         this.imagePath1 = imagePath1;
         this.imagePath2 = imagePath2;
         this.imagePath3 = imagePath3;
@@ -40,8 +37,6 @@ public class Puzzle implements Parcelable{
         id = in.readLong();
         userId = in.readString();
         status = in.readString();
-        title = in.readString();
-        description = in.readString();
         imagePath1 = in.readString();
         imagePath2 = in.readString();
         imagePath3 = in.readString();
@@ -85,22 +80,6 @@ public class Puzzle implements Parcelable{
 
     public void setStatus(String status) {
         this.status = status;
-    }
-
-    public String getTitle() {
-        return title;
-    }
-
-    public void setTitle(String title) {
-        this.title = title;
-    }
-
-    public String getDescription() {
-        return description;
-    }
-
-    public void setDescription(String description) {
-        this.description = description;
     }
 
     public String getImagePath1() {
@@ -170,8 +149,6 @@ public class Puzzle implements Parcelable{
         dest.writeLong(id);
         dest.writeString(userId);
         dest.writeString(status);
-        dest.writeString(title);
-        dest.writeString(description);
         dest.writeString(imagePath1);
         dest.writeString(imagePath2);
         dest.writeString(imagePath3);
@@ -179,5 +156,30 @@ public class Puzzle implements Parcelable{
         dest.writeString(place);
         dest.writeString(todo);
         dest.writeString(type);
+    }
+
+    public String getTravelDiaryId() {
+        return travelDiaryId;
+    }
+
+    public void setTravelDiaryId(String travelDiaryId) {
+        this.travelDiaryId = travelDiaryId;
+    }
+
+    @Override
+    public String toString() {
+        return "Puzzle{" +
+                "id=" + id +
+                ", userId='" + userId + '\'' +
+                ", travelDiaryId='" + travelDiaryId + '\'' +
+                ", status='" + status + '\'' +
+                ", imagePath1='" + imagePath1 + '\'' +
+                ", imagePath2='" + imagePath2 + '\'' +
+                ", imagePath3='" + imagePath3 + '\'' +
+                ", ordering=" + ordering +
+                ", place='" + place + '\'' +
+                ", todo='" + todo + '\'' +
+                ", type='" + type + '\'' +
+                '}';
     }
 }

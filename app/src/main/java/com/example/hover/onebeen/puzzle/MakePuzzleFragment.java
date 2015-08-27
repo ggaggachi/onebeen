@@ -81,7 +81,7 @@ public class MakePuzzleFragment extends Fragment {
             public void onClick(View v) {
                 EditText description = (EditText) root.findViewById(R.id.puzzle_description);
 
-                MakePuzzleFragment.this.puzzle.setDescription(description.getText().toString());
+//                MakePuzzleFragment.this.puzzle.setDescription(description.getText().toString());
 
                 PuzzleDataSource puzzleDataSource = new PuzzleDataSource(getActivity());
                 long insertedRow = puzzleDataSource.addPuzzle(MakePuzzleFragment.this.puzzle);

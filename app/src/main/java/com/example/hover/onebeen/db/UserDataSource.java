@@ -43,6 +43,10 @@ public class UserDataSource {
             database.close();
         }
 
+        if(user == null) {
+            user = new User("1234", "Guest");
+        }
+
         return user;
     }
 }

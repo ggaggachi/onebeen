@@ -14,7 +14,7 @@ import com.example.hover.onebeen.db.schema.UserTableSchema;
 public class SQLiteHelper extends SQLiteOpenHelper {
     private static final String DATABASE_NAME = "onebeen.db";
 
-    private static final int DATABASE_VERSION = 9;
+    private static final int DATABASE_VERSION = 12;
 
     public SQLiteHelper(Context context) {
         super(context, DATABASE_NAME, null, DATABASE_VERSION);

@@ -7,8 +7,6 @@ public class PuzzleTableSchema {
     public static final String TRAVEL_ID = "travel_id";
     public static final String USER_ID = "user_id";
     public static final String STATUS = "status";
-    public static final String TITLE = "puzzle_title";
-    public static final String DESCRIPTION = "puzzle_description";
     public static final String IMAGE_PATH1 = "puzzle_image_path1";
     public static final String IMAGE_PATH2 = "puzzle_image_path2";
     public static final String IMAGE_PATH3 = "puzzle_image_path3";
@@ -24,8 +22,6 @@ public class PuzzleTableSchema {
             + TRAVEL_ID + " INTEGER, "
             + USER_ID + " INTEGER, "
             + STATUS + " TEXT, "
-            + TITLE + " TEXT, "
-            + DESCRIPTION + " TEXT, "
             + IMAGE_PATH1 + " TEXT, "
             + IMAGE_PATH2 + " TEXT, "
             + IMAGE_PATH3 + " TEXT, "

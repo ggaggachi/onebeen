@@ -41,6 +41,7 @@ public class LoginActivity extends FragmentActivity {
             @Override
             public void onClick(View v) {
                 startActivity(new Intent(LoginActivity.this, MainActivity.class));
+                finish();
             }
         });
     }
@@ -53,6 +54,7 @@ public class LoginActivity extends FragmentActivity {
                         insertUserInformation();
 
                         startActivity(new Intent(LoginActivity.this, MainActivity.class));
+                        finish();
                     }
 
                     @Override

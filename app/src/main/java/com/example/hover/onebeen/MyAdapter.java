@@ -12,14 +12,14 @@ import com.facebook.login.widget.ProfilePictureView;
 
 public class MyAdapter extends RecyclerView.Adapter<MyAdapter.ViewHolder> {
     private static final int TYPE_HEADER = 0;  // Declaring Variable to Understand which View is being worked on
-    // IF the view under inflation and population is header or Item
+    // IF the view under inflation and population is navigation_header or Item
     private static final int TYPE_ITEM = 1;
 
     private String mNavTitles[]; // String Array to store the passed titles Value from MainActivity.java
     private int mIcons[];       // Int Array to store the passed icons resource value from MainActivity.java
 
-    private String name;        //String Resource for header View Name
-    private String userId;        //int Resource for header view userId picture
+    private String name;        //String Resource for navigation_header View Name
+    private String userId;        //int Resource for navigation_header view userId picture
 
     public MyAdapter(String[] titles, int[] icons, User user) {
         // titles, icons, name, email, userId pic are passed from the main activity as we
@@ -57,10 +57,10 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.ViewHolder> {
             else{
 
 
-                Name = (TextView) itemView.findViewById(R.id.name);         // Creating Text View object from header.xml for name
-                profilePictureView = (ProfilePictureView) itemView.findViewById(R.id.circleView);// Creating Image view object from header.xml for userId pic
+                Name = (TextView) itemView.findViewById(R.id.name);         // Creating Text View object from navigation_header.xml_header.xml for name
+                profilePictureView = (ProfilePictureView) itemView.findViewById(R.id.circleView);// Creating Image view object from navigation_headertion_header.xml for userId pic
                 profilePictureView.setProfileId(userId);
-                Holderid = 0;                                                // Setting holder id = 0 as the object being populated are of type header view
+                Holderid = 0;                                                // Setting holder id = 0 as the object being populated are of type navigation_header view
             }
         }
 
@@ -68,7 +68,7 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.ViewHolder> {
     }
 
     //Below first we ovverride the method onCreateViewHolder which is called when the ViewHolder is
-    //Created, In this method we inflate the item_row.xml layout if the viewType is Type_ITEM or else we inflate header.xml
+    //Created, In this method we inflate the item_row.xml layout if the viewType is Type_ITEM or else we inflate navigation_headertion_header.xml
     // if the viewType is TYPE_HEADER
     // and pass it to the view holder
 
@@ -86,7 +86,7 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.ViewHolder> {
 
         } else if (viewType == TYPE_HEADER) {
 
-            View v = LayoutInflater.from(parent.getContext()).inflate(R.layout.header,parent,false); //Inflating the layout
+            View v = LayoutInflater.from(parent.getContext()).inflate(R.layout.navigation_header,parent,false); //Inflating the layout
 
             ViewHolder vhHeader = new ViewHolder(v,viewType, userId); //Creating ViewHolder and passing the object of type view
 
@@ -103,7 +103,7 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.ViewHolder> {
     // which view type is being created 1 for item row
     @Override
     public void onBindViewHolder(MyAdapter.ViewHolder holder, int position) {
-        if(holder.Holderid ==1) {                              // as the list view is going to be called after the header view so we decrement the
+        if(holder.Holderid ==1) {                              // as the list view is going to be called after the navigation_header view so we decrement the
             // position by 1 and pass it to the holder while setting the text and image
             holder.textView.setText(mNavTitles[position - 1]); // Setting the Text with the array of our Titles
             holder.imageView.setImageResource(mIcons[position -1]);// Settimg the image with array of our icons
@@ -117,7 +117,7 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.ViewHolder> {
     // This method returns the number of items present in the list
     @Override
     public int getItemCount() {
-        return mNavTitles.length+1; // the number of items in the list will be +1 the titles including the header view.
+        return mNavTitles.length+1; // the number of items in the list will be +1 the titles including the navigation_header view.
     }
 
 

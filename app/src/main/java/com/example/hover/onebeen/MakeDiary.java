@@ -5,10 +5,7 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
-import android.widget.ImageButton;
 import android.widget.TextView;
-
-import com.example.hover.onebeen.db.TravelDataSource;
 import com.example.hover.onebeen.db.TravelDiaryDataSource;
 import com.example.hover.onebeen.db.dto.TravelDiary;
 import com.example.hover.onebeen.utility.ActivityStatus;
@@ -22,12 +19,12 @@ public class MakeDiary extends AppCompatActivity {
         setTitle("여행 일정 만들기");
         setContentView(R.layout.activity_make_diary);
 
-        onRegisterTheTravelDiary();
+        setToolBar();
 
-        setSupportedBar();
+        onRegisterTheTravelDiary();
     }
 
-    private void setSupportedBar() {
+    private void setToolBar() {
         Toolbar toolbar = (Toolbar) findViewById(R.id.tool_bar);
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
@@ -50,5 +47,15 @@ public class MakeDiary extends AppCompatActivity {
                 finish();
             }
         });
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(android.view.MenuItem item) {
+        switch (item.getItemId()) {
+            case android.R.id.home:
+                finish();
+                return true;
+        }
+        return super.onOptionsItemSelected(item);
     }
 }

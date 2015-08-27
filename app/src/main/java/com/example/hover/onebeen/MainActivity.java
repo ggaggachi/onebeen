@@ -1,5 +1,6 @@
 package com.example.hover.onebeen;
 
+import android.app.Fragment;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.FragmentManager;
@@ -13,7 +14,10 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Toast;
 
+import com.example.hover.onebeen.db.TravelDiaryDataSource;
 import com.example.hover.onebeen.db.UserDataSource;
+import com.example.hover.onebeen.db.dto.TravelDiary;
+import com.example.hover.onebeen.db.dto.TravelStatus;
 import com.example.hover.onebeen.db.dto.User;
 import com.example.hover.onebeen.diarylist.TravelDiaryListFragment;
 import com.example.hover.onebeen.utility.ActivityStatus;
@@ -89,9 +93,29 @@ public class MainActivity extends AppCompatActivity {
         fragmentManager = getSupportFragmentManager();
         fragmentManager.beginTransaction().replace(R.id.container, homeFragment).commit();
 
+        insertMockData();
+
 //		FacebookSdk.sdkInitialize(this.getApplicationContext());
 //		callbackManager = CallbackManager.Factory.create();
 //		registerFacebookLoginButtonEvent();
+    }
+
+    private void insertMockData() {
+        TravelDiaryDataSource travelDiaryDataSource = new TravelDiaryDataSource(this);
+
+        try {
+            TravelDiary travelDiary1 = travelDiaryDataSource.getTravelDiary(1L);
+        } catch(Exception e) {
+            for (int i = 0; i < 10; i++) {
+                TravelDiary travelDiary = new TravelDiary(null, "title" + i, "2015.08.25", "2015.08.30", TravelStatus.BEEN, "");
+                travelDiaryDataSource.insertTravelDiary(travelDiary);
+            }
+
+            for (int i = 0; i < 10; i++) {
+                TravelDiary travelDiary = new TravelDiary(null, "title" + i, "2015.08.25", "2015.08.30", TravelStatus.ONGOING, "");
+                travelDiaryDataSource.insertTravelDiary(travelDiary);
+            }
+        }
     }
 
     private void registerFacebookLoginButtonEvent() {

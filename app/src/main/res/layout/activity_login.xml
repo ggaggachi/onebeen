@@ -3,18 +3,53 @@
     xmlns:facebook="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:paddingLeft="@dimen/activity_horizontal_margin"
-    android:paddingRight="@dimen/activity_horizontal_margin"
-    android:paddingTop="@dimen/activity_vertical_margin"
-    android:paddingBottom="@dimen/activity_vertical_margin"
-    android:background="#35c1d6"
     tools:context=".LoginActivity">
+
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@drawable/login_background"
+        android:src="#99333333"
+        android:scaleType="centerCrop"/>
+
+    <ImageView
+        android:id="@+id/make_diary_title"
+        android:layout_width="150dp"
+        android:layout_height="20dp"
+        android:layout_above="@+id/onebeen"
+        android:layout_centerHorizontal="true"
+        android:layout_gravity="center"
+        android:layout_marginBottom="14dp"
+        android:scaleType="centerInside"
+        android:src="@drawable/title" />
+
+    <ImageView
+        android:id="@+id/onebeen"
+        android:layout_width="200dp"
+        android:layout_height="40dp"
+        android:layout_above="@+id/white_logo"
+        android:layout_centerHorizontal="true"
+        android:layout_gravity="center"
+        android:layout_marginBottom="22dp"
+        android:scaleType="centerInside"
+        android:src="@drawable/onebeen" />
+
+    <ImageView
+        android:id="@+id/white_logo"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_centerVertical="true"
+        android:layout_gravity="center"
+        android:scaleType="centerInside"
+        android:src="@drawable/white_logo" />
 
     <RelativeLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_centerHorizontal="true"
-        android:layout_centerVertical="true">
+        android:layout_marginTop="20dp"
+        android:layout_below="@id/white_logo">
 
         <com.facebook.login.widget.LoginButton
             android:id="@+id/facebook_login_line"
@@ -26,10 +61,12 @@
         <Button
             android:id="@+id/guest"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_height="30dp"
             android:layout_centerHorizontal="true"
             android:layout_marginTop="10dp"
-            android:background="@drawable/messenger_button_white_bg_round"
+            android:textStyle="bold"
+            android:textSize="12sp"
+            android:background="@drawable/rect_shadow"
             android:layout_below="@id/facebook_login_line"
             android:text="둘러보기"/>
 

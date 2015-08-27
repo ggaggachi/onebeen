@@ -21,7 +21,7 @@ package com.example.hover.onebeen;
 public class SplashActivity extends Activity {
 
     private static String TAG = SplashActivity.class.getName();
-    private static long SLEEP_TIME = 2;
+    private static long SLEEP_TIME = 3;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -56,7 +56,7 @@ public class SplashActivity extends Activity {
                 Log.e(TAG, e.getMessage());
             }
 
-            Intent intent = new Intent(SplashActivity.this, MainActivity.class);
+            Intent intent = new Intent(SplashActivity.this, LoginActivity.class);
             SplashActivity.this.startActivity(intent);
             SplashActivity.this.finish();
         }

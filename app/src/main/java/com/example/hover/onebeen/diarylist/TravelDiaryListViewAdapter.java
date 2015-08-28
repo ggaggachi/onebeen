@@ -61,6 +61,8 @@ public class TravelDiaryListViewAdapter extends BaseAdapter{
         convertView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                Log.e("TravelViewAdapter", "travelStatus:"+travelStatus);
+                Log.e("TravelViewAdapter", "travelDiaryId:"+String.valueOf(diaryItem.getId()));
                 Intent intent = new Intent(finalConvertView.getContext(), TravelDiaryActivity.class);
                 intent.putExtra("travelStatus", travelStatus);
                 intent.putExtra("travelDiaryId", String.valueOf(diaryItem.getId()));

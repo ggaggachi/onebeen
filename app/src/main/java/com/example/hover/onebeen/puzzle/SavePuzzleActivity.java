@@ -22,7 +22,12 @@ import android.widget.TextView;
 import android.widget.Toast;
 import com.example.hover.onebeen.R;
 import com.example.hover.onebeen.db.PuzzleDataSource;
+import com.example.hover.onebeen.db.TravelDiaryDataSource;
 import com.example.hover.onebeen.db.dto.Puzzle;
+import com.example.hover.onebeen.db.dto.TravelDiary;
+import com.example.hover.onebeen.db.dto.TravelStatus;
+import com.example.hover.onebeen.utility.Time;
+
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
@@ -81,6 +86,7 @@ public class SavePuzzleActivity extends AppCompatActivity {
 
         SavePuzzleActivity.this.puzzle.setId(puzzle.getId());
         SavePuzzleActivity.this.puzzle.setTravelDiaryId(puzzle.getTravelDiaryId());
+        SavePuzzleActivity.this.puzzle.setStatus(puzzle.getStatus());
         SavePuzzleActivity.this.puzzle.setPlace(puzzle.getPlace());
         SavePuzzleActivity.this.puzzle.setTodo(puzzle.getTodo());
 

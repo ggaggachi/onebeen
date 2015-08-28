@@ -2,6 +2,7 @@ package com.example.hover.onebeen.diary;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.v4.app.FragmentManager;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
@@ -20,10 +21,11 @@ import com.example.hover.onebeen.db.dto.Puzzle;
 import com.example.hover.onebeen.db.dto.TravelDiary;
 import com.example.hover.onebeen.db.dto.TravelStatus;
 import com.example.hover.onebeen.db.dto.User;
-import com.example.hover.onebeen.diarylist.TravelDiaryListItem;
+import com.example.hover.onebeen.diarylist.TravelDiaryListFragment;
 import com.example.hover.onebeen.puzzle.AddPuzzleActivity;
 import com.example.hover.onebeen.puzzle.SavePuzzleActivity;
-import com.example.hover.onebeen.puzzle.ShowPuzzleActivity;
+import com.example.hover.onebeen.utility.ActivityStatus;
+import com.example.hover.onebeen.utility.Time;
 import com.facebook.FacebookSdk;
 import com.facebook.appevents.AppEventsLogger;
 import com.facebook.login.widget.ProfilePictureView;
@@ -36,18 +38,25 @@ public class TravelDiaryActivity extends AppCompatActivity {
 
         FacebookSdk.sdkInitialize(this.getApplicationContext());
 
+        Log.e("TravelDiaryActivity", "onCreate");
+
         setContentView(R.layout.activity_diary);
         setSupportActionBar();
 
         Intent intent = getIntent();
         final String travelDiaryId = intent.getExtras().getString("travelDiaryId");
-        String travelStatus = intent.getExtras().getString("travelStatus");
+        final String travelStatus = intent.getExtras().getString("travelStatus");
+
+        Log.e("TravelDiaryActivity", "travelDiaryId:"+travelDiaryId);
+        Log.e("TravelDiaryActivity", "travelStatus:"+travelStatus);
 
         setTopMenu(travelDiaryId);
 
         PuzzleDataSource puzzleDataSource = new PuzzleDataSource(this);
 
         final ArrayList<Puzzle> puzzles = puzzleDataSource.getPuzzles(Long.valueOf(travelDiaryId));
+
+        Log.e("TravelDiaryActivity", "puzzles:"+puzzles);
 
         convertToViewAccodingToTravelStatus(travelStatus, puzzles);
 
@@ -92,10 +101,43 @@ public class TravelDiaryActivity extends AppCompatActivity {
         ((Button) findViewById(R.id.register_travel_diary)).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent1 = new Intent(TravelDiaryActivity.this, MainActivity.class);
-                startActivity(intent1);
+                Log.e("TravelDiaryActivity", "RegisterTravelDiary");
+
+                if (TravelStatus.PLANNING.getValue().equals(travelStatus)) {
+                    Log.e("TravelDiaryActivity", "PLANNING TravelDiaryListFragment Event");
+
+                    TravelDiaryListFragment travelDiaryListFragment = new TravelDiaryListFragment();
+
+                    Bundle args = new Bundle();
+                    args.putString("travelStatus", TravelStatus.PLANNING.getValue());
+
+                    travelDiaryListFragment.setArguments(args);
+
+                    TravelDiaryDataSource travelDiaryDataSource = new TravelDiaryDataSource(TravelDiaryActivity.this);
+                    TravelDiary travelDiary = travelDiaryDataSource.getTravelDiary(Long.valueOf(travelDiaryId));
+                    travelDiary.setTravelStatus(TravelStatus.ONGOING);
+                    travelDiary.setStartDate(Time.now());
+
+                    Log.e("SavePuzzleActivity", "저장할 TravelDiary 가져오기 : " + travelDiary.toString());
+
+                    int travelDiaryId = travelDiaryDataSource.updateTravelDiary(travelDiary);
+
+                    Log.e("SavePuzzleActivity", "업데이트한 TravelDiaryId : " + String.valueOf(travelDiaryId));
+
+                    finish();
+                }
+
+//                Intent intent1 = new Intent(TravelDiaryActivity.this, MainActivity.class);
+//                startActivityForResult(intent1, ActivityStatus.TravelDiaryActivity.getValue());
             }
         });
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+
+        Log.e("TravelDiaryActivity", "requestCode:"+requestCode+"/resultCode:"+resultCode+"/data:"+data);
     }
 
     private void convertToViewAccodingToTravelStatus(String travelStatus, ArrayList<Puzzle> puzzles) {
@@ -128,15 +170,8 @@ public class TravelDiaryActivity extends AppCompatActivity {
         UserDataSource userDataSource = new UserDataSource(this);
         User user = userDataSource.getUser();
 
-        if( user == null ) {
-            user = new User(null, "Guest");
-        }
-
-        ProfilePictureView profilePictureView = (ProfilePictureView) findViewById(R.id.profile);
-        profilePictureView.setProfileId(user.getId());
-
-        TextView userName = (TextView) findViewById(R.id.user_name);
-        userName.setText(user.getName());
+        ((ProfilePictureView) findViewById(R.id.profile)).setProfileId(user.getId());
+        ((TextView) findViewById(R.id.user_name)).setText(user.getName());
     }
 
     private void setSupportActionBar() {

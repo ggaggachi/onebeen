@@ -5,7 +5,8 @@ package com.example.hover.onebeen.utility;
  */
 public enum ActivityStatus {
     MAKE_DIARY(1),
-    MAIN_ACTIVITY(2);
+    MAIN_ACTIVITY(2),
+    TravelDiaryActivity(3);
 
     private int activityStatus;
 

@@ -141,10 +141,20 @@ public class TravelDiaryActivity extends AppCompatActivity {
     }
 
     private void progressBarEvent(ArrayList<Puzzle> puzzles) {
+        if (puzzles.size() == 0 || puzzles.size() == 1) {
+            Log.e("TravelDiaryActivity", "puzzles가 없는 경우, 즉 처음에 여행 시작하기를 통하여 들어온 경");
+            TextView progressText = (TextView) findViewById(R.id.progress_percent);
+            progressText.setText("0%");
+            return;
+        }
+
+        Log.e("TravelDiaryActivity", "progressBarEvent");
+        Log.e("TravelDiaryActivity", "puzzles:" + puzzles.toString());
+
         int beenSize = 0;
 
         for (Puzzle puzzle : puzzles) {
-            if("BEEN".equals(puzzle.getStatus())) {
+            if(puzzle != null && "BEEN".equals(puzzle.getStatus())) {
                 beenSize++;
             }
         }

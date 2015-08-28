@@ -21,7 +21,7 @@
             android:id="@+id/diary_info"
             android:layout_width="match_parent"
             android:layout_height="fill_parent"
-            android:layout_weight="75">
+            android:layout_weight="70">
 
             <ImageView
                 android:id="@+id/diary_background"
@@ -38,55 +38,62 @@
             <!--android:layout_centerVertical="true"-->
             <!--android:id="@+id/circleView" />-->
 
-            <com.facebook.login.widget.ProfilePictureView
-                android:id="@+id/profile"
-                android:layout_width="80dp"
-                android:layout_height="80dp"
-                android:layout_centerVertical="true"
-                android:layout_marginLeft="30dp"
-                android:layout_marginTop="38dp"
-                facebook:preset_size="normal" />
-
             <RelativeLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_centerVertical="true"
-                android:layout_marginLeft="20dp"
-                android:layout_toRightOf="@+id/profile">
+                android:layout_alignParentBottom="true"
+                android:layout_marginBottom="25dp">
 
-                <TextView
-                    android:id="@+id/diary_info_title"
+                <com.facebook.login.widget.ProfilePictureView
+                    android:id="@+id/profile"
+                    android:layout_width="80dp"
+                    android:layout_height="80dp"
+                    android:layout_centerVertical="true"
+                    android:layout_marginLeft="30dp"
+                    facebook:preset_size="normal" />
+
+                <RelativeLayout
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="다이어리 이름"
-                    android:textColor="#ffffff"
-                    android:textSize="30sp"
-                    android:textStyle="bold" />
+                    android:layout_centerVertical="true"
+                    android:layout_marginLeft="20dp"
+                    android:layout_toRightOf="@+id/profile">
 
-                <TextView
-                    android:id="@+id/diary_info_subtitle"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_below="@id/diary_info_title"
-                    android:layout_marginBottom="2dp"
-                    android:text="여행을 시작해보세요"
-                    android:textColor="#ffffff"
-                    android:textSize="12sp"
-                    android:textStyle="italic" />
+                    <TextView
+                        android:id="@+id/diary_info_title"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="다이어리 이름"
+                        android:textColor="#ffffff"
+                        android:textSize="30sp"
+                        android:textStyle="bold" />
 
-                <TextView
-                    android:id="@+id/user_name"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_below="@id/diary_info_subtitle"
-                    android:text="허버허버"
-                    android:textColor="#ffffff"
-                    android:textSize="18sp" />
+                    <TextView
+                        android:id="@+id/diary_info_subtitle"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@id/diary_info_title"
+                        android:layout_marginBottom="2dp"
+                        android:text="여행을 시작해보세요"
+                        android:textColor="#ffffff"
+                        android:textSize="12sp"
+                        android:textStyle="italic" />
+
+                    <TextView
+                        android:id="@+id/user_name"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@id/diary_info_subtitle"
+                        android:text="허버허버"
+                        android:textColor="#ffffff"
+                        android:textSize="18sp" />
+                </RelativeLayout>
 
 
             </RelativeLayout>
 
             <TextView
+                android:id="@+id/progress_percent"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_alignParentBottom="true"
@@ -108,16 +115,17 @@
             android:id="@+id/puzzle_list_view"
             android:layout_width="match_parent"
             android:layout_height="fill_parent"
-            android:layout_weight="25" />
+            android:layout_weight="30" />
 
     </LinearLayout>
 
     <RelativeLayout
+        android:id="@+id/register_area"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/register_area"
-        android:layout_marginBottom="10dp"
-        android:layout_alignParentBottom="true">
+        android:layout_alignParentBottom="true"
+        android:layout_marginBottom="10dp">
+
         <Button
             android:id="@+id/register_travel_diary"
             android:layout_width="wrap_content"
@@ -125,8 +133,8 @@
             android:layout_centerHorizontal="true"
             android:layout_centerVertical="true"
             android:background="#4dc4d7"
-            android:textColor="#ffffff"
-            android:text="등록" />
+            android:text="등록"
+            android:textColor="#ffffff" />
     </RelativeLayout>
 
 

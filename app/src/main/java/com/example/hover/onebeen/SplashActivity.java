@@ -4,19 +4,16 @@ package com.example.hover.onebeen;
  * Created by seojin on 2015-07-28.
  */
 
-    import android.app.Activity;
-    import android.content.Intent;
-    import android.os.Bundle;
-    import android.os.Handler;
-    import android.util.Log;
-    import android.view.Window;
-    import android.view.WindowManager;
-    import android.view.animation.Animation;
-    import android.view.animation.LinearInterpolator;
-    import android.view.animation.RotateAnimation;
-    import android.widget.ImageView;
-
-    import com.example.hover.onebeen.puzzle.PuzzleDummyActivity;
+import android.app.Activity;
+import android.content.Intent;
+import android.os.Bundle;
+import android.util.Log;
+import android.view.Window;
+import android.view.WindowManager;
+import android.view.animation.Animation;
+import android.view.animation.LinearInterpolator;
+import android.view.animation.RotateAnimation;
+import android.widget.ImageView;
 
 public class SplashActivity extends Activity {
 
@@ -51,7 +48,7 @@ public class SplashActivity extends Activity {
         public void run() {
 
             try {
-                Thread.sleep(SLEEP_TIME*1000);
+                Thread.sleep(SLEEP_TIME * 1000);
             } catch (Exception e) {
                 Log.e(TAG, e.getMessage());
             }

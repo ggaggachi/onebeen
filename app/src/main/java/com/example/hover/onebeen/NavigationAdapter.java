@@ -27,7 +27,7 @@ public class NavigationAdapter extends RecyclerView.Adapter<NavigationAdapter.Vi
         userId = user.getId();
     }
 
-    public static class ViewHolder extends RecyclerView.ViewHolder {
+    public static class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener{
         int Holderid;
 
         TextView textView;
@@ -49,6 +49,11 @@ public class NavigationAdapter extends RecyclerView.Adapter<NavigationAdapter.Vi
                 profilePictureView.setProfileId(userId);
                 Holderid = 0;
             }
+        }
+
+        @Override
+        public void onClick(View v) {
+            
         }
     }
 

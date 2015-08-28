@@ -106,13 +106,6 @@ public class TravelDiaryActivity extends AppCompatActivity {
                 if (TravelStatus.PLANNING.getValue().equals(travelStatus)) {
                     Log.e("TravelDiaryActivity", "PLANNING TravelDiaryListFragment Event");
 
-                    TravelDiaryListFragment travelDiaryListFragment = new TravelDiaryListFragment();
-
-                    Bundle args = new Bundle();
-                    args.putString("travelStatus", TravelStatus.PLANNING.getValue());
-
-                    travelDiaryListFragment.setArguments(args);
-
                     TravelDiaryDataSource travelDiaryDataSource = new TravelDiaryDataSource(TravelDiaryActivity.this);
                     TravelDiary travelDiary = travelDiaryDataSource.getTravelDiary(Long.valueOf(travelDiaryId));
                     travelDiary.setTravelStatus(TravelStatus.ONGOING);
@@ -120,15 +113,16 @@ public class TravelDiaryActivity extends AppCompatActivity {
 
                     Log.e("SavePuzzleActivity", "저장할 TravelDiary 가져오기 : " + travelDiary.toString());
 
-                    int travelDiaryId = travelDiaryDataSource.updateTravelDiary(travelDiary);
+                    travelDiaryDataSource.updateTravelDiary(travelDiary);
 
-                    Log.e("SavePuzzleActivity", "업데이트한 TravelDiaryId : " + String.valueOf(travelDiaryId));
-
-                    finish();
+                    Intent intent1 = new Intent(TravelDiaryActivity.this, MainActivity.class);
+                    startActivityForResult(intent1, ActivityStatus.TravelDiaryActivity.getValue());
                 }
 
-//                Intent intent1 = new Intent(TravelDiaryActivity.this, MainActivity.class);
-//                startActivityForResult(intent1, ActivityStatus.TravelDiaryActivity.getValue());
+                if(travelStatus == null) {
+                    Intent intent1 = new Intent(TravelDiaryActivity.this, MainActivity.class);
+                    startActivityForResult(intent1, ActivityStatus.TravelDiaryActivity.getValue());
+                }
             }
         });
     }

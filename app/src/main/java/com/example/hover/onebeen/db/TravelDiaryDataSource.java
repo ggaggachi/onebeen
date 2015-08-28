@@ -68,14 +68,14 @@ public class TravelDiaryDataSource {
         return travelDiary;
     }
 
-    public int updateTravelDiary(TravelDiary travelDiary) {
+    public void updateTravelDiary(TravelDiary travelDiary) {
         SQLiteDatabase database = dbHelper.getWritableDatabase();
 
         String[] args = {String.valueOf(travelDiary.getId())};
 
         ContentValues values = getContentValues(travelDiary);
 
-        return database.update(TravelDiarySchema.TABLE_NAME, values, TravelDiarySchema.ID_COLUMN + "=?", args);
+        database.update(TravelDiarySchema.TABLE_NAME, values, TravelDiarySchema.ID_COLUMN + "=?", args);
     }
 
     @NonNull

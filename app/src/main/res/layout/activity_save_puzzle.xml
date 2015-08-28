@@ -27,7 +27,8 @@
             android:layout_marginLeft="30dp"
             android:text="가고싶은곳"
             android:textColor="#000000"
-            android:textSize="18sp" />
+            android:textSize="18sp"
+            android:textStyle="bold" />
 
         <TextView
             android:id="@+id/puzzle_place"
@@ -59,7 +60,8 @@
             android:layout_marginLeft="30dp"
             android:text="하고싶은일"
             android:textColor="#000000"
-            android:textSize="18sp" />
+            android:textSize="18sp"
+            android:textStyle="bold" />
 
         <TextView
             android:id="@+id/puzzle_todo"
@@ -82,10 +84,10 @@
         android:layout_above="@+id/puzzle_image_box"
         android:layout_below="@+id/want_to_to"
         android:layout_margin="10dp"
-        android:padding="20dp"
         android:background="@drawable/text_area_border"
         android:gravity="center"
-        android:hint="소감 한마디" />
+        android:hint="소감 한마디"
+        android:padding="20dp" />
 
 
     <LinearLayout
@@ -94,8 +96,8 @@
         android:layout_height="wrap_content"
         android:layout_above="@+id/add_btn_wrapper"
         android:layout_marginBottom="20dp"
-        android:gravity="center"
         android:layout_marginTop="5dp"
+        android:gravity="center"
         android:orientation="horizontal"
         android:paddingLeft="10dp"
         android:paddingRight="10dp">

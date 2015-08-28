@@ -48,7 +48,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="20dp"
+        android:layout_marginTop="50dp"
         android:layout_below="@id/white_logo">
 
         <com.facebook.login.widget.LoginButton
@@ -60,15 +60,15 @@
 
         <Button
             android:id="@+id/guest"
-            android:layout_width="wrap_content"
+            android:layout_width="120dp"
             android:layout_height="30dp"
             android:layout_centerHorizontal="true"
-            android:layout_marginTop="10dp"
+            android:layout_marginTop="20dp"
             android:textStyle="bold"
             android:textSize="12sp"
             android:background="@drawable/rect_shadow"
             android:layout_below="@id/facebook_login_line"
-            android:text="둘러보기"/>
+            android:text="둘 러 보 기"/>
 
     </RelativeLayout>
 

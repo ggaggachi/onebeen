@@ -67,7 +67,7 @@ public class TravelDiaryActivity extends AppCompatActivity {
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 String tag = String.valueOf(view.getTag());
                 String puzzleId = String.valueOf(view.getTag("puzzleId".hashCode()));
-Log.e("ekdxhrl PuzzledId", puzzleId);
+
                 if ("CURRENT".equals(tag)) {
 //                    startActivity(new Intent(TravelDiaryActivity.this, ShowPuzzleActivity.class));
                 } else if ("BEEN".equals(tag)) {
@@ -76,7 +76,7 @@ Log.e("ekdxhrl PuzzledId", puzzleId);
 //                    startActivity(addPuzzleIntent);
                 } else if ("WANT".equals(tag)) {
                     Intent addPuzzleIntent = new Intent(TravelDiaryActivity.this, SavePuzzleActivity.class);
-                    addPuzzleIntent.putExtra("id", puzzleId);
+                    addPuzzleIntent.putExtra("puzzleId", puzzleId);
                     startActivity(addPuzzleIntent);
                 } else {
                     Intent addPuzzleIntent = new Intent(TravelDiaryActivity.this, AddPuzzleActivity.class);

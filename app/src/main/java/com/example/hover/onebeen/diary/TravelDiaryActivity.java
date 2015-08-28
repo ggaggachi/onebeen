@@ -111,18 +111,24 @@ public class TravelDiaryActivity extends AppCompatActivity {
                     travelDiary.setTravelStatus(TravelStatus.ONGOING);
                     travelDiary.setStartDate(Time.now());
 
-                    Log.e("SavePuzzleActivity", "저장할 TravelDiary 가져오기 : " + travelDiary.toString());
+                    Log.e("SavePuzzleActivity", "업데이트할 TravelDiary 가져오기 : " + travelDiary.toString());
 
                     travelDiaryDataSource.updateTravelDiary(travelDiary);
+                } else if (TravelStatus.ONGOING.getValue().equals(travelStatus)) {
+                    Log.e("TravelDiaryActivity", "ONGOING TravelDiaryListFragment Event");
 
-                    Intent intent1 = new Intent(TravelDiaryActivity.this, MainActivity.class);
-                    startActivityForResult(intent1, ActivityStatus.TravelDiaryActivity.getValue());
+                    TravelDiaryDataSource travelDiaryDataSource = new TravelDiaryDataSource(TravelDiaryActivity.this);
+                    TravelDiary travelDiary = travelDiaryDataSource.getTravelDiary(Long.valueOf(travelDiaryId));
+                    travelDiary.setTravelStatus(TravelStatus.BEEN);
+                    travelDiary.setEndDate(Time.now());
+
+                    Log.e("SavePuzzleActivity", "업데이트할 TravelDiary 가져오기 : " + travelDiary.toString());
+
+                    travelDiaryDataSource.updateTravelDiary(travelDiary);
                 }
 
-                if(travelStatus == null) {
-                    Intent intent1 = new Intent(TravelDiaryActivity.this, MainActivity.class);
-                    startActivityForResult(intent1, ActivityStatus.TravelDiaryActivity.getValue());
-                }
+                Intent intent = new Intent(TravelDiaryActivity.this, MainActivity.class);
+                startActivityForResult(intent, ActivityStatus.TravelDiaryActivity.getValue());
             }
         });
     }
@@ -140,15 +146,21 @@ public class TravelDiaryActivity extends AppCompatActivity {
         }
 
         if(TravelStatus.BEEN.getValue() == travelStatus) {
+            for (Puzzle puzzle : puzzles) {
 
+            }
         }
 
         if(TravelStatus.ONGOING.getValue() == travelStatus) {
+            for (Puzzle puzzle : puzzles) {
 
+            }
         }
 
         if(TravelStatus.PLANNING.getValue() == travelStatus) {
+            for (Puzzle puzzle : puzzles) {
 
+            }
         }
     }
 

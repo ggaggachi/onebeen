@@ -3,8 +3,8 @@ package com.example.hover.onebeen.db.dto;
 public class TravelDiary {
     private Long id;
     private String title = "";
-    private String startDate = "";
-    private String endDate = "";
+    private String startDate = null;
+    private String endDate = null;
     private TravelStatus travelStatus = null;
     private String backgroundImagePath = "";
 

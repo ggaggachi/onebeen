@@ -2,6 +2,7 @@ package com.example.hover.onebeen.diarylist;
 
 import android.content.Context;
 import android.content.Intent;
+import android.support.annotation.NonNull;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -52,9 +53,12 @@ public class TravelDiaryListViewAdapter extends BaseAdapter{
         final TravelDiaryListItem diaryItem = data.get(position);
 
         ((TextView) convertView.findViewById(R.id.diary_title)).setText(diaryItem.getTripTitle());
-        ((TextView) convertView.findViewById(R.id.diary_subtitle)).setText(diaryItem.getSubTitle());
+//        ((TextView) convertView.findViewById(R.id.diary_subtitle)).setText(diaryItem.getSubTitle());
 
-        String date = diaryItem.getTripEndDate() != null ? diaryItem.getTripStartDate() + " - " + diaryItem.getTripEndDate() : null;
+        Log.e("TravelViewAdapter", "diaryItem:"+diaryItem.toString());
+
+        String date = getCalculatedDiaryDate(diaryItem);
+
         ((TextView) convertView.findViewById(R.id.diary_date)).setText(date);
 
         final View finalConvertView = convertView;
@@ -72,5 +76,23 @@ public class TravelDiaryListViewAdapter extends BaseAdapter{
         });
 
         return convertView;
+    }
+
+    @NonNull
+    private String getCalculatedDiaryDate(TravelDiaryListItem diaryItem) {
+        String date;
+
+        // 계획 중인 경우만 날짜 데이터가 없다.
+        // 계획을 세웠으면 여행 시작 날짜가 세팅되어 있을테고
+        // 여행을 종료했다면 여행 종료 날짜가 같이 세팅되어 있을 것이다.
+        if (diaryItem.getTripStartDate() != null && diaryItem.getTripEndDate() == null) {
+            date = diaryItem.getTripStartDate() + " - " + "여행 중";
+        } else if (diaryItem.getTripStartDate() != null && diaryItem.getTripEndDate() != null) {
+            date = diaryItem.getTripStartDate() + " - " + diaryItem.getTripEndDate();
+        } else {
+            date = "계획 중";
+        }
+
+        return date;
     }
 }

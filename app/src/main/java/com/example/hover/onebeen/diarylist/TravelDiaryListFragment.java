@@ -49,13 +49,13 @@ public class TravelDiaryListFragment extends Fragment {
 
         if(TravelStatus.ONGOING.getValue() == travelStatus) {
             for (TravelDiary travelDiary : travelDiaries) {
-                diaryItems.add(new TravelDiaryListItem(travelDiary.getTitle(), travelDiary.getStartDate(), null, "여행 중", travelDiary.getId()));
+                diaryItems.add(new TravelDiaryListItem(travelDiary.getTitle(), travelDiary.getStartDate(), null, null, travelDiary.getId()));
             }
         }
 
         if(TravelStatus.PLANNING.getValue() == travelStatus) {
             for (TravelDiary travelDiary : travelDiaries) {
-                diaryItems.add(new TravelDiaryListItem(travelDiary.getTitle(), travelDiary.getStartDate(), null, "계획 중", travelDiary.getId()));
+                diaryItems.add(new TravelDiaryListItem(travelDiary.getTitle(), travelDiary.getStartDate(), null, null, travelDiary.getId()));
             }
         }
 

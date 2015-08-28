@@ -11,7 +11,7 @@ public class Time {
     public static String now() {
         Date now = new Date();
 
-        SimpleDateFormat format = new SimpleDateFormat("yyyy.MM.DD", Locale.KOREA);
+        SimpleDateFormat format = new SimpleDateFormat("yyyy.MM.dd", Locale.KOREA);
 
         return format.format(now);
     }

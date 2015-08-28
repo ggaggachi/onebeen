@@ -54,4 +54,15 @@ public class TravelDiaryListItem {
     public void setId(Long id) {
         this.id = id;
     }
+
+    @Override
+    public String toString() {
+        return "TravelDiaryListItem{" +
+                "id=" + id +
+                ", tripTitle='" + tripTitle + '\'' +
+                ", tripStartDate='" + tripStartDate + '\'' +
+                ", tripEndDate='" + tripEndDate + '\'' +
+                ", subTitle='" + subTitle + '\'' +
+                '}';
+    }
 }

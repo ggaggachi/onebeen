@@ -159,16 +159,16 @@ public class TravelDiaryActivity extends AppCompatActivity {
             }
         }
 
-        if (beenSize == 0) {
+        if (beenSize == 0 || puzzles.size() / 100 == 0) {
             TextView progressText = (TextView) findViewById(R.id.progress_percent);
             progressText.setText("0%");
             return;
         }
 
-        int percent = beenSize / (puzzles.size() / 100);
+        int percent = (int) ((beenSize * 100) / puzzles.size());
 
         TextView progressText = (TextView) findViewById(R.id.progress_percent);
-        progressText.setText(Integer.valueOf(percent));
+        progressText.setText(percent);
 
         ProgressBar progressBar = (ProgressBar) findViewById(R.id.progressBar);
         progressBar.setMax(100);

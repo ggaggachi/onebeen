@@ -43,18 +43,24 @@ public class ShowPuzzleActivity extends AppCompatActivity {
 
         setActionbar();
 
-//		Intent intent = getIntent();
-//        Bundle extras = intent.getExtras();
+        Intent intent = getIntent();
 
-//		puzzle = intent.getParcelableExtra("puzzle");
+        final String puzzleId = intent.getExtras().getString("id");
 
-        puzzles = new ArrayList<>();
+        Log.e("ShowPuzzleActivity", intent.getStringExtra("id"));
+        Log.e("ShowPuzzleActivity", intent.getExtras().getString("id"));
+
+//        PuzzleDataSource puzzleDataSource = new PuzzleDataSource(this);
+//        Puzzle puzzle = puzzleDataSource.getPuzzle(Long.valueOf(puzzleId));
+
+
+        this.puzzles = new ArrayList<>();
         Puzzle puzzle1 = new Puzzle();
         puzzle1.setDescription("재밌는 여행");
-        puzzles.add(puzzle1);
+        this.puzzles.add(puzzle1);
         Puzzle puzzle2 = new Puzzle();
         puzzle2.setDescription("재밌는 여행");
-        puzzles.add(puzzle2);
+        this.puzzles.add(puzzle2);
 
         mViewPager = (ViewPager) findViewById(R.id.pager);
         mPagerAdapter = new PagerAdapter(getSupportFragmentManager());

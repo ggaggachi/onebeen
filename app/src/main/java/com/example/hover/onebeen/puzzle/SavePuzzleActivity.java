@@ -11,19 +11,21 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.os.Environment;
 import android.provider.MediaStore;
+import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageButton;
-import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
-
 import com.example.hover.onebeen.R;
 import com.example.hover.onebeen.db.PuzzleDataSource;
+import com.example.hover.onebeen.db.TravelDiaryDataSource;
 import com.example.hover.onebeen.db.dto.Puzzle;
+import com.example.hover.onebeen.db.dto.TravelDiary;
+import com.example.hover.onebeen.diary.TravelDiaryActivity;
 
 import java.io.File;
 import java.io.FileOutputStream;
@@ -31,7 +33,8 @@ import java.io.IOException;
 import java.io.OutputStream;
 
 public class SavePuzzleActivity extends AppCompatActivity {
-    Puzzle puzzle;
+
+    Puzzle puzzle = new Puzzle();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -39,13 +42,31 @@ public class SavePuzzleActivity extends AppCompatActivity {
         setContentView(R.layout.activity_save_puzzle);
         setActionbar();
 
-        puzzle = new Puzzle();
-        puzzle.setPlace("테스트테스트");
-        puzzle.setTodo("테스트테스트");
+        Intent intent = getIntent();
+        String puzzleId = intent.getExtras().getString("puzzleId");
 
-        ((TextView) findViewById(R.id.puzzle_place)).setText(puzzle.getPlace());
-        ((TextView) findViewById(R.id.puzzle_todo)).setText(puzzle.getTodo());
+        PuzzleDataSource puzzleDataSource = new PuzzleDataSource(this);
+        Puzzle localPuzzle = puzzleDataSource.getPuzzle(Long.valueOf(puzzleId));
 
+        Log.e("SavePuzzleActivity", "PuzzleStatus에 따른 이벤트 시작!");
+        Log.e("SavePuzzleActivity", "puzleStatus:" + localPuzzle.getStatus());
+
+        if ("WANT".equals(localPuzzle.getStatus())) {
+            Log.e("SavePuzzleActivity", "PuzzleStatus WANT 분기문 시작");
+            setDefaultPuzzleData(localPuzzle);
+            setClickUpdatePuzzleButtonEvent();
+        } else if ("CURRENT".equals(localPuzzle.getStatus())) {
+            
+        } else if ("BEEN".equals(localPuzzle.getStatus())) {
+
+        } else {
+
+        }
+
+        setClickImageRegisterButtonEvent();
+    }
+
+    private void setClickImageRegisterButtonEvent() {
         findViewById(R.id.image_add_button1).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -64,19 +85,86 @@ public class SavePuzzleActivity extends AppCompatActivity {
                 galleryEvent(v, 2);
             }
         });
+    }
 
+    @NonNull
+    private void setDefaultPuzzleData(Puzzle localPuzzle) {
+        Log.e("SavePuzzleActivity", String.valueOf(localPuzzle.getId()));
+        Log.e("SavePuzzleActivity", localPuzzle.toString());
+
+        ((TextView) findViewById(R.id.puzzle_place)).setText(localPuzzle.getPlace());
+        ((TextView) findViewById(R.id.puzzle_todo)).setText(localPuzzle.getTodo());
+
+        SavePuzzleActivity.this.puzzle.setId(localPuzzle.getId());
+        SavePuzzleActivity.this.puzzle.setTravelDiaryId(localPuzzle.getTravelDiaryId());
+        SavePuzzleActivity.this.puzzle.setStatus(localPuzzle.getStatus());
+        SavePuzzleActivity.this.puzzle.setPlace(localPuzzle.getPlace());
+        SavePuzzleActivity.this.puzzle.setTodo(localPuzzle.getTodo());
+
+        // 디폴트로 장소와 하고 싶은 일은 다른 액티비티에서 저장이 되어 오지만, Description은 이곳에서 저장하고 다시
+        // 이 액티비티를 들어오지 않는 이상 데이터가 없을 수도 있으므로 Null Check를 한다.
+        if (isRegisteredPreviously(localPuzzle)) {
+            ((EditText) findViewById(R.id.puzzle_description)).setText(localPuzzle.getDescription());
+            SavePuzzleActivity.this.puzzle.setDescription(localPuzzle.getDescription());
+        }
+        if (localPuzzle.getImagePath1() != null) {
+            ImageButton imageButton = (ImageButton) findViewById(R.id.image_add_button1);
+            imageButton.setImageURI(Uri.parse(localPuzzle.getImagePath1()));
+            SavePuzzleActivity.this.puzzle.setImagePath1(localPuzzle.getImagePath1());
+        }
+        if (localPuzzle.getImagePath2() != null) {
+            ImageButton imageButton = (ImageButton) findViewById(R.id.image_add_button2);
+            imageButton.setImageURI(Uri.parse(localPuzzle.getImagePath2()));
+            SavePuzzleActivity.this.puzzle.setImagePath2(localPuzzle.getImagePath2());
+        }
+        if (localPuzzle.getImagePath3() != null) {
+            ImageButton imageButton = (ImageButton) findViewById(R.id.image_add_button3);
+            imageButton.setImageURI(Uri.parse(localPuzzle.getImagePath3()));
+            SavePuzzleActivity.this.puzzle.setImagePath3(localPuzzle.getImagePath3());
+        }
+    }
+
+    private boolean isRegisteredPreviously(Puzzle puzzle) {
+        return puzzle != null;
+    }
+
+    private void setClickUpdatePuzzleButtonEvent() {
         findViewById(R.id.puzzle_add_button).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 EditText description = (EditText) findViewById(R.id.puzzle_description);
-                puzzle.setDescription(description.getText().toString());
+
+                SavePuzzleActivity.this.puzzle.setDescription(description.getText().toString());
+                Log.e("SavePuzzleActivity", description.getText().toString());
+                Log.e("SavePuzzleActivity", SavePuzzleActivity.this.puzzle.toString());
 
                 PuzzleDataSource puzzleDataSource = new PuzzleDataSource(getApplicationContext());
-                long insertedRow = puzzleDataSource.addPuzzle(puzzle);
+                long puzzleId = puzzleDataSource.updatePuzzle(SavePuzzleActivity.this.puzzle);
+                Log.e("getPuzzle", puzzleDataSource.getPuzzle(puzzleId).toString());
+
+                callTravelDiaryActivity();
 
                 finish();
             }
         });
+    }
+
+    private void callTravelDiaryActivity() {
+        Log.e("SavePuzzleActivity", "callTravelDiaryActivity");
+
+        Intent intent = new Intent(SavePuzzleActivity.this, TravelDiaryActivity.class);
+        TravelDiaryDataSource travelDiaryDataSource = new TravelDiaryDataSource(getApplicationContext());
+
+        Log.e("SavePuzzleActivity", "callTravelDiaryActivity travelDiaryId:"+ SavePuzzleActivity.this.puzzle.getTravelDiaryId());
+
+        TravelDiary travelDiary = travelDiaryDataSource.getTravelDiary(Long.valueOf(SavePuzzleActivity.this.puzzle.getTravelDiaryId()));
+
+        Log.e("SavePuzzleActivity", "callTravelDiaryActivity travelDiary:"+travelDiary.toString());
+
+        intent.putExtra("travelDiaryId", String.valueOf(travelDiary.getId()));
+        intent.putExtra("travelStatus", travelDiary.getTravelStatus().getValue());
+
+        startActivityForResult(intent, 1);
     }
 
     private void setActionbar() {
@@ -100,7 +188,6 @@ public class SavePuzzleActivity extends AppCompatActivity {
 
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
-
         if (resultCode != Activity.RESULT_OK) {
             Toast.makeText(getApplicationContext(), "이미지를 가져오는데 실패했습니다.", Toast.LENGTH_SHORT).show();
             return;

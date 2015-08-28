@@ -10,6 +10,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.View;
 
 import com.example.hover.onebeen.db.UserDataSource;
@@ -23,10 +24,6 @@ import com.facebook.appevents.AppEventsLogger;
 public class MainActivity extends AppCompatActivity {
     String TITLES[] = {"여행 시작하기", "다녀온 여행지", "진행중 여행지", "계획중 여행지", "설정"};
     int ICONS[] = {R.drawable.logo_green, R.drawable.logo_green, R.drawable.logo_green, R.drawable.logo_green, R.drawable.logo_green};
-
-    String NAME = "이름";
-    String EMAIL = "이메일";
-    int PROFILE = R.drawable.default_profile;
 
     private Toolbar toolbar;
 
@@ -111,32 +108,19 @@ public class MainActivity extends AppCompatActivity {
         return user;
     }
 
-
-
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-//        callbackManager.onActivityResult(requestCode, resultCode, data);
+        Log.e("MainActivity", "requestCode:" + requestCode + "/resultCode:" + resultCode + "/data:" + data);
 
-        if (resultCode == ActivityStatus.MAKE_DIARY.getActivityStatus()) {
+        if (resultCode == ActivityStatus.MAKE_DIARY.getValue()) {
             Intent intent = new Intent(MainActivity.this, TravelDiaryActivity.class);
             intent.putExtra("travelDiaryId", data.getStringExtra("travelDiaryId"));
-            startActivity(intent);
-//            moveToTravelDiaryListFragment(data);
+
+            Log.e("MainActivityDiaryId", data.getStringExtra("travelDiaryId"));
+            startActivityForResult(intent, ActivityStatus.MAIN_ACTIVITY.getValue());
         }
     }
-
-//    private void moveToTravelDiaryListFragment(Intent data) {
-//
-//        TravelDiaryListFragment travelDiaryListFragment = new TravelDiaryListFragment();
-//        Bundle args = new Bundle();
-//        args.putString("travelDiaryId", data.getStringExtra("travelDiaryId"));
-//        travelDiaryListFragment.setArguments(args);
-//        fragmentManager
-//                .beginTransaction()
-//                .replace(R.id.container, travelDiaryListFragment)
-//                .commit();
-//    }
 
     @Override
     public void onBackPressed() {

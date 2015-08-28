@@ -60,6 +60,10 @@ public class PuzzleListViewAdapter extends BaseAdapter {
         ((TextView) convertView.findViewById(R.id.puzzle_item_place)).setText(puzzle.getPlace());
         ((TextView) convertView.findViewById(R.id.puzzle_item_todo)).setText(puzzle.getTodo());
 
+        if (puzzle.getDescription() != null) {
+            ((TextView) convertView.findViewById(R.id.puzzle_subtitle)).setText(puzzle.getDescription());
+        }
+
         String status = puzzle.getStatus();
 
         if (PuzzleStatus.BEEN.toString().equals(status)) {
@@ -71,6 +75,7 @@ public class PuzzleListViewAdapter extends BaseAdapter {
         }
 
         convertView.setTag(status);
+        convertView.setTag("puzzleId".hashCode(), puzzle.getId());
 
         return convertView;
     }

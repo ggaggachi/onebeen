@@ -173,12 +173,16 @@ public class Puzzle implements Parcelable{
         this.travelDiaryId = travelDiaryId;
     }
 
+    public String getDescription() {
+        return description;
+    }
+
     @Override
     public String toString() {
         return "Puzzle{" +
                 "id=" + id +
-                ", userId='" + userId + '\'' +
                 ", travelDiaryId='" + travelDiaryId + '\'' +
+                ", userId='" + userId + '\'' +
                 ", status='" + status + '\'' +
                 ", imagePath1='" + imagePath1 + '\'' +
                 ", imagePath2='" + imagePath2 + '\'' +
@@ -187,10 +191,7 @@ public class Puzzle implements Parcelable{
                 ", place='" + place + '\'' +
                 ", todo='" + todo + '\'' +
                 ", type='" + type + '\'' +
+                ", description='" + description + '\'' +
                 '}';
-    }
-
-    public String getDescription() {
-        return description;
     }
 }

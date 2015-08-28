@@ -67,15 +67,4 @@
         android:textColor="#ffffff"
         android:textSize="9sp" />
 
-    <TextView
-        android:id="@+id/diary_subtitle"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/white_line_img"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="8dp"
-        android:text=""
-        android:textColor="#ffffff"
-        android:textSize="9sp" />
-
 </RelativeLayout>

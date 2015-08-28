@@ -98,7 +98,6 @@
                 android:layout_height="wrap_content"
                 android:layout_alignParentBottom="true"
                 android:layout_alignParentRight="true"
-                android:text="35%"
                 android:textColor="#ffffff"
                 android:textSize="15sp"
                 android:textStyle="bold" />

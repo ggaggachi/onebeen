@@ -4,8 +4,11 @@ import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
+import android.support.annotation.NonNull;
+
 import com.example.hover.onebeen.db.dto.TravelDiary;
 import com.example.hover.onebeen.db.dto.TravelStatus;
+import com.example.hover.onebeen.db.schema.PuzzleTableSchema;
 import com.example.hover.onebeen.db.schema.TravelDiarySchema;
 import java.util.ArrayList;
 
@@ -23,12 +26,7 @@ public class TravelDiaryDataSource {
     public Long insertTravelDiary(TravelDiary travelDiary) {
         SQLiteDatabase database = dbHelper.getWritableDatabase();
 
-        ContentValues values = new ContentValues();
-        values.put(TravelDiarySchema.TITLE_COLUMN, travelDiary.getTitle());
-        values.put(TravelDiarySchema.START_DATE_COLUMN, travelDiary.getStartDate());
-        values.put(TravelDiarySchema.END_DATE_COLUMN, travelDiary.getEndDate());
-        values.put(TravelDiarySchema.STATUS_COLUMN, travelDiary.getTravelStatus().getValue());
-        values.put(TravelDiarySchema.BACKGROUND_IMAGE_PATH_COLUMN, travelDiary.getBackgroundImagePath());
+        ContentValues values = getContentValues(travelDiary);
 
         long travelDiaryId = database.insert(TravelDiarySchema.TABLE_NAME, null, values);
         database.close();
@@ -39,7 +37,7 @@ public class TravelDiaryDataSource {
     public ArrayList<TravelDiary> getTravelDiaries(String travelStatus) {
         SQLiteDatabase database = dbHelper.getReadableDatabase();
 
-        Cursor cursor = database.query(TravelDiarySchema.TABLE_NAME + "", null, TravelDiarySchema.STATUS_COLUMN + "=?", new String[] { travelStatus }, null, null, null);
+        Cursor cursor = database.query(TravelDiarySchema.TABLE_NAME + "", null, TravelDiarySchema.STATUS_COLUMN + "=?", new String[]{travelStatus}, null, null, null);
 
         ArrayList<TravelDiary> travelDiaries = new ArrayList<>();
 
@@ -68,5 +66,26 @@ public class TravelDiaryDataSource {
         cursor.close();
 
         return travelDiary;
+    }
+
+    public void updateTravelDiary(TravelDiary travelDiary) {
+        SQLiteDatabase database = dbHelper.getWritableDatabase();
+
+        String[] args = {String.valueOf(travelDiary.getId())};
+
+        ContentValues values = getContentValues(travelDiary);
+
+        database.update(TravelDiarySchema.TABLE_NAME, values, TravelDiarySchema.ID_COLUMN + "=?", args);
+    }
+
+    @NonNull
+    private ContentValues getContentValues(TravelDiary travelDiary) {
+        ContentValues values = new ContentValues();
+        values.put(TravelDiarySchema.TITLE_COLUMN, travelDiary.getTitle());
+        values.put(TravelDiarySchema.START_DATE_COLUMN, travelDiary.getStartDate());
+        values.put(TravelDiarySchema.END_DATE_COLUMN, travelDiary.getEndDate());
+        values.put(TravelDiarySchema.STATUS_COLUMN, travelDiary.getTravelStatus().getValue());
+        values.put(TravelDiarySchema.BACKGROUND_IMAGE_PATH_COLUMN, travelDiary.getBackgroundImagePath());
+        return values;
     }
 }

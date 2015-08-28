@@ -31,13 +31,13 @@ public class TravelDiaryListFragment extends Fragment {
 
         final String travelStatus = bundle.getString("travelStatus");
 
-        Log.e("ekdxhrl", travelStatus);
+        Log.e("TravelDiaryListFragment", travelStatus);
 
         TravelDiaryDataSource travelDiaryDataSource = new TravelDiaryDataSource(getContext());
 
         ArrayList<TravelDiary> travelDiaries = travelDiaryDataSource.getTravelDiaries(travelStatus);
 
-        Log.e("ekdxhrl", travelDiaries.toString());
+        Log.e("TravelDiaryListFragment", travelDiaries.toString());
 
         ArrayList<TravelDiaryListItem> diaryItems = new ArrayList<>();
 
@@ -49,13 +49,13 @@ public class TravelDiaryListFragment extends Fragment {
 
         if(TravelStatus.ONGOING.getValue() == travelStatus) {
             for (TravelDiary travelDiary : travelDiaries) {
-                diaryItems.add(new TravelDiaryListItem(travelDiary.getTitle(), travelDiary.getStartDate(), null, "여행 중", travelDiary.getId()));
+                diaryItems.add(new TravelDiaryListItem(travelDiary.getTitle(), travelDiary.getStartDate(), null, null, travelDiary.getId()));
             }
         }
 
         if(TravelStatus.PLANNING.getValue() == travelStatus) {
             for (TravelDiary travelDiary : travelDiaries) {
-                diaryItems.add(new TravelDiaryListItem(travelDiary.getTitle(), travelDiary.getStartDate(), null, "계획 중", travelDiary.getId()));
+                diaryItems.add(new TravelDiaryListItem(travelDiary.getTitle(), travelDiary.getStartDate(), null, null, travelDiary.getId()));
             }
         }
 

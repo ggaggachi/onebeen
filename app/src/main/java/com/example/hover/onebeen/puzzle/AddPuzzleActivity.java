@@ -53,13 +53,13 @@ public class AddPuzzleActivity extends AppCompatActivity {
         UserDataSource userDataSource = new UserDataSource(this);
         puzzle.setUserId(userDataSource.getUser().getId());
         puzzle.setStatus("WANT");
-        Log.e("ekdxhrl", puzzle.toString());
+        Log.e("AddPuzzleActivity", puzzle.toString());
 
         long puzzleId = puzzleDataSource.addPuzzle(puzzle);
-        Log.e("ekdxhrl", String.valueOf(puzzleId));
+        Log.e("AddPuzzleActivity", String.valueOf(puzzleId));
         Puzzle puzzle1 = puzzleDataSource.getPuzzle(puzzleId);
 
-        Log.e("ekdxhrl", puzzle1.toString());
+        Log.e("AddPuzzleActivity", puzzle1.toString());
 
         return travelDiaryId;
     }

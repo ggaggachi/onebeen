@@ -11,11 +11,15 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
+import android.view.MotionEvent;
 import android.view.View;
 
 import com.example.hover.onebeen.db.UserDataSource;
+import com.example.hover.onebeen.db.dto.TravelStatus;
 import com.example.hover.onebeen.db.dto.User;
+import com.example.hover.onebeen.diary.MakeDiary;
 import com.example.hover.onebeen.diary.TravelDiaryActivity;
+import com.example.hover.onebeen.diarylist.TravelDiaryListFragment;
 import com.example.hover.onebeen.utility.ActivityStatus;
 import com.example.hover.onebeen.utility.BackPressHandler;
 import com.facebook.FacebookSdk;
@@ -61,9 +65,82 @@ public class MainActivity extends AppCompatActivity {
         mRecyclerView = (RecyclerView) findViewById(R.id.RecyclerView);
         mRecyclerView.setHasFixedSize(true);
 
-        mAdapter = new NavigationAdapter(TITLES, ICONS, getUser());
+        //mAdapter = new NavigationAdapter(TITLES, ICONS, getUser());
+        mAdapter = new NavigationAdapter(TITLES, ICONS, getUser(), getApplicationContext());
         mRecyclerView.setAdapter(mAdapter);
+        /*추가*/
+        mRecyclerView.addOnItemTouchListener(new RecyclerView.OnItemTouchListener() {
+            @Override
+            public boolean onInterceptTouchEvent(RecyclerView rv, MotionEvent e) {
+                View child = rv.findChildViewUnder(e.getX(), e.getY());
+                TravelDiaryListFragment travelDiaryListFragment = null;
+                Bundle args = null;
+                if (child != null) {
+                    Drawer.closeDrawers();
+                    switch (rv.getChildPosition(child)) {
+                        case 1: //여행 시작하기
 
+                            Intent intent = new Intent(getApplicationContext(), MakeDiary.class);
+                            intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                            startActivityForResult(intent, 1);
+
+                            break;
+                        case 2: //다녀온 여행지
+                            travelDiaryListFragment = new TravelDiaryListFragment();
+
+                            args = new Bundle();
+                            args.putString("travelStatus", TravelStatus.ONGOING.getValue());
+
+                            travelDiaryListFragment.setArguments(args);
+
+                            fragmentManager.beginTransaction()
+                                    .setCustomAnimations(R.anim.slide_in_light, R.anim.slide_out_left)
+                                    .replace(R.id.container, travelDiaryListFragment)
+                                    .commit();
+                            break;
+                        case 3: //진행중 여행지
+                            travelDiaryListFragment = new TravelDiaryListFragment();
+
+                            args = new Bundle();
+                            args.putString("travelStatus", TravelStatus.BEEN.getValue());
+
+                            travelDiaryListFragment.setArguments(args);
+
+                            fragmentManager.beginTransaction()
+                                    .setCustomAnimations(R.anim.slide_in_light, R.anim.slide_out_left)
+                                    .replace(R.id.container, travelDiaryListFragment)
+                                    .commit();
+                            break;
+                        case 4: //계획중 여행지
+                            travelDiaryListFragment = new TravelDiaryListFragment();
+
+                            args = new Bundle();
+                            args.putString("travelStatus", TravelStatus.PLANNING.getValue());
+
+                            travelDiaryListFragment.setArguments(args);
+
+                            fragmentManager.beginTransaction()
+                                    .setCustomAnimations(R.anim.slide_in_light, R.anim.slide_out_left)
+                                    .replace(R.id.container, travelDiaryListFragment)
+                                    .commit();
+                            break;
+                        default:
+                            break;
+                    }
+                }
+                return false;
+            }
+
+            @Override
+            public void onTouchEvent(RecyclerView rv, MotionEvent e) {
+
+            }
+
+            @Override
+            public void onRequestDisallowInterceptTouchEvent(boolean disallowIntercept) {
+
+            }
+        });
         mLayoutManager = new LinearLayoutManager(this);
         mRecyclerView.setLayoutManager(mLayoutManager);
 
@@ -102,7 +179,7 @@ public class MainActivity extends AppCompatActivity {
         UserDataSource userDataSource = new UserDataSource(this);
         User user = userDataSource.getUser();
 
-        if(user == null) {
+        if (user == null) {
             user = new User(null, "Guest");
         }
         return user;

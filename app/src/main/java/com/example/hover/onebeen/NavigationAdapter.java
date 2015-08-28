@@ -1,8 +1,10 @@
 package com.example.hover.onebeen;
 
+import android.content.Context;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -19,15 +21,26 @@ public class NavigationAdapter extends RecyclerView.Adapter<NavigationAdapter.Vi
 
     private String name;
     private String userId;
+    Context mContext;//추가
 
     public NavigationAdapter(String[] titles, int[] icons, User user) {
         mNavTitles = titles;
         mIcons = icons;
         name = user.getName();
         userId = user.getId();
+
+    }
+    /*추가된 생성자*/
+    public NavigationAdapter(String[] titles, int[] icons, User user,Context context) {
+        mNavTitles = titles;
+        mIcons = icons;
+        name = user.getName();
+        userId = user.getId();
+        mContext = context;
+
     }
 
-    public static class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener{
+    public static class ViewHolder extends RecyclerView.ViewHolder implements OnClickListener{
         int Holderid;
 
         TextView textView;
@@ -35,6 +48,7 @@ public class NavigationAdapter extends RecyclerView.Adapter<NavigationAdapter.Vi
         ProfilePictureView profilePictureView;
         TextView Name;
         TextView email;
+        private Context mContext;//추가
 
         public ViewHolder(View itemView, int ViewType, String userId) {
             super(itemView);
@@ -50,10 +64,59 @@ public class NavigationAdapter extends RecyclerView.Adapter<NavigationAdapter.Vi
                 Holderid = 0;
             }
         }
-
+        /*추가*/
+        public ViewHolder(View itemView, int ViewType, String userId,Context context) {
+            super(itemView);
+            /*추가된 부분*/
+            mContext = context;
+            itemView.setClickable(true);
+            itemView.setOnClickListener(this);
+            if (ViewType == TYPE_ITEM) {
+                textView = (TextView) itemView.findViewById(R.id.rowText);
+                imageView = (ImageView) itemView.findViewById(R.id.rowIcon);
+                Holderid = 1;
+            } else {
+                Name = (TextView) itemView.findViewById(R.id.name);
+                profilePictureView = (ProfilePictureView) itemView.findViewById(R.id.circleView);
+                profilePictureView.setProfileId(userId);
+                Holderid = 0;
+            }
+        }
+        /*추가된 부분*/
         @Override
         public void onClick(View v) {
-            
+            /*TravelDiaryListFragment travelDiaryListFragment = null;
+            if(getItemViewType() == TYPE_ITEM){
+                switch(getPosition()){
+                    case 1: //여행 시작하기
+                        Intent intent = new Intent(mContext, MakeDiary.class);
+                        intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                        mContext.startActivity(intent);
+                        Toast.makeText(v.getContext(), "시작하기", Toast.LENGTH_SHORT).show();
+                        break;
+                    case 2: //다녀온 여행지
+                        travelDiaryListFragment = new TravelDiaryListFragment();
+
+                        Bundle args = new Bundle();
+                        args.putString("travelStatus", TravelStatus.ONGOING.getValue());
+
+                        travelDiaryListFragment.setArguments(args);
+
+                        *//*fragmentManager.beginTransaction()
+                                .setCustomAnimations(R.anim.slide_in_light, R.anim.slide_out_left)
+                                .replace(R.id.container, travelDiaryListFragment)
+                                .commit();*//*
+                        break;
+                    case 3: //진행중 여행지
+                        Toast.makeText(v.getContext(), "진행중", Toast.LENGTH_SHORT).show();
+                        break;
+                    case 4: //계획중 여행지
+                        Toast.makeText(v.getContext(), "계획중", Toast.LENGTH_SHORT).show();
+                        break;
+                    default: break;
+                }
+            }*/
+
         }
     }
 
@@ -62,12 +125,14 @@ public class NavigationAdapter extends RecyclerView.Adapter<NavigationAdapter.Vi
 
         if (viewType == TYPE_ITEM) {
             View v = LayoutInflater.from(parent.getContext()).inflate(R.layout.navigation_item, parent, false);
-            ViewHolder vhItem = new ViewHolder(v, viewType, userId);
+            //ViewHolder vhItem = new ViewHolder(v, viewType, userId);
+            ViewHolder vhItem = new ViewHolder(v,viewType,userId,mContext);
             return vhItem;
 
         } else if (viewType == TYPE_HEADER) {
             View v = LayoutInflater.from(parent.getContext()).inflate(R.layout.navigation_header, parent, false);
-            ViewHolder vhHeader = new ViewHolder(v, viewType, userId);
+            //ViewHolder vhHeader = new ViewHolder(v, viewType, userId);
+            ViewHolder vhHeader = new ViewHolder(v, viewType, userId,mContext);
             return vhHeader;
         }
         return null;

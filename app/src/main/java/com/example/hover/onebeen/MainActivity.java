@@ -10,28 +10,15 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
-import android.util.Log;
 import android.view.View;
-import android.widget.AdapterView;
-import android.widget.ListView;
-import android.widget.Toast;
-import com.example.hover.onebeen.db.TravelDiaryDataSource;
+
 import com.example.hover.onebeen.db.UserDataSource;
-import com.example.hover.onebeen.db.dto.TravelDiary;
-import com.example.hover.onebeen.db.dto.TravelStatus;
 import com.example.hover.onebeen.db.dto.User;
 import com.example.hover.onebeen.diary.TravelDiaryActivity;
-import com.example.hover.onebeen.diarylist.TravelDiaryListFragment;
 import com.example.hover.onebeen.utility.ActivityStatus;
 import com.example.hover.onebeen.utility.BackPressHandler;
-import com.facebook.CallbackManager;
-import com.facebook.FacebookCallback;
-import com.facebook.FacebookException;
 import com.facebook.FacebookSdk;
-import com.facebook.Profile;
 import com.facebook.appevents.AppEventsLogger;
-import com.facebook.login.LoginManager;
-import com.facebook.login.LoginResult;
 
 public class MainActivity extends AppCompatActivity {
     String TITLES[] = {"여행 시작하기", "다녀온 여행지", "진행중 여행지", "계획중 여행지", "설정"};
@@ -66,7 +53,7 @@ public class MainActivity extends AppCompatActivity {
 
         FacebookSdk.sdkInitialize(this.getApplicationContext());
 
-        setContentView(R.layout.actionbar_activity);
+        setContentView(R.layout.activity_main);
 
         backPressHandler = new BackPressHandler(this);
 
@@ -77,7 +64,7 @@ public class MainActivity extends AppCompatActivity {
         mRecyclerView = (RecyclerView) findViewById(R.id.RecyclerView);
         mRecyclerView.setHasFixedSize(true);
 
-        mAdapter = new MyAdapter(TITLES, ICONS, getUser());
+        mAdapter = new NavigationAdapter(TITLES, ICONS, getUser());
         mRecyclerView.setAdapter(mAdapter);
 
         mLayoutManager = new LinearLayoutManager(this);

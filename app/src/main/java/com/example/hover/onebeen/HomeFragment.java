@@ -14,7 +14,7 @@ import com.example.hover.onebeen.diarylist.TravelDiaryListFragment;
 
 import com.example.hover.onebeen.diary.MakeDiary;
 
-public class HomeFragment extends Fragment{
+public class HomeFragment extends Fragment {
 
     private static int TRAVEL_START_CODE = 1;
 
@@ -36,7 +36,7 @@ public class HomeFragment extends Fragment{
         root.findViewById(R.id.traven_ongoing_btn).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                ((MainActivity)getActivity()).setIsHomeFragment(false);
+                ((MainActivity) getActivity()).setIsHomeFragment(false);
                 TravelDiaryListFragment travelDiaryListFragment = new TravelDiaryListFragment();
 
                 Bundle args = new Bundle();
@@ -54,7 +54,7 @@ public class HomeFragment extends Fragment{
         root.findViewById(R.id.travel_been_btn).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                ((MainActivity)getActivity()).setIsHomeFragment(false);
+                ((MainActivity) getActivity()).setIsHomeFragment(false);
                 TravelDiaryListFragment travelDiaryListFragment = new TravelDiaryListFragment();
 
                 Bundle args = new Bundle();
@@ -72,7 +72,7 @@ public class HomeFragment extends Fragment{
         root.findViewById(R.id.travel_planning_btn).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                ((MainActivity)getActivity()).setIsHomeFragment(false);
+                ((MainActivity) getActivity()).setIsHomeFragment(false);
                 TravelDiaryListFragment travelDiaryListFragment = new TravelDiaryListFragment();
 
                 Bundle args = new Bundle();

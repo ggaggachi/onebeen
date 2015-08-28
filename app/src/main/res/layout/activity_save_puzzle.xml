@@ -7,73 +7,52 @@
 
     <include
         android:id="@+id/tool_bar"
-        layout="@layout/tool_bar_no_img">
+        layout="@layout/tool_bar_transparent">
 
     </include>
 
     <RelativeLayout
-        android:id="@+id/want_to_go"
+        android:id="@+id/save_puzzle_info"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/tool_bar"
-        android:layout_marginTop="20dp">
+        android:layout_height="150dp">
 
-        <TextView
-            android:id="@+id/place_notice"
-            android:layout_width="100dp"
-            android:layout_height="wrap_content"
-            android:layout_alignParentLeft="true"
-            android:layout_centerVertical="true"
-            android:layout_marginLeft="30dp"
-            android:text="가고싶은곳"
-            android:textColor="#000000"
-            android:textSize="18sp"
-            android:textStyle="bold" />
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@drawable/travel_ongoing"
+            android:scaleType="centerCrop" />
 
-        <TextView
-            android:id="@+id/puzzle_place"
+        <RelativeLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
             android:layout_centerVertical="true"
-            android:layout_marginLeft="10dp"
-            android:layout_toRightOf="@+id/place_notice"
-            android:paddingLeft="10dp"
-            android:text="가고싶은곳"
-            android:textColor="#000000"
-            android:textSize="18sp" />
-    </RelativeLayout>
+            android:layout_marginRight="20dp">
 
-    <RelativeLayout
-        android:id="@+id/want_to_to"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/want_to_go"
-        android:layout_marginBottom="10dp"
-        android:layout_marginTop="10dp">
+            <TextView
+                android:id="@+id/puzzle_place"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
+                android:text="가고싶은곳"
+                android:textColor="#ffffff"
+                android:textSize="35sp"
+                android:textStyle="bold" />
 
-        <TextView
-            android:id="@+id/todo_notice"
-            android:layout_width="100dp"
-            android:layout_height="wrap_content"
-            android:layout_alignParentLeft="true"
-            android:layout_centerVertical="true"
-            android:layout_marginLeft="30dp"
-            android:text="하고싶은일"
-            android:textColor="#000000"
-            android:textSize="18sp"
-            android:textStyle="bold" />
+            <TextView
+                android:id="@+id/puzzle_todo"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:layout_below="@id/puzzle_place"
+                android:layout_marginTop="30dp"
+                android:text="하고싶은일"
+                android:textColor="#ffffff"
+                android:textSize="28sp" />
+        </RelativeLayout>
 
-        <TextView
-            android:id="@+id/puzzle_todo"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_centerVertical="true"
-            android:layout_marginLeft="10dp"
-            android:layout_toRightOf="@+id/todo_notice"
-            android:paddingLeft="10dp"
-            android:text="하고싶은일"
-            android:textColor="#000000"
-            android:textSize="18sp" />
+
     </RelativeLayout>
 
 
@@ -82,7 +61,7 @@
         android:layout_width="match_parent"
         android:layout_height="fill_parent"
         android:layout_above="@+id/puzzle_image_box"
-        android:layout_below="@+id/want_to_to"
+        android:layout_below="@+id/save_puzzle_info"
         android:layout_margin="10dp"
         android:background="@drawable/text_area_border"
         android:gravity="center"
@@ -109,8 +88,8 @@
 
             <ImageButton
                 android:id="@+id/image_add_button1"
-                android:layout_width="115dp"
-                android:layout_height="115dp"
+                android:layout_width="100dp"
+                android:layout_height="100dp"
                 android:layout_centerHorizontal="true"
                 android:adjustViewBounds="true"
                 android:background="@drawable/area_dashed_border"
@@ -124,8 +103,8 @@
 
             <ImageButton
                 android:id="@+id/image_add_button2"
-                android:layout_width="115dp"
-                android:layout_height="115dp"
+                android:layout_width="100dp"
+                android:layout_height="100dp"
                 android:layout_centerHorizontal="true"
                 android:adjustViewBounds="true"
                 android:background="@drawable/area_dashed_border"
@@ -139,8 +118,8 @@
 
             <ImageButton
                 android:id="@+id/image_add_button3"
-                android:layout_width="115dp"
-                android:layout_height="115dp"
+                android:layout_width="100dp"
+                android:layout_height="100dp"
                 android:layout_centerHorizontal="true"
                 android:adjustViewBounds="true"
                 android:background="@drawable/area_dashed_border"

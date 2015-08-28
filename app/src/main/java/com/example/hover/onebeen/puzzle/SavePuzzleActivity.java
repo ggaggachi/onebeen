@@ -51,14 +51,19 @@ public class SavePuzzleActivity extends AppCompatActivity {
         Log.e("SavePuzzleActivity", "PuzzleStatus에 따른 이벤트 시작!");
         Log.e("SavePuzzleActivity", "puzleStatus:" + localPuzzle.getStatus());
 
+        // 사용자가 누른 퍼즐의 성격에 따라, 등록을 눌렀을 때에 Puzzle의 타입이 바뀌게 된다.
+        //
+
         if ("WANT".equals(localPuzzle.getStatus())) {
             Log.e("SavePuzzleActivity", "PuzzleStatus WANT 분기문 시작");
-            setDefaultPuzzleData(localPuzzle);
-            setClickUpdatePuzzleButtonEvent();
-        } else if ("CURRENT".equals(localPuzzle.getStatus())) {
-            
-        } else if ("BEEN".equals(localPuzzle.getStatus())) {
 
+            setDefaultPuzzleData(localPuzzle);
+            setUpdatePuzzleStatusEvent(PuzzleStatus.BEEN);
+        } else if ("CURRENT".equals(localPuzzle.getStatus())) {
+
+            setUpdatePuzzleStatusEvent(PuzzleStatus.BEEN);
+        } else if ("BEEN".equals(localPuzzle.getStatus())) {
+            setUpdatePuzzleStatusEvent(PuzzleStatus.BEEN);
         } else {
 
         }
@@ -89,6 +94,7 @@ public class SavePuzzleActivity extends AppCompatActivity {
 
     @NonNull
     private void setDefaultPuzzleData(Puzzle localPuzzle) {
+        Log.e("SavePuzzleActivity", "DefaultPuzzle");
         Log.e("SavePuzzleActivity", String.valueOf(localPuzzle.getId()));
         Log.e("SavePuzzleActivity", localPuzzle.toString());
 
@@ -128,18 +134,23 @@ public class SavePuzzleActivity extends AppCompatActivity {
         return puzzle != null;
     }
 
-    private void setClickUpdatePuzzleButtonEvent() {
+    private void setUpdatePuzzleStatusEvent(final PuzzleStatus puzzleStatus) {
+        Log.e("SavePuzzleActivity", "defaultClickUpdatePuzzleButtonEvent");
+
         findViewById(R.id.puzzle_add_button).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 EditText description = (EditText) findViewById(R.id.puzzle_description);
 
                 SavePuzzleActivity.this.puzzle.setDescription(description.getText().toString());
+                SavePuzzleActivity.this.puzzle.setStatus(String.valueOf(puzzleStatus));
+
                 Log.e("SavePuzzleActivity", description.getText().toString());
                 Log.e("SavePuzzleActivity", SavePuzzleActivity.this.puzzle.toString());
 
                 PuzzleDataSource puzzleDataSource = new PuzzleDataSource(getApplicationContext());
                 long puzzleId = puzzleDataSource.updatePuzzle(SavePuzzleActivity.this.puzzle);
+
                 Log.e("getPuzzle", puzzleDataSource.getPuzzle(puzzleId).toString());
 
                 callTravelDiaryActivity();

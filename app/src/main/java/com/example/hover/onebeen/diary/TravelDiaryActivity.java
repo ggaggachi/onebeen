@@ -10,6 +10,7 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.ListView;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import com.example.hover.onebeen.MainActivity;
@@ -56,7 +57,7 @@ public class TravelDiaryActivity extends AppCompatActivity {
 
         final ArrayList<Puzzle> puzzles = puzzleDataSource.getPuzzles(Long.valueOf(travelDiaryId));
 
-        Log.e("TravelDiaryActivity", "puzzles:"+puzzles);
+        Log.e("TravelDiaryActivity", "puzzles:" + puzzles);
 
         convertToViewAccodingToTravelStatus(travelStatus, puzzles);
 
@@ -68,6 +69,12 @@ public class TravelDiaryActivity extends AppCompatActivity {
 //
 //        puzzles.add(null);
 
+        progressBarEvent(puzzles);
+
+        listViewEvent(travelDiaryId, travelStatus, puzzles);
+    }
+
+    private void listViewEvent(final String travelDiaryId, final String travelStatus, ArrayList<Puzzle> puzzles) {
         ListView listView = (ListView) findViewById(R.id.puzzle_list_view);
         listView.setAdapter(new PuzzleListViewAdapter(getLayoutInflater(), R.layout.puzzle_item, puzzles));
 
@@ -77,7 +84,7 @@ public class TravelDiaryActivity extends AppCompatActivity {
                 String tag = String.valueOf(view.getTag());
                 String puzzleId = String.valueOf(view.getTag("puzzleId".hashCode()));
 
-                Log.e("TravelDiaryActivity", "puzzledId:"+puzzleId);
+                Log.e("TravelDiaryActivity", "puzzledId:" + puzzleId);
                 Log.e("TravelDiaryActivity", "tag:"+tag);
 
                 if ("CURRENT".equals(tag)) {
@@ -131,6 +138,31 @@ public class TravelDiaryActivity extends AppCompatActivity {
                 startActivityForResult(intent, ActivityStatus.TravelDiaryActivity.getValue());
             }
         });
+    }
+
+    private void progressBarEvent(ArrayList<Puzzle> puzzles) {
+        int beenSize = 0;
+
+        for (Puzzle puzzle : puzzles) {
+            if("BEEN".equals(puzzle.getStatus())) {
+                beenSize++;
+            }
+        }
+
+        if (beenSize == 0) {
+            TextView progressText = (TextView) findViewById(R.id.progress_percent);
+            progressText.setText("0%");
+            return;
+        }
+
+        int percent = beenSize / (puzzles.size() / 100);
+
+        TextView progressText = (TextView) findViewById(R.id.progress_percent);
+        progressText.setText(Integer.valueOf(percent));
+
+        ProgressBar progressBar = (ProgressBar) findViewById(R.id.progressBar);
+        progressBar.setMax(100);
+        progressBar.setProgress(percent);
     }
 
     @Override

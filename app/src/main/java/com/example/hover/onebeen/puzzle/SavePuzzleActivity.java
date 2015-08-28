@@ -42,10 +42,28 @@ public class SavePuzzleActivity extends AppCompatActivity {
         setContentView(R.layout.activity_save_puzzle);
         setActionbar();
 
-        setDefaultPuzzleData();
+        Intent intent = getIntent();
+        String puzzleId = intent.getExtras().getString("puzzleId");
+
+        PuzzleDataSource puzzleDataSource = new PuzzleDataSource(this);
+        Puzzle localPuzzle = puzzleDataSource.getPuzzle(Long.valueOf(puzzleId));
+
+        Log.e("SavePuzzleActivity", "PuzzleStatus에 따른 이벤트 시작!");
+        Log.e("SavePuzzleActivity", "puzleStatus:" + localPuzzle.getStatus());
+
+        if ("WANT".equals(localPuzzle.getStatus())) {
+            Log.e("SavePuzzleActivity", "PuzzleStatus WANT 분기문 시작");
+            setDefaultPuzzleData(localPuzzle);
+            setClickUpdatePuzzleButtonEvent();
+        } else if ("CURRENT".equals(localPuzzle.getStatus())) {
+            
+        } else if ("BEEN".equals(localPuzzle.getStatus())) {
+
+        } else {
+
+        }
 
         setClickImageRegisterButtonEvent();
-        setClickUpdatePuzzleButtonEvent();
     }
 
     private void setClickImageRegisterButtonEvent() {
@@ -70,45 +88,39 @@ public class SavePuzzleActivity extends AppCompatActivity {
     }
 
     @NonNull
-    private void setDefaultPuzzleData() {
-        Intent intent = getIntent();
-        String puzzleId = intent.getExtras().getString("puzzleId");
+    private void setDefaultPuzzleData(Puzzle localPuzzle) {
+        Log.e("SavePuzzleActivity", String.valueOf(localPuzzle.getId()));
+        Log.e("SavePuzzleActivity", localPuzzle.toString());
 
-        PuzzleDataSource puzzleDataSource = new PuzzleDataSource(this);
-        Puzzle puzzle = puzzleDataSource.getPuzzle(Long.valueOf(puzzleId));
+        ((TextView) findViewById(R.id.puzzle_place)).setText(localPuzzle.getPlace());
+        ((TextView) findViewById(R.id.puzzle_todo)).setText(localPuzzle.getTodo());
 
-        Log.e("SavePuzzleActivity", String.valueOf(puzzleId));
-        Log.e("SavePuzzleActivity", puzzle.toString());
-
-        ((TextView) findViewById(R.id.puzzle_place)).setText(puzzle.getPlace());
-        ((TextView) findViewById(R.id.puzzle_todo)).setText(puzzle.getTodo());
-
-        SavePuzzleActivity.this.puzzle.setId(puzzle.getId());
-        SavePuzzleActivity.this.puzzle.setTravelDiaryId(puzzle.getTravelDiaryId());
-        SavePuzzleActivity.this.puzzle.setStatus(puzzle.getStatus());
-        SavePuzzleActivity.this.puzzle.setPlace(puzzle.getPlace());
-        SavePuzzleActivity.this.puzzle.setTodo(puzzle.getTodo());
+        SavePuzzleActivity.this.puzzle.setId(localPuzzle.getId());
+        SavePuzzleActivity.this.puzzle.setTravelDiaryId(localPuzzle.getTravelDiaryId());
+        SavePuzzleActivity.this.puzzle.setStatus(localPuzzle.getStatus());
+        SavePuzzleActivity.this.puzzle.setPlace(localPuzzle.getPlace());
+        SavePuzzleActivity.this.puzzle.setTodo(localPuzzle.getTodo());
 
         // 디폴트로 장소와 하고 싶은 일은 다른 액티비티에서 저장이 되어 오지만, Description은 이곳에서 저장하고 다시
         // 이 액티비티를 들어오지 않는 이상 데이터가 없을 수도 있으므로 Null Check를 한다.
-        if (isRegisteredPreviously(puzzle)) {
-            ((EditText) findViewById(R.id.puzzle_description)).setText(puzzle.getDescription());
-            SavePuzzleActivity.this.puzzle.setDescription(puzzle.getDescription());
+        if (isRegisteredPreviously(localPuzzle)) {
+            ((EditText) findViewById(R.id.puzzle_description)).setText(localPuzzle.getDescription());
+            SavePuzzleActivity.this.puzzle.setDescription(localPuzzle.getDescription());
         }
-        if (puzzle.getImagePath1() != null) {
+        if (localPuzzle.getImagePath1() != null) {
             ImageButton imageButton = (ImageButton) findViewById(R.id.image_add_button1);
-            imageButton.setImageURI(Uri.parse(puzzle.getImagePath1()));
-            SavePuzzleActivity.this.puzzle.setImagePath1(puzzle.getImagePath1());
+            imageButton.setImageURI(Uri.parse(localPuzzle.getImagePath1()));
+            SavePuzzleActivity.this.puzzle.setImagePath1(localPuzzle.getImagePath1());
         }
-        if (puzzle.getImagePath2() != null) {
+        if (localPuzzle.getImagePath2() != null) {
             ImageButton imageButton = (ImageButton) findViewById(R.id.image_add_button2);
-            imageButton.setImageURI(Uri.parse(puzzle.getImagePath2()));
-            SavePuzzleActivity.this.puzzle.setImagePath2(puzzle.getImagePath2());
+            imageButton.setImageURI(Uri.parse(localPuzzle.getImagePath2()));
+            SavePuzzleActivity.this.puzzle.setImagePath2(localPuzzle.getImagePath2());
         }
-        if (puzzle.getImagePath3() != null) {
+        if (localPuzzle.getImagePath3() != null) {
             ImageButton imageButton = (ImageButton) findViewById(R.id.image_add_button3);
-            imageButton.setImageURI(Uri.parse(puzzle.getImagePath3()));
-            SavePuzzleActivity.this.puzzle.setImagePath3(puzzle.getImagePath3());
+            imageButton.setImageURI(Uri.parse(localPuzzle.getImagePath3()));
+            SavePuzzleActivity.this.puzzle.setImagePath3(localPuzzle.getImagePath3());
         }
     }
 

@@ -48,10 +48,11 @@ public class TravelDiaryActivity extends AppCompatActivity {
         final String travelDiaryId = intent.getExtras().getString("travelDiaryId");
         final String travelStatus = intent.getExtras().getString("travelStatus");
 
-        Log.e("TravelDiaryActivity", "travelDiaryId:"+travelDiaryId);
-        Log.e("TravelDiaryActivity", "travelStatus:"+travelStatus);
+        Log.e("TravelDiaryActivity", "travelDiaryId:" + travelDiaryId);
+        Log.e("TravelDiaryActivity", "travelStatus:" + travelStatus);
 
         setTopMenu(travelDiaryId);
+        setBottomMenu(travelDiaryId);
 
         PuzzleDataSource puzzleDataSource = new PuzzleDataSource(this);
 
@@ -72,6 +73,19 @@ public class TravelDiaryActivity extends AppCompatActivity {
         progressBarEvent(puzzles);
 
         listViewEvent(travelDiaryId, travelStatus, puzzles);
+    }
+
+    private void setBottomMenu(String travelDiaryId) {
+        TravelDiaryDataSource travelDiaryDataSource = new TravelDiaryDataSource(this);
+        TravelDiary travelDiary = travelDiaryDataSource.getTravelDiary(Long.valueOf(travelDiaryId));
+
+        if (TravelStatus.ONGOING.equals(travelDiary.getTravelStatus())) {
+            Button button = (Button) findViewById(R.id.register_travel_diary);
+            button.setText("여행 완료");
+        } else if (TravelStatus.PLANNING.equals(travelDiary.getTravelStatus())){
+            Button button = (Button) findViewById(R.id.register_travel_diary);
+            button.setText("시작");
+        }
     }
 
     private void listViewEvent(final String travelDiaryId, final String travelStatus, ArrayList<Puzzle> puzzles) {
@@ -141,7 +155,7 @@ public class TravelDiaryActivity extends AppCompatActivity {
     }
 
     private void progressBarEvent(ArrayList<Puzzle> puzzles) {
-        if (puzzles.size() == 0 || puzzles.size() == 1) {
+        if (puzzles.size() == 0) {
             Log.e("TravelDiaryActivity", "puzzles가 없는 경우, 즉 처음에 여행 시작하기를 통하여 들어온 경");
             TextView progressText = (TextView) findViewById(R.id.progress_percent);
             progressText.setText("0%");
@@ -159,20 +173,24 @@ public class TravelDiaryActivity extends AppCompatActivity {
             }
         }
 
-        if (beenSize == 0 || puzzles.size() / 100 == 0) {
+        if (beenSize == 0) {
             TextView progressText = (TextView) findViewById(R.id.progress_percent);
             progressText.setText("0%");
             return;
         }
 
+        Log.e("TravelDiaryActivity", "Percent 계산 시작");
+
         int percent = (int) ((beenSize * 100) / puzzles.size());
 
         TextView progressText = (TextView) findViewById(R.id.progress_percent);
-        progressText.setText(percent);
+        progressText.setText(String.valueOf(percent));
 
         ProgressBar progressBar = (ProgressBar) findViewById(R.id.progressBar);
         progressBar.setMax(100);
         progressBar.setProgress(percent);
+
+        Log.e("TravelDiaryActivity", "계산된 Percent:"+percent);
     }
 
     @Override

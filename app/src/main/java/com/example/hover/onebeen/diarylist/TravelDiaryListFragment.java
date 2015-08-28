@@ -31,13 +31,13 @@ public class TravelDiaryListFragment extends Fragment {
 
         final String travelStatus = bundle.getString("travelStatus");
 
-        Log.e("ekdxhrl", travelStatus);
+        Log.e("TravelDiaryListFragment", travelStatus);
 
         TravelDiaryDataSource travelDiaryDataSource = new TravelDiaryDataSource(getContext());
 
         ArrayList<TravelDiary> travelDiaries = travelDiaryDataSource.getTravelDiaries(travelStatus);
 
-        Log.e("ekdxhrl", travelDiaries.toString());
+        Log.e("TravelDiaryListFragment", travelDiaries.toString());
 
         ArrayList<TravelDiaryListItem> diaryItems = new ArrayList<>();
 

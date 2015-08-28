@@ -47,8 +47,8 @@ public class ShowPuzzleActivity extends AppCompatActivity {
 
         final String puzzleId = intent.getExtras().getString("id");
 
-        Log.e("ekdxhrl1", intent.getStringExtra("id"));
-        Log.e("ekdxhrl2", intent.getExtras().getString("id"));
+        Log.e("ShowPuzzleActivity", intent.getStringExtra("id"));
+        Log.e("ShowPuzzleActivity", intent.getExtras().getString("id"));
 
 //        PuzzleDataSource puzzleDataSource = new PuzzleDataSource(this);
 //        Puzzle puzzle = puzzleDataSource.getPuzzle(Long.valueOf(puzzleId));

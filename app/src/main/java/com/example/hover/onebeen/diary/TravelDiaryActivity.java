@@ -68,6 +68,9 @@ public class TravelDiaryActivity extends AppCompatActivity {
                 String tag = String.valueOf(view.getTag());
                 String puzzleId = String.valueOf(view.getTag("puzzleId".hashCode()));
 
+                Log.e("TravelDiaryActivity", "puzzledId:"+puzzleId);
+                Log.e("TravelDiaryActivity", "tag:"+tag);
+
                 if ("CURRENT".equals(tag)) {
 //                    startActivity(new Intent(TravelDiaryActivity.this, ShowPuzzleActivity.class));
                 } else if ("BEEN".equals(tag)) {
@@ -77,11 +80,11 @@ public class TravelDiaryActivity extends AppCompatActivity {
                 } else if ("WANT".equals(tag)) {
                     Intent addPuzzleIntent = new Intent(TravelDiaryActivity.this, SavePuzzleActivity.class);
                     addPuzzleIntent.putExtra("puzzleId", puzzleId);
-                    startActivity(addPuzzleIntent);
+                    startActivityForResult(addPuzzleIntent, 1);
                 } else {
                     Intent addPuzzleIntent = new Intent(TravelDiaryActivity.this, AddPuzzleActivity.class);
                     addPuzzleIntent.putExtra("travelDiaryId", travelDiaryId);
-                    startActivity(addPuzzleIntent);
+                    startActivityForResult(addPuzzleIntent, 1);
                 }
             }
         });

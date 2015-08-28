@@ -137,6 +137,7 @@ public class TravelDiaryActivity extends AppCompatActivity {
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
 
+
         Log.e("TravelDiaryActivity", "requestCode:"+requestCode+"/resultCode:"+resultCode+"/data:"+data);
     }
 
@@ -205,4 +206,6 @@ public class TravelDiaryActivity extends AppCompatActivity {
         }
         return super.onOptionsItemSelected(item);
     }
+
+
 }

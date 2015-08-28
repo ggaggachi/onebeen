@@ -25,8 +25,7 @@ import com.example.hover.onebeen.db.PuzzleDataSource;
 import com.example.hover.onebeen.db.TravelDiaryDataSource;
 import com.example.hover.onebeen.db.dto.Puzzle;
 import com.example.hover.onebeen.db.dto.TravelDiary;
-import com.example.hover.onebeen.db.dto.TravelStatus;
-import com.example.hover.onebeen.utility.Time;
+import com.example.hover.onebeen.diary.TravelDiaryActivity;
 
 import java.io.File;
 import java.io.FileOutputStream;
@@ -131,9 +130,29 @@ public class SavePuzzleActivity extends AppCompatActivity {
                 long puzzleId = puzzleDataSource.updatePuzzle(SavePuzzleActivity.this.puzzle);
                 Log.e("getPuzzle", puzzleDataSource.getPuzzle(puzzleId).toString());
 
+                callTravelDiaryActivity();
+
                 finish();
             }
         });
+    }
+
+    private void callTravelDiaryActivity() {
+        Log.e("SavePuzzleActivity", "callTravelDiaryActivity");
+
+        Intent intent = new Intent(SavePuzzleActivity.this, TravelDiaryActivity.class);
+        TravelDiaryDataSource travelDiaryDataSource = new TravelDiaryDataSource(getApplicationContext());
+
+        Log.e("SavePuzzleActivity", "callTravelDiaryActivity travelDiaryId:"+ SavePuzzleActivity.this.puzzle.getTravelDiaryId());
+
+        TravelDiary travelDiary = travelDiaryDataSource.getTravelDiary(Long.valueOf(SavePuzzleActivity.this.puzzle.getTravelDiaryId()));
+
+        Log.e("SavePuzzleActivity", "callTravelDiaryActivity travelDiary:"+travelDiary.toString());
+
+        intent.putExtra("travelDiaryId", String.valueOf(travelDiary.getId()));
+        intent.putExtra("travelStatus", travelDiary.getTravelStatus().getValue());
+
+        startActivityForResult(intent, 1);
     }
 
     private void setActionbar() {

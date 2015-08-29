@@ -82,12 +82,14 @@ public class MainActivity extends AppCompatActivity {
                     switch (rv.getChildPosition(child)) {
                         case 1: //여행 시작하기
 
+                            Drawer.closeDrawers();
                             Intent intent = new Intent(getApplicationContext(), MakeDiary.class);
                             intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                             startActivityForResult(intent, 1);
 
                             break;
                         case 2: //다녀온 여행지
+                            Drawer.closeDrawers();
                             travelDiaryListFragment = new TravelDiaryListFragment();
 
                             args = new Bundle();
@@ -102,6 +104,7 @@ public class MainActivity extends AppCompatActivity {
                                     .commit();
                             break;
                         case 3: //진행중 여행지
+                            Drawer.closeDrawers();
                             travelDiaryListFragment = new TravelDiaryListFragment();
 
                             args = new Bundle();
@@ -116,6 +119,7 @@ public class MainActivity extends AppCompatActivity {
                                     .commit();
                             break;
                         case 4: //계획중 여행지
+                            Drawer.closeDrawers();
                             travelDiaryListFragment = new TravelDiaryListFragment();
 
                             args = new Bundle();

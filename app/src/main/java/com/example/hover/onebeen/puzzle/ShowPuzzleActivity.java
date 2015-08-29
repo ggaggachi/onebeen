@@ -50,9 +50,10 @@ public class ShowPuzzleActivity extends AppCompatActivity {
         Log.e("ShowPuzzleActivity", intent.getStringExtra("id"));
         Log.e("ShowPuzzleActivity", intent.getExtras().getString("id"));
 
-//        PuzzleDataSource puzzleDataSource = new PuzzleDataSource(this);
-//        Puzzle puzzle = puzzleDataSource.getPuzzle(Long.valueOf(puzzleId));
+        PuzzleDataSource puzzleDataSource = new PuzzleDataSource(this);
+        Puzzle puzzle = puzzleDataSource.getPuzzle(Long.valueOf(puzzleId));
 
+        Log.e("ShowPuzzleActivity", puzzle.toString());
 
         this.puzzles = new ArrayList<>();
         Puzzle puzzle1 = new Puzzle();

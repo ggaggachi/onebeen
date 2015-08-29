@@ -25,6 +25,7 @@ import com.example.hover.onebeen.db.dto.User;
 import com.example.hover.onebeen.diarylist.TravelDiaryListFragment;
 import com.example.hover.onebeen.puzzle.AddPuzzleActivity;
 import com.example.hover.onebeen.puzzle.SavePuzzleActivity;
+import com.example.hover.onebeen.puzzle.ShowPuzzleActivity;
 import com.example.hover.onebeen.utility.ActivityStatus;
 import com.example.hover.onebeen.utility.Time;
 import com.facebook.FacebookSdk;
@@ -104,9 +105,9 @@ public class TravelDiaryActivity extends AppCompatActivity {
                 if ("CURRENT".equals(tag)) {
 //                    startActivity(new Intent(TravelDiaryActivity.this, ShowPuzzleActivity.class));
                 } else if ("BEEN".equals(tag)) {
-//                    startActivity(new Intent(TravelDiaryActivity.this, ShowPuzzleActivity.class));
-//                    addPuzzleIntent.putExtra("puzzleId", puzzledId);
-//                    startActivity(addPuzzleIntent);
+                    Intent intent = new Intent(TravelDiaryActivity.this, ShowPuzzleActivity.class);
+                    intent.putExtra("id", puzzleId);
+                    startActivity(intent);
                 } else if ("WANT".equals(tag)) {
                     Intent addPuzzleIntent = new Intent(TravelDiaryActivity.this, SavePuzzleActivity.class);
                     addPuzzleIntent.putExtra("puzzleId", puzzleId);
@@ -190,7 +191,7 @@ public class TravelDiaryActivity extends AppCompatActivity {
         progressBar.setMax(100);
         progressBar.setProgress(percent);
 
-        Log.e("TravelDiaryActivity", "계산된 Percent:"+percent);
+        Log.e("TravelDiaryActivity", "계산된 Percent:" + percent);
     }
 
     @Override

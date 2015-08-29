@@ -53,23 +53,10 @@ public class SavePuzzleActivity extends AppCompatActivity {
 
         Log.e("SavePuzzleActivity", "PuzzleStatus에 따른 이벤트 시작!");
         Log.e("SavePuzzleActivity", "puzleStatus:" + localPuzzle.getStatus());
+        Log.e("SavePuzzleActivity", "localPuzzle:" + localPuzzle.toString());
 
-        // 사용자가 누른 퍼즐의 성격에 따라, 등록을 눌렀을 때에 Puzzle의 타입이 바뀌게 된다.
-        //
-
-        if ("WANT".equals(localPuzzle.getStatus())) {
-            Log.e("SavePuzzleActivity", "PuzzleStatus WANT 분기문 시작");
-
-            setDefaultPuzzleData(localPuzzle);
-            setUpdatePuzzleStatusEvent(PuzzleStatus.BEEN);
-        } else if ("CURRENT".equals(localPuzzle.getStatus())) {
-
-            setUpdatePuzzleStatusEvent(PuzzleStatus.BEEN);
-        } else if ("BEEN".equals(localPuzzle.getStatus())) {
-            setUpdatePuzzleStatusEvent(PuzzleStatus.BEEN);
-        } else {
-
-        }
+        setDefaultPuzzleData(localPuzzle);
+        setUpdatePuzzleStatusEvent(PuzzleStatus.BEEN);
 
         setClickImageRegisterButtonEvent();
     }

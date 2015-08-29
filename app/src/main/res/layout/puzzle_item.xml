@@ -5,6 +5,26 @@
     android:layout_height="90dp"
     android:background="#53b2d5">
 
+    <RelativeLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_toRightOf="@+id/puzzle_route_img"
+        android:layout_centerHorizontal="true"
+        android:layout_centerVertical="true"
+        android:layout_marginLeft="10dp">
+        <ImageView
+            android:id="@+id/img_piece"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+        <TextView
+            android:id="@+id/img_piece_count"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:layout_centerVertical="true"
+            android:paddingBottom="5dp" />
+    </RelativeLayout>
+
     <ImageView
         android:id="@+id/puzzle_route_img"
         android:layout_width="55dp"

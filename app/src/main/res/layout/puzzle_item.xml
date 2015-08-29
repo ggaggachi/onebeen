@@ -2,7 +2,7 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:id="@+id/puzzle_item_background"
     android:layout_width="match_parent"
-    android:layout_height="120dp"
+    android:layout_height="90dp"
     android:background="#53b2d5">
 
     <ImageView
@@ -29,7 +29,7 @@
             android:layout_alignParentRight="true"
             android:text="가고싶은곳"
             android:textColor="#ffffff"
-            android:textSize="30sp"
+            android:textSize="24sp"
             android:textStyle="bold" />
 
         <TextView
@@ -37,7 +37,7 @@
             android:layout_height="wrap_content"
             android:layout_below="@id/puzzle_item_place"
             android:layout_alignParentRight="true"
-            android:textSize="20sp"
+            android:textSize="16sp"
             android:textColor="#ffffff"
             android:id="@+id/puzzle_item_todo"
             android:text="하고싶은일" />

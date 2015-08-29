@@ -72,7 +72,8 @@ public class AddPuzzleActivity extends AppCompatActivity {
                 Intent intent = new Intent(AddPuzzleActivity.this, TravelDiaryActivity.class);
                 intent.putExtra("travelDiaryId", travelDiaryId);
 
-                startActivityForResult(intent, 1);
+                startActivity(intent);
+                finish();
             }
         });
     }

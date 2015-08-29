@@ -1,5 +1,6 @@
 package com.example.hover.onebeen.diary;
 
+import android.graphics.Color;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -14,6 +15,7 @@ import com.example.hover.onebeen.puzzle.PuzzleStatus;
 import java.util.ArrayList;
 
 public class PuzzleListViewAdapter extends BaseAdapter {
+    private final ArrayList<String> colors;
 
     private LayoutInflater inflater;
     private int layout;
@@ -23,6 +25,22 @@ public class PuzzleListViewAdapter extends BaseAdapter {
         this.inflater = inflater;
         this.layout = layout;
         this.data = data;
+
+        colors = new ArrayList<>();
+        colors.add("#4dc0e9");
+        colors.add("#29aed8");
+        colors.add("#279ecd");
+        colors.add("#239abf");
+        colors.add("#2295b1");
+        colors.add("#117f9f");
+        colors.add("#1b6b8f");
+        colors.add("#645588");
+        colors.add("#614571");
+        colors.add("#473159");
+        colors.add("#39274c");
+        colors.add("#2f2243");
+        colors.add("#2c1c3d");
+        colors.add("#211433");
     }
 
     @Override
@@ -44,6 +62,12 @@ public class PuzzleListViewAdapter extends BaseAdapter {
     public View getView(int position, View convertView, ViewGroup parent) {
         if (convertView == null) {
             convertView = inflater.inflate(layout, parent, false);
+        }
+
+        if (position >= colors.size()) {
+            convertView.findViewById(R.id.puzzle_item_background).setBackgroundColor(Color.parseColor(colors.get(colors.size()-1)));
+        } else {
+            convertView.findViewById(R.id.puzzle_item_background).setBackgroundColor(Color.parseColor(colors.get(position)));
         }
 
         Puzzle puzzle = data.get(position);

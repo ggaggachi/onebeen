@@ -74,6 +74,14 @@ public class TravelDiaryListViewAdapter extends BaseAdapter{
                 Log.e("TravelViewAdapter", "ClickEventExit");
             }
         });
+        convertView.setOnLongClickListener(new View.OnLongClickListener() {
+
+            @Override
+            public boolean onLongClick(View v) {
+                //Toast.makeText(finalConvertView.getContext(), "ASDF", Toast.LENGTH_SHORT).show();
+                return false;
+            }
+        });
 
         return convertView;
     }

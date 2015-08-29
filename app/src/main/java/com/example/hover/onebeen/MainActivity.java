@@ -29,7 +29,7 @@ public class MainActivity extends AppCompatActivity {
     /*String TITLES[] = {"여행 시작하기", "다녀온 여행지", "진행중 여행지", "계획중 여행지", "설정"};
     int ICONS[] = {R.drawable.logo_green, R.drawable.logo_green, R.drawable.logo_green, R.drawable.logo_green, R.drawable.logo_green};*/
     String TITLES[] = {"여행 시작하기", "다녀온 여행지", "진행중 여행지", "계획중 여행지"};
-    int ICONS[] = {R.drawable.logo_green, R.drawable.logo_green, R.drawable.logo_green, R.drawable.logo_green};
+    int ICONS[] = {R.drawable.btn_1, R.drawable.btn_2, R.drawable.btn_3, R.drawable.btn_4};
 
     private Toolbar toolbar;
 

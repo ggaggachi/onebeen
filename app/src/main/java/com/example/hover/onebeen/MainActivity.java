@@ -95,6 +95,7 @@ public class MainActivity extends AppCompatActivity {
 
                             travelDiaryListFragment.setArguments(args);
 
+                            isHomeFragment = false;
                             fragmentManager.beginTransaction()
                                     .setCustomAnimations(R.anim.slide_in_light, R.anim.slide_out_left)
                                     .replace(R.id.container, travelDiaryListFragment)
@@ -108,6 +109,7 @@ public class MainActivity extends AppCompatActivity {
 
                             travelDiaryListFragment.setArguments(args);
 
+                            isHomeFragment = false;
                             fragmentManager.beginTransaction()
                                     .setCustomAnimations(R.anim.slide_in_light, R.anim.slide_out_left)
                                     .replace(R.id.container, travelDiaryListFragment)
@@ -121,6 +123,7 @@ public class MainActivity extends AppCompatActivity {
 
                             travelDiaryListFragment.setArguments(args);
 
+                            isHomeFragment = false;
                             fragmentManager.beginTransaction()
                                     .setCustomAnimations(R.anim.slide_in_light, R.anim.slide_out_left)
                                     .replace(R.id.container, travelDiaryListFragment)

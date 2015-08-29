@@ -18,6 +18,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -105,18 +106,33 @@ public class SavePuzzleActivity extends AppCompatActivity {
         }
         if (localPuzzle.getImagePath1() != null) {
             ImageButton imageButton = (ImageButton) findViewById(R.id.image_add_button1);
-            imageButton.setImageURI(Uri.parse(localPuzzle.getImagePath1()));
             SavePuzzleActivity.this.puzzle.setImagePath1(localPuzzle.getImagePath1());
+
+            String path = Environment.getExternalStorageDirectory().getAbsolutePath() + "/" + localPuzzle.getImagePath1();
+            BitmapFactory.Options bo = new BitmapFactory.Options();
+            bo.inSampleSize = 1;
+            Bitmap bmp = BitmapFactory.decodeFile(path, bo);
+            imageButton.setImageBitmap(bmp);
         }
         if (localPuzzle.getImagePath2() != null) {
             ImageButton imageButton = (ImageButton) findViewById(R.id.image_add_button2);
-            imageButton.setImageURI(Uri.parse(localPuzzle.getImagePath2()));
             SavePuzzleActivity.this.puzzle.setImagePath2(localPuzzle.getImagePath2());
+
+            String path = Environment.getExternalStorageDirectory().getAbsolutePath() + "/" + localPuzzle.getImagePath2();
+            BitmapFactory.Options bo = new BitmapFactory.Options();
+            bo.inSampleSize = 1;
+            Bitmap bmp = BitmapFactory.decodeFile(path, bo);
+            imageButton.setImageBitmap(bmp);
         }
         if (localPuzzle.getImagePath3() != null) {
             ImageButton imageButton = (ImageButton) findViewById(R.id.image_add_button3);
-            imageButton.setImageURI(Uri.parse(localPuzzle.getImagePath3()));
             SavePuzzleActivity.this.puzzle.setImagePath3(localPuzzle.getImagePath3());
+
+            String path = Environment.getExternalStorageDirectory().getAbsolutePath() + "/" + localPuzzle.getImagePath3();
+            BitmapFactory.Options bo = new BitmapFactory.Options();
+            bo.inSampleSize = 1;
+            Bitmap bmp = BitmapFactory.decodeFile(path, bo);
+            imageButton.setImageBitmap(bmp);
         }
     }
 
@@ -435,5 +451,15 @@ public class SavePuzzleActivity extends AppCompatActivity {
         }
 
         return null;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(android.view.MenuItem item) {
+        switch (item.getItemId()) {
+            case android.R.id.home:
+                finish();
+                return true;
+        }
+        return super.onOptionsItemSelected(item);
     }
 }

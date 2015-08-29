@@ -13,6 +13,7 @@ import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
+import android.widget.ImageView;
 
 import com.example.hover.onebeen.db.UserDataSource;
 import com.example.hover.onebeen.db.dto.TravelStatus;
@@ -62,6 +63,18 @@ public class MainActivity extends AppCompatActivity {
 
         toolbar = (Toolbar) findViewById(R.id.tool_bar);
         setSupportActionBar(toolbar);
+
+        ImageView homeBtn = (ImageView)findViewById(R.id.home_btn);
+        homeBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                isHomeFragment = true;
+                fragmentManager.beginTransaction()
+                        .setCustomAnimations(R.anim.slide_in_light, R.anim.slide_out_left)
+                        .replace(R.id.container, homeFragment)
+                        .commit();
+            }
+        });
         getSupportActionBar().setDisplayShowTitleEnabled(false);
 
         mRecyclerView = (RecyclerView) findViewById(R.id.RecyclerView);

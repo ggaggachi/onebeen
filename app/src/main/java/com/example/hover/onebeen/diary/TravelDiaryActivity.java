@@ -73,6 +73,8 @@ public class TravelDiaryActivity extends AppCompatActivity {
 
         progressBarEvent(puzzles);
 
+        Log.e("TravelDiaryActivity", "converted puzzles:" + puzzles.toString());
+
         listViewEvent(travelDiaryId, travelStatus, puzzles);
     }
 
@@ -108,14 +110,17 @@ public class TravelDiaryActivity extends AppCompatActivity {
                     Intent intent = new Intent(TravelDiaryActivity.this, ShowPuzzleActivity.class);
                     intent.putExtra("id", puzzleId);
                     startActivity(intent);
+                    finish();
                 } else if ("WANT".equals(tag)) {
                     Intent addPuzzleIntent = new Intent(TravelDiaryActivity.this, SavePuzzleActivity.class);
                     addPuzzleIntent.putExtra("puzzleId", puzzleId);
-                    startActivityForResult(addPuzzleIntent, 1);
+                    startActivity(addPuzzleIntent);
+                    finish();
                 } else {
                     Intent addPuzzleIntent = new Intent(TravelDiaryActivity.this, AddPuzzleActivity.class);
                     addPuzzleIntent.putExtra("travelDiaryId", travelDiaryId);
-                    startActivityForResult(addPuzzleIntent, 1);
+                    startActivity(addPuzzleIntent);
+                    finish();
                 }
             }
         });

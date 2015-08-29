@@ -65,7 +65,7 @@
                         android:layout_height="wrap_content"
                         android:text="다이어리 이름"
                         android:textColor="#ffffff"
-                        android:textSize="30sp"
+                        android:textSize="24sp"
                         android:textStyle="bold" />
 
                     <TextView
@@ -86,7 +86,7 @@
                         android:layout_below="@id/diary_info_subtitle"
                         android:text="허버허버"
                         android:textColor="#ffffff"
-                        android:textSize="18sp" />
+                        android:textSize="16sp" />
                 </RelativeLayout>
 
 

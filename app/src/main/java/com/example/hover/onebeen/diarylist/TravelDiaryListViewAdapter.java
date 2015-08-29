@@ -74,6 +74,7 @@ public class TravelDiaryListViewAdapter extends BaseAdapter{
                 Log.e("TravelViewAdapter", "ClickEventExit");
             }
         });
+
         convertView.setOnLongClickListener(new View.OnLongClickListener() {
 
             @Override

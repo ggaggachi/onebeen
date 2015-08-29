@@ -1,6 +1,9 @@
 package com.example.hover.onebeen.diarylist;
 
+import android.annotation.TargetApi;
 import android.content.Intent;
+import android.graphics.drawable.Drawable;
+import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -9,6 +12,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
+import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.Toast;
 
@@ -22,6 +26,7 @@ import java.util.ArrayList;
 
 public class TravelDiaryListFragment extends Fragment {
 
+    @TargetApi(Build.VERSION_CODES.JELLY_BEAN)
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -57,6 +62,12 @@ public class TravelDiaryListFragment extends Fragment {
             for (TravelDiary travelDiary : travelDiaries) {
                 diaryItems.add(new TravelDiaryListItem(travelDiary.getTitle(), travelDiary.getStartDate(), null, null, travelDiary.getId()));
             }
+        }
+
+        if (diaryItems.size() == 0) {
+            LinearLayout rootDiaryView = (LinearLayout) root.findViewById(R.id.root_diary_list_view);
+            Drawable drawable = getResources().getDrawable(R.drawable.bg_start);
+            rootDiaryView.setBackground(drawable);
         }
 
         ListView listView = (ListView) root.findViewById(R.id.diary_list_view);

@@ -103,18 +103,30 @@ public class TravelDiaryActivity extends AppCompatActivity {
 
                 Log.e("TravelDiaryActivity", "puzzledId:" + puzzleId);
                 Log.e("TravelDiaryActivity", "tag:"+tag);
+                if(TravelStatus.PLANNING.getValue().equals(travelStatus)) {
+                   return;
+                }
 
                 if ("CURRENT".equals(tag)) {
 //                    startActivity(new Intent(TravelDiaryActivity.this, ShowPuzzleActivity.class));
                 } else if ("BEEN".equals(tag)) {
-                    Intent intent = new Intent(TravelDiaryActivity.this, ShowPuzzleActivity.class);
-                    intent.putExtra("id", puzzleId);
-                    startActivity(intent);
+                    if (TravelStatus.ONGOING.getValue().equals(travelStatus)) {
+                        Intent addPuzzleIntent = new Intent(TravelDiaryActivity.this, SavePuzzleActivity.class);
+                        addPuzzleIntent.putExtra("puzzleId", puzzleId);
+//                        addPuzzleIntent.putExtra("travelStatus", travelStatus);
+                        startActivity(addPuzzleIntent);
+                    } else {
+                        Intent intent = new Intent(TravelDiaryActivity.this, ShowPuzzleActivity.class);
+                        intent.putExtra("id", puzzleId);
+                        startActivity(intent);
+                    }
+
                     finish();
                 } else if ("WANT".equals(tag)) {
                     Intent addPuzzleIntent = new Intent(TravelDiaryActivity.this, SavePuzzleActivity.class);
                     addPuzzleIntent.putExtra("puzzleId", puzzleId);
                     startActivity(addPuzzleIntent);
+
                     finish();
                 } else {
                     Intent addPuzzleIntent = new Intent(TravelDiaryActivity.this, AddPuzzleActivity.class);

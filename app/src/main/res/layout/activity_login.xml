@@ -72,14 +72,13 @@
             android:text="둘 러 보 기"/>-->
         <ImageView
             android:id="@+id/guest_btn"
-            android:layout_width="120dp"
-            android:layout_height="30dp"
-            android:scaleType="centerCrop"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             android:layout_marginTop="20dp"
             android:layout_centerHorizontal="true"
             android:layout_below="@id/facebook_login_line"
             android:background="@null"
-            android:src="@drawable/guest_btn"
+            android:src="@drawable/btn_withoutlogin"
             android:focusable="false"
             android:focusableInTouchMode="false" />
     </RelativeLayout>

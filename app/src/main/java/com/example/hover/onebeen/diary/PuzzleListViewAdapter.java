@@ -2,6 +2,7 @@ package com.example.hover.onebeen.diary;
 
 import android.graphics.drawable.Drawable;
 import android.net.Uri;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -67,6 +68,7 @@ public class PuzzleListViewAdapter extends BaseAdapter {
         }
 
         if (0 < puzzle.getImagePathCount()) {
+            Log.e("PuzzleListViewAdapter", "ImageCount:" + puzzle.getImagePathCount());
             ((TextView) convertView.findViewById(R.id.img_piece_count)).setText(String.valueOf(puzzle.getImagePathCount()));
             ImageView imageView = (ImageView) convertView.findViewById(R.id.img_piece);
             imageView.setImageResource(R.drawable.img_piece);

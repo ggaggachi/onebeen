@@ -200,9 +200,13 @@ public class Puzzle implements Parcelable{
 
         if (!(imagePath1 == null || imagePath1.equals(""))) {
             imagePathCount++;
-        } else if(!(imagePath2 == null || imagePath2.equals(""))) {
+        }
+
+        if(!(imagePath2 == null || imagePath2.equals(""))) {
             imagePathCount++;
-        } else if(!(imagePath3 == null || imagePath3.equals(""))) {
+        }
+
+        if(!(imagePath3 == null || imagePath3.equals(""))) {
             imagePathCount++;
         }
 

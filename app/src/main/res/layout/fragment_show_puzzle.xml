@@ -38,6 +38,7 @@
             android:paddingRight="10dp"
             android:paddingTop="10dp"
             android:textColor="#000000"
+            android:textSize="18sp"
 
             android:text="여행 소감"/>
     </LinearLayout>

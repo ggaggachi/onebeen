@@ -20,6 +20,7 @@ import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.TextView;
 import android.widget.Toast;
+
 import com.example.hover.onebeen.R;
 import com.example.hover.onebeen.db.PuzzleDataSource;
 import com.example.hover.onebeen.db.TravelDiaryDataSource;
@@ -31,10 +32,12 @@ import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.OutputStream;
+import java.util.ArrayList;
 
 public class SavePuzzleActivity extends AppCompatActivity {
 
     Puzzle puzzle = new Puzzle();
+    ArrayList<String> imagePathTemp = new ArrayList<>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -148,6 +151,16 @@ public class SavePuzzleActivity extends AppCompatActivity {
                 Log.e("SavePuzzleActivity", description.getText().toString());
                 Log.e("SavePuzzleActivity", SavePuzzleActivity.this.puzzle.toString());
 
+                if (imagePathTemp.size() > 0) {
+                    puzzle.setImagePath1(imagePathTemp.get(0));
+                }
+                if (imagePathTemp.size() > 1) {
+                    puzzle.setImagePath2(imagePathTemp.get(1));
+                }
+                if (imagePathTemp.size() > 2) {
+                    puzzle.setImagePath3(imagePathTemp.get(2));
+                }
+
                 PuzzleDataSource puzzleDataSource = new PuzzleDataSource(getApplicationContext());
                 long puzzleId = puzzleDataSource.updatePuzzle(SavePuzzleActivity.this.puzzle);
 
@@ -166,11 +179,11 @@ public class SavePuzzleActivity extends AppCompatActivity {
         Intent intent = new Intent(SavePuzzleActivity.this, TravelDiaryActivity.class);
         TravelDiaryDataSource travelDiaryDataSource = new TravelDiaryDataSource(getApplicationContext());
 
-        Log.e("SavePuzzleActivity", "callTravelDiaryActivity travelDiaryId:"+ SavePuzzleActivity.this.puzzle.getTravelDiaryId());
+        Log.e("SavePuzzleActivity", "callTravelDiaryActivity travelDiaryId:" + SavePuzzleActivity.this.puzzle.getTravelDiaryId());
 
         TravelDiary travelDiary = travelDiaryDataSource.getTravelDiary(Long.valueOf(SavePuzzleActivity.this.puzzle.getTravelDiaryId()));
 
-        Log.e("SavePuzzleActivity", "callTravelDiaryActivity travelDiary:"+travelDiary.toString());
+        Log.e("SavePuzzleActivity", "callTravelDiaryActivity travelDiary:" + travelDiary.toString());
 
         intent.putExtra("travelDiaryId", String.valueOf(travelDiary.getId()));
         intent.putExtra("travelStatus", travelDiary.getTravelStatus().getValue());
@@ -228,21 +241,34 @@ public class SavePuzzleActivity extends AppCompatActivity {
             e.printStackTrace();
         }
 
-
         switch (requestCode) {
             case 0:
-                puzzle.setImagePath1(fileName);
+                imagePathTemp.add(fileName);
                 ((ImageButton) findViewById(R.id.image_add_button1)).setImageBitmap(resizedBitmap);
                 break;
             case 1:
-                puzzle.setImagePath2(fileName);
+                imagePathTemp.add(fileName);
                 ((ImageButton) findViewById(R.id.image_add_button2)).setImageBitmap(resizedBitmap);
                 break;
             case 2:
-                puzzle.setImagePath3(fileName);
+                imagePathTemp.add(fileName);
                 ((ImageButton) findViewById(R.id.image_add_button3)).setImageBitmap(resizedBitmap);
                 break;
         }
+
+//        if (imageSize == 0) {
+//            imagePathTemp.add(fileName);
+//            ((ImageButton) findViewById(R.id.image_add_button1)).setImageBitmap(resizedBitmap);
+//            imageSize++;
+//        } else if (imageSize == 1) {
+//            imagePathTemp.add(fileName);
+//            ((ImageButton) findViewById(R.id.image_add_button2)).setImageBitmap(resizedBitmap);
+//            imageSize++;
+//        } else if (imageSize == 2) {
+//            imagePathTemp.add(fileName);
+//            ((ImageButton) findViewById(R.id.image_add_button3)).setImageBitmap(resizedBitmap);
+//            imageSize++;
+//        }
 
 //        Bitmap thumbnailFromPath = getThumbnailFromPath(getFilePathFromUri(imageUri));
 //        ImageView imageView = (ImageView) findViewById(R.id.imageView);

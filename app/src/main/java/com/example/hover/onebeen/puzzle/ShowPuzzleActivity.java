@@ -34,7 +34,8 @@ public class ShowPuzzleActivity extends AppCompatActivity {
     private ViewPager mViewPager;
     private PagerAdapter mPagerAdapter;
 
-    private ArrayList<Puzzle> puzzles;
+    private Puzzle puzzle;
+    private int imageSize = 0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -51,17 +52,19 @@ public class ShowPuzzleActivity extends AppCompatActivity {
         Log.e("ShowPuzzleActivity", intent.getExtras().getString("id"));
 
         PuzzleDataSource puzzleDataSource = new PuzzleDataSource(this);
-        Puzzle puzzle = puzzleDataSource.getPuzzle(Long.valueOf(puzzleId));
+        puzzle = puzzleDataSource.getPuzzle(Long.valueOf(puzzleId));
 
         Log.e("ShowPuzzleActivity", puzzle.toString());
 
-        this.puzzles = new ArrayList<>();
-        Puzzle puzzle1 = new Puzzle();
-        puzzle1.setDescription("재밌는 여행");
-        this.puzzles.add(puzzle1);
-        Puzzle puzzle2 = new Puzzle();
-        puzzle2.setDescription("재밌는 여행");
-        this.puzzles.add(puzzle2);
+        if (puzzle.getImagePath1() == null) {
+            imageSize = 0;
+        } else if (puzzle.getImagePath2() == null) {
+            imageSize = 1;
+        } else if (puzzle.getImagePath3() == null) {
+            imageSize = 2;
+        } else {
+            imageSize = 3;
+        }
 
         mViewPager = (ViewPager) findViewById(R.id.pager);
         mPagerAdapter = new PagerAdapter(getSupportFragmentManager());
@@ -76,13 +79,12 @@ public class ShowPuzzleActivity extends AppCompatActivity {
 
         @Override
         public Fragment getItem(int position) {
-            // 해당하는 page의 Fragment를 생성합니다.
-            return ShowPuzzleFragment.create(puzzles.get(position));
+            return ShowPuzzleFragment.create(puzzle, position);
         }
 
         @Override
         public int getCount() {
-            return puzzles.size();  // 총 5개의 page를 보여줍니다.
+            return imageSize;
         }
 
     }
